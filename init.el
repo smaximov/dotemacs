@@ -41,6 +41,7 @@
 (global-set-key [f5] 'compile)
 (global-set-key [f1] 'man)
 (global-set-key (kbd "<C-tab>") 'complete-symbol)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;; enable fuzzy matching
 (require 'fuzzy)
