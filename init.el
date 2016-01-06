@@ -55,4 +55,5 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'elixir-mode-hook 'alchemist-mode)
+(add-hook 'alchemist-mode-hook 'company-mode)
