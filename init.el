@@ -5,7 +5,12 @@
 ;;; Code:
 
 ;;; startup customization of UI
-(tool-bar-mode 0)
+
+;; when emacs is built without X frontend
+;; `tool-bar-mode` is unavailable which causes
+;; initialization to fail. 
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode 0))
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
