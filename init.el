@@ -50,4 +50,9 @@
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Terminus-12"))
 
-(provide 'init)
+;; utility function to quickly open init file
+(defun find-emacs-init ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(add-hook 'after-init-hook 'global-company-mode)
