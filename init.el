@@ -30,6 +30,7 @@
 (global-set-key (kbd "<C-tab>") 'complete-symbol)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c f u i") 'find-user-init-file)
+(global-set-key (kbd "C-c m s") 'magit-status)
 
 ;;; Set man page width
 (setenv "MANWIDTH" "72")
