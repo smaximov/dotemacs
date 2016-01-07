@@ -61,5 +61,7 @@
 (add-hook 'haskell-mode-hook 'company-mode)
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 
+(setq shm-program-name "~/.local/bin/structured-haskell-mode")
+
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
