@@ -1,5 +1,8 @@
 ;;; startup customization of UI
 
+(defvar user-cask-file "~/.emacs.d/Cask"
+  "Cask file for emacs configuration")
+
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
@@ -30,6 +33,7 @@
 (global-set-key (kbd "<C-tab>") 'complete-symbol)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c f u i") 'find-user-init-file)
+(global-set-key (kbd "C-c f u c") 'find-user-cask-file)
 (global-set-key (kbd "C-c m s") 'magit-status)
 
 ;;; Set man page width
@@ -45,6 +49,11 @@
 (defun find-user-init-file ()
   (interactive)
   (find-file user-init-file))
+
+;; utility function to quickly open cask file
+(defun find-user-cask-file ()
+  (interactive)
+  (find-file user-cask-file))
 
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
