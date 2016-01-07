@@ -41,19 +41,28 @@
 
 (mouse-avoidance-mode 'animate)
 
+;; Follow links to VCS-controlled source files
+(setq vc-follow-symlinks t)
+
 ;;; Customize fonts
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Terminus-12"))
 
 ;; utility function to quickly open init file
-(defun find-user-init-file ()
-  (interactive)
-  (find-file user-init-file))
+(defun find-user-init-file (other-window-p)
+  (interactive "P")
+  (let ((find-function (if other-window-p
+			   #'find-file-other-window
+  			   #'find-file)))
+    (funcall find-function user-init-file)))
 
 ;; utility function to quickly open cask file
-(defun find-user-cask-file ()
-  (interactive)
-  (find-file user-cask-file))
+(defun find-user-cask-file (other-window-p)
+  (interactive "P")
+  (let ((find-function (if other-window-p
+			   #'find-file-other-window
+  			   #'find-file)))
+    (funcall find-function user-cask-file)))
 
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
