@@ -14,6 +14,9 @@
 
 (setq inhibit-splash-screen t)
 
+;; Custom theme
+(load-theme 'material t)
+
 ;; Detach the customization file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -56,3 +59,6 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 (add-hook 'haskell-mode-hook 'company-mode)
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+
+;; Elisp
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
