@@ -8,4 +8,5 @@
 (depends-on "flycheck-haskell")
 (depends-on "shm")
 (depends-on "magit")
+(depends-on "yaml-mode")
 (depends-on "material-theme" :git "https://github.com/cpaulik/emacs-material-theme")
