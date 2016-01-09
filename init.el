@@ -83,3 +83,9 @@
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
+
+;; Javascript
+(setq flycheck-disabled-checkers '(javascript-jshint))
+(setq flycheck-checkers '(javascript-eslint))
+
+
