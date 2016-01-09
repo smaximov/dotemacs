@@ -17,6 +17,9 @@
 
 (setq inhibit-splash-screen t)
 
+;; Get rid of annoying backup files in-place
+(setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
+
 ;; Custom theme
 (load-theme 'material t)
 
