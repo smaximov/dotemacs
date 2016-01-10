@@ -10,3 +10,4 @@
 (depends-on "magit")
 (depends-on "yaml-mode")
 (depends-on "material-theme" :git "https://github.com/cpaulik/emacs-material-theme")
+(depends-on "tldr" :git "https://github.com/kuanyui/tldr.el")
