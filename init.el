@@ -99,3 +99,8 @@
 ;; Use Ido
 (setq ido-auto-merge-work-directories-length -1)
 (ido-mode 1)
+
+;; Handle whitespace
+(setq whitespace-line-column 120)
+(add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
