@@ -38,7 +38,7 @@
 (global-set-key (kbd "C-c f u i") 'find-user-init-file)
 (global-set-key (kbd "C-c f u c") 'find-user-cask-file)
 (global-set-key (kbd "C-c m s") 'magit-status)
-
+(global-set-key (kbd "C-c t l d r") 'tldr)
 ;;; Set man page width
 (setenv "MANWIDTH" "72")
 
@@ -95,3 +95,7 @@
 (eval-after-load 'org
   '(setq org-default-notes-file (concat org-directory "/notes.org")))
 (define-key global-map "\C-cc" 'org-capture)
+
+;; Use Ido
+(setq ido-auto-merge-work-directories-length -1)
+(ido-mode 1)
