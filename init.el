@@ -35,8 +35,8 @@
 (global-set-key [(meta /)] 'redo)
 (global-set-key (kbd "<C-tab>") 'complete-symbol)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-c f u i") 'find-user-init-file)
-(global-set-key (kbd "C-c f u c") 'find-user-cask-file)
+(global-set-key (kbd "C-c f u i") 'nameless/find-user-init-file)
+(global-set-key (kbd "C-c f u c") 'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c t l d r") 'tldr)
 ;;; Set man page width
@@ -52,19 +52,19 @@
   (set-face-attribute 'default nil :font "Terminus-12"))
 
 ;; utility function to quickly open init file
-(defun find-user-init-file (other-window-p)
+(defun nameless/find-user-init-file (other-window-p)
   (interactive "P")
   (let ((find-function (if other-window-p
 			   #'find-file-other-window
-  			   #'find-file)))
+			 #'find-file)))
     (funcall find-function user-init-file)))
 
 ;; utility function to quickly open cask file
-(defun find-user-cask-file (other-window-p)
+(defun nameless/find-user-cask-file (other-window-p)
   (interactive "P")
   (let ((find-function (if other-window-p
 			   #'find-file-other-window
-  			   #'find-file)))
+			 #'find-file)))
     (funcall find-function user-cask-file)))
 
 ;; Flycheck
