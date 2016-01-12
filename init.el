@@ -138,3 +138,16 @@
 
 ;; Select auto mode for new files
 (add-hook 'after-save-hook 'nameless/set-auto-mode)
+
+;; Lordown
+(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+
+(defun nameless/convert-lordown ()
+  (interactive)
+  (call-process-region (point-min) (point-max) "lordown" t t))
+
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-c C-e") 'nameless/convert-lordown)))
