@@ -1,23 +1,27 @@
-;;; startup customization of UI
-
+;; Use cask for Emacs configuration
 (defvar user-cask-file "~/.emacs.d/Cask"
   "Cask file for emacs configuration")
 
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+;;; startup customization of UI
+
 ;; when emacs is built without X frontend some features like
 ;; toolbar or scrollbar are unavailable; that causes
-;; initialization to fail.
+;; initialization to fail. To avoid that, check if the feature is present first
 (mapc
  (lambda (feature)
    (when (fboundp feature)
      (funcall feature 0)))
- '(tool-bar-mode scroll-bar-mode menu-bar-mode))
+ '(tool-bar-mode			; disable toolbar
+   scroll-bar-mode			; disable scrollbar
+   menu-bar-mode))			; disable menubar
 
+;; Don't show splash screen at startup
 (setq inhibit-splash-screen t)
 
-;; Get rid of annoying backup files in-place
+;; Get rid of annoying backup files stored in-place
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
 
 ;; Custom theme
@@ -41,8 +45,6 @@
 (global-set-key (kbd "C-c t l d r") 'tldr)
 ;;; Set man page width
 (setenv "MANWIDTH" "72")
-
-(mouse-avoidance-mode 'animate)
 
 ;; Follow links to VCS-controlled source files
 (setq vc-follow-symlinks t)
