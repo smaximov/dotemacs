@@ -99,8 +99,40 @@
 ;; Use Ido
 (setq ido-auto-merge-work-directories-length -1)
 (ido-mode 1)
+(ido-everywhere t)
 
 ;; Handle whitespace
 (setq whitespace-line-column 120)
 (add-hook 'prog-mode-hook 'whitespace-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(defun nameless/file-make-executable (file)
+  "Make file FILE executable"
+  (interactive "fSelect file: ")
+  (let* ((file-modes (file-modes file))
+	 (new-modes (logior #o100 file-modes)))
+    (set-file-modes file new-modes)
+    (message "Set mode 0%s (octal) for file `%s'" new-modes file)))
+
+(defun nameless/file-make-executable-if-shebang ()
+  "Make the file associated with the current buffer executable if it has shebang"
+  (and buffer-file-name
+       (save-excursion
+	 (save-restriction
+	   (widen)
+	   (goto-char (point-min))
+	   (when (and (looking-at auto-mode-interpreter-regexp)
+		      (not (file-executable-p buffer-file-name)))
+	     (nameless/file-make-executable buffer-file-name))))))
+
+(defun nameless/set-auto-mode ()
+  "Call `set-auto-mode' if `major-mode' is fundamental-mode"
+  (interactive)
+  (when (equal major-mode 'fundamental-mode)
+    (set-auto-mode t)))
+
+;; Make files with shebang executable
+(add-hook 'after-save-hook 'nameless/file-make-executable-if-shebang)
+
+;; Select auto mode for new files
+(add-hook 'after-save-hook 'nameless/set-auto-mode)
