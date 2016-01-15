@@ -43,6 +43,7 @@
 (global-set-key (kbd "C-c f u c") 'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c t l d r") 'tldr)
+(global-set-key (kbd "C-x n i") 'nameless/narrow-to-region-in-indirect-buffer)
 ;;; Set man page width
 (setenv "MANWIDTH" "72")
 
@@ -151,3 +152,24 @@
 (add-hook 'markdown-mode-hook
 	  (lambda ()
 	    (local-set-key (kbd "C-c C-e") 'nameless/convert-lordown)))
+(put 'narrow-to-region 'disabled nil)
+
+;; Narrow to region in indirect buffer
+(defun nameless/narrow-to-region-in-indirect-buffer (start end name)
+  "Narrow to the current region in indirect buffer
+
+NAME is the name of new buffer. It's also used to determine
+suitable major mode according to `auto-mode-alist'"
+  (interactive "r\nsBuffer name: ")
+  (deactivate-mark)
+  (let ((buffer (clone-indirect-buffer name nil))
+	(switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
+    (with-current-buffer buffer
+      (funcall switch buffer)
+      (narrow-to-region start end)
+      ;; Try to guess major mode from indirect buffer's file name
+      (when name
+	(let ((mode (assoc-default name auto-mode-alist 'string-match)))
+	  (when (and mode
+		     (not (equal mode major-mode)))
+	    (funcall mode)))))))
