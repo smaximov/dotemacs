@@ -55,17 +55,17 @@
   (set-face-attribute 'default nil :font "Terminus-12"))
 
 ;; utility function to quickly open init file
-(defun nameless/find-user-init-file (other-window-p)
-  (interactive "P")
-  (let ((find-function (if other-window-p
+(defun nameless/find-user-init-file ()
+  (interactive)
+  (let ((find-function (if current-prefix-arg
 			   #'find-file-other-window
 			 #'find-file)))
     (funcall find-function user-init-file)))
 
 ;; utility function to quickly open cask file
-(defun nameless/find-user-cask-file (other-window-p)
-  (interactive "P")
-  (let ((find-function (if other-window-p
+(defun nameless/find-user-cask-file ()
+  (interactive)
+  (let ((find-function (if current-prefix-arg
 			   #'find-file-other-window
 			 #'find-file)))
     (funcall find-function user-cask-file)))
