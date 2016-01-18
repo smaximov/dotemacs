@@ -37,7 +37,7 @@
 
 ;;; custom keybindings
 (global-set-key [(meta /)] 'redo)
-(global-set-key (kbd "<C-tab>") 'complete-symbol)
+(global-set-key (kbd "TAB") 'company-indent-or-complete-common)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c f u i") 'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") 'nameless/find-user-cask-file)
@@ -173,3 +173,22 @@ suitable major mode according to `auto-mode-alist'"
 	  (when (and mode
 		     (not (equal mode major-mode)))
 	    (funcall mode)))))))
+
+;; Rust customization
+(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+(setq racer-rust-src-path (expand-file-name "~/src/rust/src"))
+(setq flycheck-rust-executable (executable-find "rustc"))
+(add-hook 'rust-mode-hook #'cargo-minor-mode)
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(setq company-tooltip-align-annotations t)
+
+(defun nameless/rust-compile-hook ()
+  (require 'compile)
+  (set (make-local-variable 'compile-command)
+       (if (locate-dominating-file (buffer-file-name) "Cargo.toml")
+	   "cargo run"
+	 (format "rustc %s && %s" (buffer-file-name)
+		 (file-name-sans-extension (buffer-file-name))))))
+(add-hook 'rust-mode-hook #'nameless/rust-compile-hook)
