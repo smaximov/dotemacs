@@ -10,13 +10,10 @@
 ;; when emacs is built without X frontend some features like
 ;; toolbar or scrollbar are unavailable; that causes
 ;; initialization to fail. To avoid that, check if the feature is present first
-(mapc
- (lambda (feature)
-   (when (fboundp feature)
-     (funcall feature 0)))
- '(tool-bar-mode			; disable toolbar
-   scroll-bar-mode			; disable scrollbar
-   menu-bar-mode))			; disable menubar
+(require 'dash)
+(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
+  (when (fboundp it)
+    (funcall it 0)))
 
 ;; Don't show splash screen at startup
 (setq inhibit-splash-screen t)
@@ -92,7 +89,6 @@
 
 ;; Javascript
 (setq flycheck-disabled-checkers '(javascript-jshint))
-(setq flycheck-checkers '(javascript-eslint))
 
 ;; Org Mode
 (eval-after-load 'org
@@ -177,7 +173,8 @@ suitable major mode according to `auto-mode-alist'"
 ;; Rust customization
 (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
 (setq racer-rust-src-path (expand-file-name "~/src/rust/src"))
-(setq flycheck-rust-executable (executable-find "rustc"))
+
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook #'cargo-minor-mode)
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)

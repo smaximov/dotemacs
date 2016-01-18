@@ -17,3 +17,4 @@
 (depends-on "rust-mode")
 (depends-on "cargo")
 (depends-on "flycheck-rust")
+(depends-on "dash")
