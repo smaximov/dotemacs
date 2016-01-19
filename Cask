@@ -18,3 +18,4 @@
 (depends-on "cargo")
 (depends-on "flycheck-rust")
 (depends-on "dash")
+(depends-on "toml-mode")
