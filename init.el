@@ -181,11 +181,16 @@ suitable major mode according to `auto-mode-alist'"
 (add-hook 'racer-mode-hook #'company-mode)
 (setq company-tooltip-align-annotations t)
 
-(defun nameless/rust-compile-hook ()
-  (require 'compile)
-  (set (make-local-variable 'compile-command)
-       (if (locate-dominating-file (buffer-file-name) "Cargo.toml")
-	   "cargo run"
-	 (format "rustc %s && %s" (buffer-file-name)
-		 (file-name-sans-extension (buffer-file-name))))))
-(add-hook 'rust-mode-hook #'nameless/rust-compile-hook)
+(defun nameless/rust-mode-hook ()
+  (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
+
+(defun nameless/find-cargo-file ()
+  (interactive)
+  (let ((find-function (if current-prefix-arg
+			   #'find-file-other-window
+			 #'find-file)))
+    (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
+	(funcall find-function (expand-file-name "Cargo.toml" crate-root))
+      (error "No `Cargo.toml` found"))))
+
+(add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
