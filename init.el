@@ -16,10 +16,10 @@
     (funcall it 0)))
 
 ;; Don't show splash screen at startup
-(setq inhibit-splash-screen t)
+(setf inhibit-splash-screen t)
 
 ;; Get rid of annoying backup files stored in-place
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
+(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
 
 ;; Display current column position of the cursor
 (add-hook 'after-init-hook #'column-number-mode)
@@ -31,12 +31,12 @@
 (load-theme 'material t)
 
 ;; Detach the customization file
-(setq custom-file "~/.emacs.d/custom.el")
+(setf custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
 ;; Add line numbers
 (add-hook 'after-init-hook #'global-linum-mode)
-(setq linum-format "%4d ")
+(setf linum-format "%4d ")
 
 ;;; custom keybindings
 (global-set-key [(meta /)] 'redo)
@@ -51,7 +51,7 @@
 (setenv "MANWIDTH" "72")
 
 ;; Follow links to VCS-controlled source files
-(setq vc-follow-symlinks t)
+(setf vc-follow-symlinks t)
 
 ;;; Customize fonts
 (when (display-graphic-p)
@@ -88,26 +88,26 @@
 (add-hook 'haskell-mode-hook 'company-mode)
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 
-(setq shm-program-name "~/.local/bin/structured-haskell-mode")
+(setf shm-program-name "~/.local/bin/structured-haskell-mode")
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 ;; Javascript
-(setq flycheck-disabled-checkers '(javascript-jshint))
+(setf flycheck-disabled-checkers '(javascript-jshint))
 
 ;; Org Mode
 (eval-after-load 'org
-  '(setq org-default-notes-file (concat org-directory "/notes.org")))
+  '(setf org-default-notes-file (concat org-directory "/notes.org")))
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; Use Ido
-(setq ido-auto-merge-work-directories-length -1)
+(setf ido-auto-merge-work-directories-length -1)
 (ido-mode 1)
 (ido-everywhere t)
 
 ;; Handle whitespace
-(setq whitespace-line-column 120)
+(setf whitespace-line-column 120)
 (add-hook 'prog-mode-hook 'whitespace-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -178,14 +178,14 @@ suitable major mode according to `auto-mode-alist'"
 
 ;; Rust customization
 (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-(setq racer-rust-src-path (expand-file-name "~/src/rust/src"))
+(setf racer-rust-src-path (expand-file-name "~/src/rust/src"))
 
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook #'cargo-minor-mode)
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
-(setq company-tooltip-align-annotations t)
+(setf company-tooltip-align-annotations t)
 
 (defun nameless/rust-mode-hook ()
   (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
@@ -202,4 +202,4 @@ suitable major mode according to `auto-mode-alist'"
 (add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
 
 ;; It's not like we are 800x600 nowadays
-(setq fill-column 120)
+(setf fill-column 120)
