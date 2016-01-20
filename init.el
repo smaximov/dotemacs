@@ -200,3 +200,6 @@ suitable major mode according to `auto-mode-alist'"
       (error "No `Cargo.toml` found"))))
 
 (add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
+
+;; It's not like we are 800x600 nowadays
+(setq fill-column 120)
