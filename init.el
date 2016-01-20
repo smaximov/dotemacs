@@ -21,6 +21,12 @@
 ;; Get rid of annoying backup files stored in-place
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
 
+;; Display current column position of the cursor
+(add-hook 'after-init-hook #'column-number-mode)
+
+;; Track recent files
+(add-hook 'after-init-hook #'recentf-mode)
+
 ;; Custom theme
 (load-theme 'material t)
 
