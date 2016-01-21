@@ -203,3 +203,7 @@ suitable major mode according to `auto-mode-alist'"
 
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
+
+;; Yasnippet
+(add-hook 'after-init-hook #'yas-global-mode)
+(setf yas-snippet-dirs '("~/.emacs.d/snippets"))
