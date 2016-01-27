@@ -20,3 +20,4 @@
 (depends-on "dash")
 (depends-on "toml-mode")
 (depends-on "yasnippet")
+(depends-on "s")
