@@ -94,6 +94,10 @@
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 ;; Javascript
+(setenv "PATH"
+	(s-concat (expand-file-name "~/node/bin")
+		  ":"
+		  (getenv "PATH")))
 (setf flycheck-disabled-checkers '(javascript-jshint))
 (setf js-indent-level 2)
 
