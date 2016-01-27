@@ -95,6 +95,7 @@
 
 ;; Javascript
 (setf flycheck-disabled-checkers '(javascript-jshint))
+(setf js-indent-level 2)
 
 ;; Org Mode
 (eval-after-load 'org
