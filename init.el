@@ -47,8 +47,6 @@
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c t l d r") 'tldr)
 (global-set-key (kbd "C-x n i") 'nameless/narrow-to-region-in-indirect-buffer)
-;;; Set man page width
-(setenv "MANWIDTH" "72")
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
@@ -100,6 +98,7 @@
 		  (getenv "PATH")))
 (setf flycheck-disabled-checkers '(javascript-jshint))
 (setf js-indent-level 2)
+(add-hook 'js-mode-hook 'electric-pair-mode)
 
 ;; Org Mode
 (eval-after-load 'org
