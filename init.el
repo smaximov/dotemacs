@@ -222,15 +222,27 @@ suitable major mode according to `auto-mode-alist'"
   (s-trim (shell-command-to-string
 	   (s-lex-format "${nameless/rvm-executable} ${command}"))))
 
-(defun nameless/rvm-find-gem (gem)
-  (let* ((rvm-current-ruby (nameless/rvm "current"))
+(defun nameless/rvm/current-ruby ()
+  (nameless/rvm "current"))
+
+(defun nameless/rvm/find-ruby ()
+  (let ((rvm-current-ruby (nameless/rvm/current-ruby)))
+    (expand-file-name
+     (s-lex-format "~/.rvm/rubies/${rvm-current-ruby}/bin/ruby"))))
+
+(defun nameless/rvm/find-gem (gem)
+  (let* ((rvm-current-ruby (nameless/rvm/current-ruby))
 	 (gem-path (expand-file-name
 		    (s-lex-format "~/.rvm/gems/${rvm-current-ruby}/wrappers/${gem}"))))
     (when (file-exists-p gem-path)
       gem-path)))
 
+;; Ruby
+(-when-let (ruby-path (nameless/rvm/find-ruby))
+  (setf flycheck-ruby-executable ruby-path))
+
 ;; Scss
-(-when-let (scss-lint-gem (nameless/rvm-find-gem "scss-lint"))
+(-when-let (scss-lint-gem (nameless/rvm/find-gem "scss-lint"))
   (setf flycheck-scss-lint-executable scss-lint-gem))
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
