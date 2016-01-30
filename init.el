@@ -211,3 +211,23 @@ suitable major mode according to `auto-mode-alist'"
 ;; Yasnippet
 (add-hook 'after-init-hook #'yas-global-mode)
 (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
+
+;; Handle RVM
+(defvar nameless/rvm-executable (expand-file-name "~/.rvm/bin/rvm"))
+
+(defun nameless/rvm (command)
+  (s-trim (shell-command-to-string
+	   (s-lex-format "${nameless/rvm-executable} ${command}"))))
+
+(defun nameless/rvm-find-gem (gem)
+  (let* ((rvm-current-ruby (nameless/rvm "current"))
+	 (gem-path (expand-file-name
+		    (s-lex-format "~/.rvm/gems/${rvm-current-ruby}/wrappers/${gem}"))))
+    (when (file-exists-p gem-path)
+      gem-path)))
+
+;; Scss
+(-when-let (scss-lint-gem (nameless/rvm-find-gem "scss-lint"))
+  (setf flycheck-scss-lint-executable scss-lint-gem))
+(setf css-indent-offset 2)
+(add-hook 'scss-mode-hook #'whitespace-mode)
