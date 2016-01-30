@@ -15,6 +15,9 @@
   (when (fboundp it)
     (funcall it 0)))
 
+;; Indent using spaces
+(setq-default indent-tabs-mode nil)
+
 ;; Don't show splash screen at startup
 (setf inhibit-splash-screen t)
 
