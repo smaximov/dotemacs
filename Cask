@@ -21,3 +21,4 @@
 (depends-on "toml-mode")
 (depends-on "yasnippet")
 (depends-on "s")
+(depends-on "scss-mode")
