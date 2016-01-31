@@ -4,6 +4,7 @@
 
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
+(pallet-mode t)
 
 ;;; startup customization of UI
 
