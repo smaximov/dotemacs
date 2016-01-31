@@ -62,25 +62,22 @@
 (defun nameless/find-user-init-file ()
   (interactive)
   (let ((find-function (if current-prefix-arg
-			   #'find-file-other-window
-			 #'find-file)))
+                           #'find-file-other-window
+                         #'find-file)))
     (funcall find-function user-init-file)))
 
 ;; utility function to quickly open cask file
 (defun nameless/find-user-cask-file ()
   (interactive)
   (let ((find-function (if current-prefix-arg
-			   #'find-file-other-window
-			 #'find-file)))
+                           #'find-file-other-window
+                         #'find-file)))
     (funcall find-function user-cask-file)))
 
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Elixir Lang
-(add-hook 'elixir-mode-hook 'alchemist-mode)
-(add-hook 'alchemist-mode-hook 'company-mode)
-(add-hook 'alchemist-iex-mode-hook 'company-mode)
 (add-hook 'elixir-mode-hook #'alchemist-mode)
 (add-hook 'alchemist-mode-hook #'company-mode)
 (add-hook 'alchemist-iex-mode-hook #'company-mode)
@@ -100,17 +97,16 @@
 
 ;; Javascript
 (setenv "PATH"
-	(s-concat (expand-file-name "~/node/bin")
-		  ":"
-		  (getenv "PATH")))
+        (s-concat (f-full "~/node/bin")
+                  ":"
+                  (getenv "PATH")))
 (setf flycheck-disabled-checkers '(javascript-jshint))
 (setf js-indent-level 2)
-(add-hook 'js-mode-hook 'electric-pair-mode)
 (add-hook 'js-mode-hook #'electric-pair-mode)
 
 ;; Org Mode
 (eval-after-load 'org
-  '(setf org-default-notes-file (concat org-directory "/notes.org")))
+  '(setf org-default-notes-file (f-join org-directory "notes.org")))
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; Use Ido
@@ -127,7 +123,7 @@
   "Make file FILE executable"
   (interactive "fSelect file: ")
   (let* ((file-modes (file-modes file))
-	 (new-modes (logior #o100 file-modes)))
+         (new-modes (logior #o100 file-modes)))
     (set-file-modes file new-modes)
     (message "Set mode 0%s (octal) for file `%s'" new-modes file)))
 
@@ -135,12 +131,12 @@
   "Make the file associated with the current buffer executable if it has shebang"
   (and buffer-file-name
        (save-excursion
-	 (save-restriction
-	   (widen)
-	   (goto-char (point-min))
-	   (when (and (looking-at auto-mode-interpreter-regexp)
-		      (not (file-executable-p buffer-file-name)))
-	     (nameless/file-make-executable buffer-file-name))))))
+         (save-restriction
+           (widen)
+           (goto-char (point-min))
+           (when (and (looking-at auto-mode-interpreter-regexp)
+                      (not (f-executable? buffer-file-name)))
+             (nameless/file-make-executable buffer-file-name))))))
 
 (defun nameless/set-auto-mode ()
   "Call `set-auto-mode' if `major-mode' is fundamental-mode"
@@ -149,13 +145,13 @@
     (set-auto-mode t)))
 
 ;; Make files with shebang executable
-(add-hook 'after-save-hook 'nameless/file-make-executable-if-shebang)
+(add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
 
 ;; Select auto mode for new files
-(add-hook 'after-save-hook 'nameless/set-auto-mode)
+(add-hook 'after-save-hook #'nameless/set-auto-mode)
 
 ;; Lordown
-(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+(add-to-list 'exec-path (f-full "~/.local/bin"))
 
 (defun nameless/convert-lordown ()
   (interactive)
@@ -164,8 +160,8 @@
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
 (add-hook 'markdown-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "C-c C-e") 'nameless/convert-lordown)))
+          (lambda ()
+            (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
 (put 'narrow-to-region 'disabled nil)
 
 ;; Narrow to region in indirect buffer
@@ -177,20 +173,20 @@ suitable major mode according to `auto-mode-alist'"
   (interactive "r\nsBuffer name: ")
   (deactivate-mark)
   (let ((buffer (clone-indirect-buffer name nil))
-	(switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
+        (switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
     (with-current-buffer buffer
       (funcall switch buffer)
       (narrow-to-region start end)
       ;; Try to guess major mode from indirect buffer's file name
       (when name
-	(let ((mode (assoc-default name auto-mode-alist 'string-match)))
-	  (when (and mode
-		     (not (equal mode major-mode)))
-	    (funcall mode)))))))
+        (let ((mode (assoc-default name auto-mode-alist 'string-match)))
+          (when (and mode
+                     (not (equal mode major-mode)))
+            (funcall mode)))))))
 
 ;; Rust customization
-(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-(setf racer-rust-src-path (expand-file-name "~/src/rust/src"))
+(add-to-list 'exec-path (f-full "~/.cargo/bin"))
+(setf racer-rust-src-path (f-full "~/src/rust/src"))
 
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook #'cargo-minor-mode)
@@ -205,10 +201,10 @@ suitable major mode according to `auto-mode-alist'"
 (defun nameless/find-cargo-file ()
   (interactive)
   (let ((find-function (if current-prefix-arg
-			   #'find-file-other-window
-			 #'find-file)))
+                           #'find-file-other-window
+                         #'find-file)))
     (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
-	(funcall find-function (expand-file-name "Cargo.toml" crate-root))
+        (funcall find-function (f-full "Cargo.toml" crate-root))
       (error "No `Cargo.toml` found"))))
 
 (add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
@@ -221,25 +217,25 @@ suitable major mode according to `auto-mode-alist'"
 (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
 ;; Handle RVM
-(defvar nameless/rvm-executable (expand-file-name "~/.rvm/bin/rvm"))
+(defvar nameless/rvm-executable (f-full "~/.rvm/bin/rvm"))
 
 (defun nameless/rvm (command)
   (s-trim (shell-command-to-string
-	   (s-lex-format "${nameless/rvm-executable} ${command}"))))
+           (s-lex-format "${nameless/rvm-executable} ${command}"))))
 
 (defun nameless/rvm/current-ruby ()
   (nameless/rvm "current"))
 
 (defun nameless/rvm/find-ruby ()
   (let ((rvm-current-ruby (nameless/rvm/current-ruby)))
-    (expand-file-name
+    (f-full
      (s-lex-format "~/.rvm/rubies/${rvm-current-ruby}/bin/ruby"))))
 
 (defun nameless/rvm/find-gem (gem)
   (let* ((rvm-current-ruby (nameless/rvm/current-ruby))
-	 (gem-path (expand-file-name
-		    (s-lex-format "~/.rvm/gems/${rvm-current-ruby}/wrappers/${gem}"))))
-    (when (file-exists-p gem-path)
+         (gem-path (f-full
+                    (s-lex-format "~/.rvm/gems/${rvm-current-ruby}/wrappers/${gem}"))))
+    (when (f-exists? gem-path)
       gem-path)))
 
 ;; Ruby

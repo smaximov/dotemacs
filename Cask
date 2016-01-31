@@ -22,3 +22,4 @@
 (depends-on "yasnippet")
 (depends-on "s")
 (depends-on "scss-mode")
+(depends-on "f")
