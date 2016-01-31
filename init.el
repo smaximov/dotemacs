@@ -10,7 +10,6 @@
 ;; when emacs is built without X frontend some features like
 ;; toolbar or scrollbar are unavailable; that causes
 ;; initialization to fail. To avoid that, check if the feature is present first
-(require 'dash)
 (--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
   (when (fboundp it)
     (funcall it 0)))
