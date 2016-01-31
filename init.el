@@ -93,6 +93,7 @@
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
 
 ;; Javascript
 (setenv "PATH"
