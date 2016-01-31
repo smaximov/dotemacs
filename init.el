@@ -42,14 +42,14 @@
 (setf linum-format "%4d ")
 
 ;;; custom keybindings
-(global-set-key [(meta /)] 'redo)
-(global-set-key (kbd "TAB") 'company-indent-or-complete-common)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-c f u i") 'nameless/find-user-init-file)
-(global-set-key (kbd "C-c f u c") 'nameless/find-user-cask-file)
-(global-set-key (kbd "C-c m s") 'magit-status)
-(global-set-key (kbd "C-c t l d r") 'tldr)
-(global-set-key (kbd "C-x n i") 'nameless/narrow-to-region-in-indirect-buffer)
+(global-set-key [(meta /)] #'redo)
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
+(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
+(global-set-key (kbd "C-c m s") #'magit-status)
+(global-set-key (kbd "C-c t l d r") #'tldr)
+(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
@@ -81,18 +81,21 @@
 (add-hook 'elixir-mode-hook 'alchemist-mode)
 (add-hook 'alchemist-mode-hook 'company-mode)
 (add-hook 'alchemist-iex-mode-hook 'company-mode)
+(add-hook 'elixir-mode-hook #'alchemist-mode)
+(add-hook 'alchemist-mode-hook #'company-mode)
+(add-hook 'alchemist-iex-mode-hook #'company-mode)
 
 ;; Haskell
-(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook #'haskell-indentation-mode)
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
-(add-hook 'haskell-mode-hook 'company-mode)
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+(add-hook 'haskell-mode-hook #'company-mode)
+(add-hook 'haskell-mode-hook #'structured-haskell-mode)
 
 (setf shm-program-name "~/.local/bin/structured-haskell-mode")
 
 ;; Elisp
-(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook #'company-mode)
 (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
 
 ;; Javascript
@@ -103,6 +106,7 @@
 (setf flycheck-disabled-checkers '(javascript-jshint))
 (setf js-indent-level 2)
 (add-hook 'js-mode-hook 'electric-pair-mode)
+(add-hook 'js-mode-hook #'electric-pair-mode)
 
 ;; Org Mode
 (eval-after-load 'org
@@ -116,8 +120,8 @@
 
 ;; Handle whitespace
 (setf whitespace-line-column 120)
-(add-hook 'prog-mode-hook 'whitespace-mode)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'prog-mode-hook #'whitespace-mode)
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
