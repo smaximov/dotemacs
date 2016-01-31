@@ -2,6 +2,7 @@
 (source melpa)
 
 (depends-on "alchemist")
+(depends-on "bookmark+")
 (depends-on "cargo")
 (depends-on "dash")
 (depends-on "elixir-mode")
