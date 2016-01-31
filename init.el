@@ -252,11 +252,15 @@ suitable major mode according to `auto-mode-alist'"
       gem-path)))
 
 ;; Ruby
-(-when-let (ruby-path (nameless/rvm/find-ruby))
-  (setf flycheck-ruby-executable ruby-path))
+(add-hook 'after-init-hook
+          #'(lambda ()
+              (-when-let (ruby-path (nameless/rvm/find-ruby))
+                (setf flycheck-ruby-executable ruby-path))))
 
 ;; Scss
-(-when-let (scss-lint-gem (nameless/rvm/find-gem "scss-lint"))
-  (setf flycheck-scss-lint-executable scss-lint-gem))
+(add-hook 'after-init-hook
+          #'(lambda ()
+              (-when-let (scss-lint-gem (nameless/rvm/find-gem "scss-lint"))
+                (setf flycheck-scss-lint-executable scss-lint-gem))))
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
