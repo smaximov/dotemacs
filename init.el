@@ -217,7 +217,7 @@ suitable major mode according to `auto-mode-alist'"
                            #'find-file-other-window
                          #'find-file)))
     (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
-        (funcall find-function (f-full "Cargo.toml" crate-root))
+        (funcall find-function (f-expand "Cargo.toml" crate-root))
       (error "No `Cargo.toml` found"))))
 
 (add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
