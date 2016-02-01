@@ -47,6 +47,7 @@
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
+(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
 (global-set-key (kbd "C-c m s") #'magit-status)
 (global-set-key (kbd "C-c t l d r") #'tldr)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
@@ -57,6 +58,11 @@
 ;;; Customize fonts
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Terminus-12"))
+
+;; Switch to scratch buffer
+(defun nameless/find-scratch-buffer ()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
 
 ;; utility function to quickly open init file
 (defun nameless/find-user-init-file ()
