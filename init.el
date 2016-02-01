@@ -230,7 +230,7 @@ suitable major mode according to `auto-mode-alist'"
 (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
 ;; Ruby
-(rvm-use-default)
+(add-hook 'after-init-hook #'rvm-use-default)
 
 ;; SCSS
 (setf css-indent-offset 2)
