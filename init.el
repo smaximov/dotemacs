@@ -229,38 +229,9 @@ suitable major mode according to `auto-mode-alist'"
 (add-hook 'after-init-hook #'yas-global-mode)
 (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
-;; Handle RVM
-(defvar nameless/rvm-executable (f-full "~/.rvm/bin/rvm"))
-
-(defun nameless/rvm (command)
-  (s-trim (shell-command-to-string
-           (s-lex-format "${nameless/rvm-executable} ${command}"))))
-
-(defun nameless/rvm/current-ruby ()
-  (nameless/rvm "current"))
-
-(defun nameless/rvm/find-ruby ()
-  (let ((rvm-current-ruby (nameless/rvm/current-ruby)))
-    (f-full
-     (s-lex-format "~/.rvm/rubies/${rvm-current-ruby}/bin/ruby"))))
-
-(defun nameless/rvm/find-gem (gem)
-  (let* ((rvm-current-ruby (nameless/rvm/current-ruby))
-         (gem-path (f-full
-                    (s-lex-format "~/.rvm/gems/${rvm-current-ruby}/wrappers/${gem}"))))
-    (when (f-exists? gem-path)
-      gem-path)))
-
 ;; Ruby
-(add-hook 'after-init-hook
-          #'(lambda ()
-              (-when-let (ruby-path (nameless/rvm/find-ruby))
-                (setf flycheck-ruby-executable ruby-path))))
+(rvm-use-default)
 
-;; Scss
-(add-hook 'after-init-hook
-          #'(lambda ()
-              (-when-let (scss-lint-gem (nameless/rvm/find-gem "scss-lint"))
-                (setf flycheck-scss-lint-executable scss-lint-gem))))
+;; SCSS
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)

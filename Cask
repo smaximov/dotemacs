@@ -18,6 +18,7 @@
 (depends-on "paredit")
 (depends-on "racer")
 (depends-on "rust-mode")
+(depends-on "rvm")
 (depends-on "s")
 (depends-on "scss-mode")
 (depends-on "shm")
