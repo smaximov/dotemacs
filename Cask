@@ -11,6 +11,7 @@
 (depends-on "flycheck-haskell")
 (depends-on "flycheck-rust")
 (depends-on "haskell-mode")
+(depends-on "json-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "material-theme")
