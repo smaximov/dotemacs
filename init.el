@@ -65,7 +65,9 @@
 ;; Switch to scratch buffer
 (defun nameless/find-scratch-buffer ()
   (interactive)
-  (switch-to-buffer "*scratch*"))
+  (funcall (if current-prefix-arg
+               #'switch-to-buffer-other-window
+             #'switch-to-buffer) "*scratch*"))
 
 ;; utility function to quickly open init file
 (defun nameless/find-user-init-file ()
