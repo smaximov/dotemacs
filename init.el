@@ -15,6 +15,9 @@
   (when (fboundp it)
     (funcall it 0)))
 
+;; Start Emacs maximized
+(toggle-frame-maximized)
+
 ;; Indent using spaces
 (setq-default indent-tabs-mode nil)
 
