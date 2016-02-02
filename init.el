@@ -98,9 +98,6 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 (add-hook 'haskell-mode-hook #'company-mode)
-(add-hook 'haskell-mode-hook #'structured-haskell-mode)
-
-(setf shm-program-name "~/.local/bin/structured-haskell-mode")
 
 ;; Elisp
 (add-hook 'emacs-lisp-mode-hook #'company-mode)
