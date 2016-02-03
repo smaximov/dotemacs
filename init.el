@@ -126,8 +126,9 @@
 (add-hook 'js-mode-hook #'electric-pair-mode)
 
 ;; Org Mode
-(eval-after-load 'org
-  '(setf org-default-notes-file (f-join org-directory "notes.org")))
+(require 'org)
+(setf org-default-notes-file (f-join org-directory "notes.org")
+      org-src-fontify-natively t)
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; Use Ido
