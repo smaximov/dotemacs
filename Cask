@@ -12,6 +12,7 @@
 (depends-on "flycheck-rust")
 (depends-on "haskell-mode")
 (depends-on "ht")
+(depends-on "htmlize")
 (depends-on "json-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
