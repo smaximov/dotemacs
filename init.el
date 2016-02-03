@@ -233,6 +233,11 @@ suitable major mode according to `auto-mode-alist'"
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
 
+;; Highlight matching parentheses
+(setf show-paren-delay 0
+      show-paren-style 'mixed)
+(add-hook 'after-init-hook #'show-paren-mode)
+
 ;; Yasnippet
 (add-hook 'after-init-hook #'yas-global-mode)
 (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
