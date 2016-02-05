@@ -102,18 +102,20 @@
 (add-hook 'prog-mode-hook #'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
 
-;; Elisp
-(--each '(emacs-lisp-mode-hook ielm-mode-hook)
+;; Various Lisps
+(--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook cider-repl-mode-hook)
   (add-hook it #'company-mode)
   (add-hook it #'eldoc-mode))
 
 ;; Paredit
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(--each '(emacs-list-mode-hook eval-expression-minibuffer-setup-hook
+                               ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
+                               scheme-mode-hook clojure-mode-hook
+                               cider-repl-mode-hook)
+  (add-hook it #'enable-paredit-mode))
+
+;; Clojure
+(setf cider-lein-command (f-full "~/bin/lein"))
 
 (require 'eldoc)
 (eldoc-add-command
