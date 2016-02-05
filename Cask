@@ -17,6 +17,7 @@
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "material-theme")
+(depends-on "mustache")
 (depends-on "pallet")
 (depends-on "paredit")
 (depends-on "racer")
