@@ -10,6 +10,7 @@
 (depends-on "dash")
 (depends-on "elixir-mode")
 (depends-on "emr")
+(depends-on "exec-path-from-shell")
 (depends-on "f")
 (depends-on "flycheck")
 (depends-on "flycheck-haskell")

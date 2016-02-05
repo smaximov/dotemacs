@@ -104,7 +104,7 @@
   (add-hook it #'eldoc-mode))
 
 ;; Paredit
-(--each '(emacs-list-mode-hook eval-expression-minibuffer-setup-hook
+(--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook
                                ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
                                scheme-mode-hook clojure-mode-hook
                                cider-repl-mode-hook)
@@ -119,10 +119,6 @@
  'paredit-close-round)
 
 ;; Javascript
-(setenv "PATH"
-        (s-concat (f-full "~/node/bin")
-                  ":"
-                  (getenv "PATH")))
 (setf flycheck-disabled-checkers '(javascript-jshint))
 (setf js-indent-level 2)
 (add-hook 'js-mode-hook #'electric-pair-mode)
@@ -174,9 +170,6 @@
 ;; Select auto mode for new files
 (add-hook 'after-save-hook #'nameless/set-auto-mode)
 
-;; Lordown
-(add-to-list 'exec-path (f-full "~/.local/bin"))
-
 (defun nameless/convert-lordown ()
   (interactive)
   (call-process-region (point-min) (point-max) "lordown" t t))
@@ -209,7 +202,6 @@ suitable major mode according to `auto-mode-alist'"
             (funcall mode)))))))
 
 ;; Rust customization
-(add-to-list 'exec-path (f-full "~/.cargo/bin"))
 (setf racer-rust-src-path (f-full "~/src/rust/src"))
 
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
@@ -254,3 +246,8 @@ suitable major mode according to `auto-mode-alist'"
 
 ;; Projectile
 (add-hook 'after-init-hook #'projectile-global-mode)
+
+;; Env variables from shell
+(let ((-compare-fn #'eq))
+  (when (-contains? '(ns x) window-system)
+    (exec-path-from-shell-initialize)))
