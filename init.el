@@ -253,3 +253,6 @@ suitable major mode according to `auto-mode-alist'"
 ;; SCSS
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
+
+;; Projectile
+(add-hook 'after-init-hook #'projectile-global-mode)
