@@ -40,10 +40,6 @@
 (setf custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
-;; Add line numbers
-(add-hook 'after-init-hook #'global-linum-mode)
-(setf linum-format "%4d ")
-
 ;;; custom keybindings
 (global-set-key [(meta /)] #'redo)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
