@@ -100,8 +100,9 @@
 (add-hook 'haskell-mode-hook #'company-mode)
 
 ;; Elisp
-(add-hook 'emacs-lisp-mode-hook #'company-mode)
-(add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+(--each '(emacs-lisp-mode-hook ielm-mode-hook)
+  (add-hook it #'company-mode)
+  (add-hook it #'eldoc-mode))
 
 ;; Paredit
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
