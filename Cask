@@ -4,6 +4,7 @@
 (depends-on "alchemist")
 (depends-on "bookmark+")
 (depends-on "cargo")
+(depends-on "company")
 (depends-on "dash")
 (depends-on "elixir-mode")
 (depends-on "emr")
