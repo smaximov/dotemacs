@@ -4,6 +4,8 @@
 (depends-on "alchemist")
 (depends-on "bookmark+")
 (depends-on "cargo")
+(depends-on "cider")
+(depends-on "clojure-mode")
 (depends-on "company")
 (depends-on "dash")
 (depends-on "elixir-mode")
