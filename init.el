@@ -99,6 +99,9 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 (add-hook 'haskell-mode-hook #'company-mode)
 
+(add-hook 'prog-mode-hook #'emr-initialize)
+(define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
+
 ;; Elisp
 (--each '(emacs-lisp-mode-hook ielm-mode-hook)
   (add-hook it #'company-mode)

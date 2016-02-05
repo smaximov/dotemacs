@@ -6,6 +6,7 @@
 (depends-on "cargo")
 (depends-on "dash")
 (depends-on "elixir-mode")
+(depends-on "emr")
 (depends-on "f")
 (depends-on "flycheck")
 (depends-on "flycheck-haskell")
