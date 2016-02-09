@@ -42,14 +42,12 @@
 
 ;;; custom keybindings
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-(global-set-key (kbd "C-x C-b") #'ibuffer)
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
 (global-set-key (kbd "C-c m s") #'magit-status)
 (global-set-key (kbd "C-c t l d r") #'tldr)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
-(global-set-key (kbd "M-x") #'helm-M-x)
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
@@ -253,3 +251,10 @@ suitable major mode according to `auto-mode-alist'"
 
 ;; Helm
 (require 'helm-config)
+(require 'helm)
+
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "M-y") #'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-b") #'helm-mini)
+
+(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
