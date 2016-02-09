@@ -52,32 +52,41 @@
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
 
-;;; Customize fonts
+;; Customize fonts
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Terminus-12"))
 
+;; Choose function to apply depending on the presence of prefix argument
+(defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
+  "Choose function based on the presence of prefix argument."
+  (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
+
 ;; Switch to scratch buffer
 (defun nameless/find-scratch-buffer ()
-  (interactive)
-  (funcall (if current-prefix-arg
-               #'switch-to-buffer-other-window
-             #'switch-to-buffer) "*scratch*"))
+  "Switch to the scratch buffer (create one if necessary).
 
-;; utility function to quickly open init file
+With prefix argument, switch to the scratch buffer in other window."
+  (interactive)
+  (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
+                                   "*scratch*"))
+
+;; Utility function to quickly open user's init file
 (defun nameless/find-user-init-file ()
-  (interactive)
-  (let ((find-function (if current-prefix-arg
-                           #'find-file-other-window
-                         #'find-file)))
-    (funcall find-function user-init-file)))
+  "Find user's initialization file.
 
-;; utility function to quickly open cask file
-(defun nameless/find-user-cask-file ()
+With prefix argument, open the file in other window."
   (interactive)
-  (let ((find-function (if current-prefix-arg
-                           #'find-file-other-window
-                         #'find-file)))
-    (funcall find-function user-cask-file)))
+  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                   user-init-file))
+
+;; Utility function to quickly open user's cask file
+(defun nameless/find-user-cask-file ()
+  "Find user's cask file.
+
+With prefix argument, open the file in other window."
+  (interactive)
+  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                   user-cask-file))
 
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -213,13 +222,14 @@ suitable major mode according to `auto-mode-alist'"
   (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
 
 (defun nameless/find-cargo-file ()
+  "Find project's Cargo.toml file.
+
+With prefix argument, find the file in other window."
   (interactive)
-  (let ((find-function (if current-prefix-arg
-                           #'find-file-other-window
-                         #'find-file)))
-    (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
-        (funcall find-function (f-expand "Cargo.toml" crate-root))
-      (error "No `Cargo.toml` found"))))
+  (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
+      (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                       (f-expand "Cargo.toml" crate-root))
+    (error "No `Cargo.toml` found")))
 
 (add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
 
