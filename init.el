@@ -50,6 +50,7 @@
 (global-set-key (kbd "C-c m s") #'magit-status)
 (global-set-key (kbd "C-c t l d r") #'tldr)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
+(global-set-key (kbd "M-x") #'helm-M-x)
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
@@ -251,3 +252,6 @@ suitable major mode according to `auto-mode-alist'"
 (let ((-compare-fn #'eq))
   (when (-contains? '(ns x) window-system)
     (exec-path-from-shell-initialize)))
+
+;; Helm
+(require 'helm-config)
