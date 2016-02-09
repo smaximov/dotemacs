@@ -1,0 +1,9 @@
+# Ignore all files
+*
+
+#
+!Cask
+!custom.el
+!init.el
+!snippets/
+!.gitignore
