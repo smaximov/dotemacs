@@ -1,1 +1,11 @@
-/home/nameless/.dotfiles/emacs.d/snippets/c-mode/once
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: once
+# key: once
+# binding: direct-keybinding
+# --
+#ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H_}
+#define $1
+
+$0
+
+#endif /* $1 */
