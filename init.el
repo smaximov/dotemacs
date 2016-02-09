@@ -236,7 +236,6 @@ suitable major mode according to `auto-mode-alist'"
 
 ;; Yasnippet
 (add-hook 'after-init-hook #'yas-global-mode)
-(setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
 ;; Ruby
 (add-hook 'after-init-hook #'rvm-use-default)
