@@ -27,6 +27,7 @@
 (depends-on "mustache")
 (depends-on "pallet")
 (depends-on "paredit")
+(depends-on "projectile")
 (depends-on "racer")
 (depends-on "rust-mode")
 (depends-on "rvm")
