@@ -41,7 +41,6 @@
 (load custom-file)
 
 ;;; custom keybindings
-(global-set-key [(meta /)] #'redo)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
