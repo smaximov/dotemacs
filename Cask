@@ -34,6 +34,7 @@
 (depends-on "s")
 (depends-on "scss-mode")
 (depends-on "slim-mode")
+(depends-on "spinner")
 (depends-on "tldr")
 (depends-on "toml-mode")
 (depends-on "yaml-mode")
