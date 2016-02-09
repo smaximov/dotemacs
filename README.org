@@ -1,0 +1,20 @@
+#+title: .emacs.d
+#+date: <2016-02-10 Wed>
+#+author: Sergei Maximov
+#+email: s.b.maximov@gmail.com
+
+
+My Emacs configuration.
+
+* Things I use
+
+  + package.el + Cask + Pallet for managing packages.
+  + company-mode for completion.
+  + magit (it's awesome!).
+  + flycheck for syntax checking.
+  + projectile for project management.
+  + helm.
+
+* Licence
+
+  Copyright © 2016 Sergei Maximov. Released under WTFTPL 2.0. See [[COPYING]].
