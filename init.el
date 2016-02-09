@@ -99,7 +99,7 @@
 (define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
 
 ;; Various Lisps
-(--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook cider-repl-mode-hook)
+(--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook clojure-mode-hook cider-repl-mode-hook)
   (add-hook it #'company-mode)
   (add-hook it #'eldoc-mode))
 
