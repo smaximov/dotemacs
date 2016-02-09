@@ -16,6 +16,7 @@
 (depends-on "flycheck-haskell")
 (depends-on "flycheck-rust")
 (depends-on "haskell-mode")
+(depends-on "helm")
 (depends-on "ht")
 (depends-on "htmlize")
 (depends-on "json-mode")
