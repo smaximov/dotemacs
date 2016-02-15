@@ -101,6 +101,7 @@ With prefix argument, open the file in other window."
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 (add-hook 'haskell-mode-hook #'company-mode)
+(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
 
 (add-hook 'prog-mode-hook #'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
