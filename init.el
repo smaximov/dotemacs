@@ -121,6 +121,9 @@ With prefix argument, open the file in other window."
 ;; Clojure
 (setf cider-lein-command (f-full "~/bin/lein"))
 
+;; Emacs Lisp
+(define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
+
 (require 'eldoc)
 (eldoc-add-command
  'paredit-backward-delete
