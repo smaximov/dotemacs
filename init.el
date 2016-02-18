@@ -270,5 +270,6 @@ With prefix argument, find the file in other window."
 (global-set-key (kbd "M-x") #'helm-M-x)
 (global-set-key (kbd "M-y") #'helm-show-kill-ring)
 (global-set-key (kbd "C-x C-b") #'helm-mini)
+(global-set-key (kbd "M-s o") #'helm-occur)
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
