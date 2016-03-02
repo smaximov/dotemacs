@@ -90,8 +90,8 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-cask-file))
 
-;; Flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
 
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
@@ -322,3 +322,8 @@ With prefix argument, find the file in other window."
   (add-hook 'elixir-mode-hook #'alchemist-mode)
   (add-hook 'alchemist-mode-hook #'company-mode)
   (add-hook 'alchemist-iex-mode-hook #'company-mode))
+
+(use-package flycheck
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode))
