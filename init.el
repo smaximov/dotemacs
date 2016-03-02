@@ -40,9 +40,6 @@
 ;; Track recent files
 (add-hook 'after-init-hook #'recentf-mode)
 
-;; Custom theme
-(load-theme 'material t)
-
 ;; Detach the customization file
 (setf custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -280,3 +277,11 @@ With prefix argument, find the file in other window."
 (global-set-key (kbd "M-s o") #'helm-occur)
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+
+;;; Packages configuration
+(use-package material-theme
+  :if window-system
+  :ensure t
+  :demand t
+  :config
+  (load-theme 'material t))
