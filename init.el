@@ -293,25 +293,6 @@ With prefix argument, open the file in other window."
   (when (equal major-mode 'fundamental-mode)
     (set-auto-mode t)))
 
-(defun nameless/narrow-to-region-in-indirect-buffer (start end name)
-  "Narrow to the current region in indirect buffer
-
-NAME is the name of new buffer. It's also used to determine
-suitable major mode according to `auto-mode-alist'"
-  (interactive "r\nsBuffer name: ")
-  (deactivate-mark)
-  (let ((buffer (clone-indirect-buffer name nil))
-        (switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
-    (with-current-buffer buffer
-      (funcall switch buffer)
-      (narrow-to-region start end)
-      ;; Try to guess major mode from indirect buffer's file name
-      (when name
-        (let ((mode (assoc-default name auto-mode-alist 'string-match)))
-          (when (and mode
-                     (not (equal mode major-mode)))
-            (funcall mode)))))))
-
 (defun nameless/find-cargo-file ()
   "Find project's Cargo.toml file.
 
@@ -356,7 +337,6 @@ With prefix argument, find the file in other window."
 ;;; custom keybindings
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
-(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
