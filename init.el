@@ -214,19 +214,12 @@ With prefix argument, find the file in other window."
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
 
-;; Helm
-(require 'helm-config)
-(require 'helm)
-
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "M-y") #'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-b") #'helm-mini)
-(global-set-key (kbd "M-s o") #'helm-occur)
-
-(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
-
 ;;; Packages configuration
 (use-package diminish
+  :ensure t
+  :demand t)
+
+(use-package async
   :ensure t
   :demand t)
 
@@ -345,3 +338,12 @@ With prefix argument, find the file in other window."
 (use-package markdown-mode
   :ensure t
   :mode ("\\.md$" "\\.markdown$"))
+
+(use-package helm
+  :ensure t
+  :init
+  (require 'helm-config)
+  :bind (("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x C-b" . helm-mini)
+         ("M-s o" . helm-occur)))
