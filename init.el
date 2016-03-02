@@ -171,9 +171,6 @@ With prefix argument, find the file in other window."
       show-paren-style 'mixed)
 (add-hook 'after-init-hook #'show-paren-mode)
 
-;; Yasnippet
-(add-hook 'after-init-hook #'yas-global-mode)
-
 ;; Ruby
 (add-hook 'after-init-hook #'rvm-use-default)
 
@@ -381,3 +378,9 @@ With prefix argument, find the file in other window."
   :after flycheck
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'yas-global-mode))
+
