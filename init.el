@@ -376,14 +376,6 @@ With prefix argument, find the file in other window."
 ;; Select auto mode for new files
 (add-hook 'after-save-hook #'nameless/set-auto-mode)
 
-(defun nameless/convert-lordown ()
-  (interactive)
-  (call-process-region (point-min) (point-max) "lordown" t t))
-
-
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
 (put 'narrow-to-region 'disabled nil)
 
 ;; It's not like we are 800x600 nowadays
