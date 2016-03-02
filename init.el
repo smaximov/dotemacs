@@ -296,3 +296,7 @@ With prefix argument, find the file in other window."
 (use-package f
   :ensure t
   :demand t)
+
+(use-package s
+  :ensure t
+  :demand t)
