@@ -146,8 +146,7 @@ With prefix argument, open the file in other window."
   (interactive)
   (call-process-region (point-min) (point-max) "lordown" t t))
 
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
+
 (add-hook 'markdown-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
@@ -342,3 +341,7 @@ With prefix argument, find the file in other window."
   :config
   (setf js2-basic-offset 2
         js2-strict-missing-semi-warning nil))
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md$" "\\.markdown$"))
