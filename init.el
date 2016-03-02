@@ -1,67 +1,250 @@
-;; Use cask for Emacs configuration
-(defvar user-cask-file "~/.emacs.d/Cask"
-  "Cask file for emacs configuration")
+(require 'package)
+(setf package-enable-at-startup nil
+      package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+(package-initialize)
 
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-(pallet-mode t)
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;;; startup customization of UI
+(require 'use-package)
 
-;; when emacs is built without X frontend some features like
-;; toolbar or scrollbar are unavailable; that causes
-;; initialization to fail. To avoid that, check if the feature is present first
-(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
-  (when (fboundp it)
-    (funcall it 0)))
+;;; Packages configuration
+(use-package diminish
+  :ensure t
+  :demand t)
 
-;; Start Emacs maximized
-(toggle-frame-maximized)
+(use-package async
+  :ensure t
+  :demand t)
 
-;; Indent using spaces
-(setq-default indent-tabs-mode nil)
+(use-package material-theme
+  :if window-system
+  :ensure t
+  :demand t
+  :config
+  (load-theme 'material t))
 
-;; Don't show splash screen at startup
-(setf inhibit-splash-screen t)
+(use-package magit
+  :ensure t
+  :bind ("C-c m s" . magit-status))
 
-;; Get rid of annoying backup files stored in-place
-(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
+(use-package dash
+  :ensure t
+  :demand t)
 
-;; Display current column position of the cursor
-(add-hook 'after-init-hook #'column-number-mode)
+(use-package f
+  :ensure t
+  :demand t)
 
-;; Track recent files
-(add-hook 'after-init-hook #'recentf-mode)
+(use-package s
+  :ensure t
+  :demand t)
 
-;; Custom theme
-(load-theme 'material t)
+(use-package projectile
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'projectile-global-mode))
 
-;; Detach the customization file
-(setf custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(use-package whitespace
+  :ensure t
+  :diminish whitespace-mode
+  :init
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+  :config
+  (setf whitespace-line-column 120))
 
-;;; custom keybindings
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
-(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
-(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
-(global-set-key (kbd "C-c m s") #'magit-status)
-(global-set-key (kbd "C-c t l d r") #'tldr)
-(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
+(use-package exec-path-from-shell
+  :if window-system
+  :config
+  (exec-path-from-shell-initialize))
 
-;; Follow links to VCS-controlled source files
-(setf vc-follow-symlinks t)
+(use-package ido
+  :ensure t
+  :config
+  (setf ido-auto-merge-work-directories-length -1)
+  (ido-mode 1)
+  (ido-everywhere t))
 
-;; Customize fonts
-(when (display-graphic-p)
-  (set-face-attribute 'default nil :font "Terminus-12"))
+(use-package tldr
+  :ensure t
+  :bind ("C-c t l d r" . tldr))
 
-;; Choose function to apply depending on the presence of prefix argument
+(use-package elixir-mode
+  :ensure t)
+
+(use-package alchemist
+  :ensure t
+  :after (elixir-mode company-mode)
+  :init
+  (add-hook 'elixir-mode-hook #'alchemist-mode))
+
+(use-package flycheck
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :config
+  (setf flycheck-disabled-checkers '(javascript-jshint)))
+
+(use-package haskell-mode
+  :ensure t
+  :init
+  (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
+
+(use-package flycheck-haskell
+  :ensure t
+  :after (flycheck haskell-mode)
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+
+(use-package toml-mode
+  :ensure t)
+
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
+  :bind ([C-tab] . company-indent-or-complete-common)
+  :config
+  (setf company-tooltip-align-annotations t))
+
+(use-package bookmark+
+  :ensure t)
+
+(use-package org
+  :ensure t
+  :after htmlize
+  :config
+  (setf org-default-notes-file (f-join org-directory "notes.org")
+        org-src-fontify-natively t)
+  :bind ("C-c c" . org-capture))
+
+(use-package htmlize
+  :ensure t
+  :defer t)
+
+(use-package emr
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'emr-initialize)
+  :bind ([M-return] . emr-show-refactor-menu))
+
+(use-package json-mode
+  :ensure t)
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js$"
+  :init
+  (add-hook 'js2-mode-hook #'electric-pair-mode)
+  :config
+  (setf js2-basic-offset 2
+        js2-strict-missing-semi-warning nil))
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md$" "\\.markdown$"))
+
+(use-package helm
+  :ensure t
+  :init
+  (require 'helm-config)
+  :bind (("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x C-b" . helm-mini)
+         ("M-s o" . helm-occur)))
+
+(use-package eldoc
+  :ensure t
+  :diminish eldoc-mode
+  :after dash
+  :init
+  (--each '(emacs-lisp-mode-hook ielm-mode-hook)
+    (add-hook it #'eldoc-mode)))
+
+(use-package paredit
+  :ensure t
+  :after (dash eldoc)
+  :init
+  (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook ielm-mode-hook
+                                 lisp-mode-hook lisp-interaction-mode-hook scheme-mode-hook)
+    (add-hook it #'enable-paredit-mode))
+  :config
+  (eldoc-add-command
+   'paredit-backward-delete
+   'paredit-close-round))
+
+(use-package clojure-mode
+  :ensure t
+  :after (eldoc paredit)
+  :init
+  (--each (list #'enable-paredit-mode #'eldoc-mode)
+    (add-hook 'clojure-mode-hook it)))
+
+(use-package cider
+  :ensure t
+  :after (clojure-mode eldoc paredit)
+  :init
+  (--each (list #'enable-paredit-mode #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook it))
+  :config
+  (setf cider-lein-command (f-full "~/bin/lein")))
+
+(use-package scss-mode
+  :ensure t
+  :after whitespace
+  :init
+  (add-hook 'scss-mode-hook #'whitespace-mode)
+  :config
+  (setf css-indent-offset 2))
+
+(use-package rust-mode
+  :ensure t
+  :bind (:map rust-mode-map
+              ("C-c f c" . nameless/find-cargo-file)))
+
+(use-package cargo
+  :ensure t
+  :diminish cargo-minor-mode
+  :after rust-mode
+  :init
+  (add-hook 'rust-mode-hook #'cargo-minor-mode))
+
+(use-package racer
+  :ensure t
+  :diminish racer-mode
+  :after (rust-mode f eldoc)
+  :init
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  :config
+  (setf racer-rust-src-path (f-full "~/src/rust/src")))
+
+(use-package flycheck-rust
+  :ensure t
+  :after flycheck
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'yas-global-mode))
+
+(use-package rvm
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'rvm-use-default))
+
+;;; Custom commands
 (defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
   "Choose function based on the presence of prefix argument."
   (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
 
-;; Switch to scratch buffer
 (defun nameless/find-scratch-buffer ()
   "Switch to the scratch buffer (create one if necessary).
 
@@ -70,7 +253,6 @@ With prefix argument, switch to the scratch buffer in other window."
   (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
                                    "*scratch*"))
 
-;; Utility function to quickly open user's init file
 (defun nameless/find-user-init-file ()
   "Find user's initialization file.
 
@@ -79,7 +261,6 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-init-file))
 
-;; Utility function to quickly open user's cask file
 (defun nameless/find-user-cask-file ()
   "Find user's cask file.
 
@@ -87,68 +268,6 @@ With prefix argument, open the file in other window."
   (interactive)
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-cask-file))
-
-;; Flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Elixir Lang
-(add-hook 'elixir-mode-hook #'alchemist-mode)
-(add-hook 'alchemist-mode-hook #'company-mode)
-(add-hook 'alchemist-iex-mode-hook #'company-mode)
-
-;; Haskell
-(add-hook 'haskell-mode-hook #'haskell-indentation-mode)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
-(add-hook 'haskell-mode-hook #'company-mode)
-(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-
-(add-hook 'prog-mode-hook #'emr-initialize)
-(define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
-
-;; Various Lisps
-(--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook clojure-mode-hook cider-repl-mode-hook)
-  (add-hook it #'company-mode)
-  (add-hook it #'eldoc-mode))
-
-;; Paredit
-(--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook
-                               ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
-                               scheme-mode-hook clojure-mode-hook
-                               cider-repl-mode-hook)
-  (add-hook it #'enable-paredit-mode))
-
-;; Clojure
-(setf cider-lein-command (f-full "~/bin/lein"))
-
-;; Emacs Lisp
-(define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
-
-(require 'eldoc)
-(eldoc-add-command
- 'paredit-backward-delete
- 'paredit-close-round)
-
-;; Javascript
-(setf flycheck-disabled-checkers '(javascript-jshint))
-(setf js-indent-level 2)
-(add-hook 'js-mode-hook #'electric-pair-mode)
-
-;; Org Mode
-(require 'org)
-(setf org-default-notes-file (f-join org-directory "notes.org")
-      org-src-fontify-natively t)
-(define-key global-map "\C-cc" 'org-capture)
-
-;; Use Ido
-(setf ido-auto-merge-work-directories-length -1)
-(ido-mode 1)
-(ido-everywhere t)
-
-;; Handle whitespace
-(setf whitespace-line-column 120)
-(add-hook 'prog-mode-hook #'whitespace-mode)
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
@@ -175,24 +294,6 @@ With prefix argument, open the file in other window."
   (when (equal major-mode 'fundamental-mode)
     (set-auto-mode t)))
 
-;; Make files with shebang executable
-(add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
-
-;; Select auto mode for new files
-(add-hook 'after-save-hook #'nameless/set-auto-mode)
-
-(defun nameless/convert-lordown ()
-  (interactive)
-  (call-process-region (point-min) (point-max) "lordown" t t))
-
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode))
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
-(put 'narrow-to-region 'disabled nil)
-
-;; Narrow to region in indirect buffer
 (defun nameless/narrow-to-region-in-indirect-buffer (start end name)
   "Narrow to the current region in indirect buffer
 
@@ -212,19 +313,6 @@ suitable major mode according to `auto-mode-alist'"
                      (not (equal mode major-mode)))
             (funcall mode)))))))
 
-;; Rust customization
-(setf racer-rust-src-path (f-full "~/src/rust/src"))
-
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-(add-hook 'rust-mode-hook #'cargo-minor-mode)
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
-(setf company-tooltip-align-annotations t)
-
-(defun nameless/rust-mode-hook ()
-  (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
-
 (defun nameless/find-cargo-file ()
   "Find project's Cargo.toml file.
 
@@ -235,7 +323,60 @@ With prefix argument, find the file in other window."
                                        (f-expand "Cargo.toml" crate-root))
     (error "No `Cargo.toml` found")))
 
-(add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
+;;; Other configuration
+
+;; when emacs is built without X frontend some features like
+;; toolbar or scrollbar are unavailable; that causes
+;; initialization to fail. To avoid that, check if the feature is present first
+(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
+  (when (fboundp it)
+    (funcall it 0)))
+
+;; Start Emacs maximized
+(toggle-frame-maximized)
+
+;; Indent using spaces
+(setq-default indent-tabs-mode nil)
+
+;; Don't show splash screen at startup
+(setf inhibit-splash-screen t)
+
+;; Get rid of annoying backup files stored in-place
+(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
+
+;; Display current column position of the cursor
+(add-hook 'after-init-hook #'column-number-mode)
+
+;; Track recent files
+(add-hook 'after-init-hook #'recentf-mode)
+
+;; Detach the customization file
+(setf custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;;; custom keybindings
+(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
+(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
+(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
+(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
+
+;; Follow links to VCS-controlled source files
+(setf vc-follow-symlinks t)
+
+;; Customize fonts
+(when (display-graphic-p)
+  (set-face-attribute 'default nil :font "Terminus-12"))
+
+;; Emacs Lisp
+(define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
+
+;; Make files with shebang executable
+(add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
+
+;; Select auto mode for new files
+(add-hook 'after-save-hook #'nameless/set-auto-mode)
+
+(put 'narrow-to-region 'disabled nil)
 
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
@@ -245,31 +386,5 @@ With prefix argument, find the file in other window."
       show-paren-style 'mixed)
 (add-hook 'after-init-hook #'show-paren-mode)
 
-;; Yasnippet
-(add-hook 'after-init-hook #'yas-global-mode)
-
-;; Ruby
-(add-hook 'after-init-hook #'rvm-use-default)
-
-;; SCSS
-(setf css-indent-offset 2)
-(add-hook 'scss-mode-hook #'whitespace-mode)
-
-;; Projectile
-(add-hook 'after-init-hook #'projectile-global-mode)
-
-;; Env variables from shell
-(let ((-compare-fn #'eq))
-  (when (-contains? '(ns x) window-system)
-    (exec-path-from-shell-initialize)))
-
-;; Helm
-(require 'helm-config)
-(require 'helm)
-
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "M-y") #'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-b") #'helm-mini)
-(global-set-key (kbd "M-s o") #'helm-occur)
-
-(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+;; Handle whitespace
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
