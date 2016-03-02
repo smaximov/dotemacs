@@ -89,9 +89,6 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-cask-file))
 
-;; Clojure
-(setf cider-lein-command (f-full "~/bin/lein"))
-
 ;; Emacs Lisp
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
 
@@ -334,21 +331,33 @@ With prefix argument, find the file in other window."
   :ensure t
   :after dash
   :init
-  (--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook
-                                 clojure-mode-hook cider-repl-mode-hook
-                                 racer-mode-hook)
+  (--each '(emacs-lisp-mode-hook ielm-mode-hook racer-mode-hook)
     (add-hook it #'eldoc-mode)))
 
 (use-package paredit
   :ensure t
   :after (dash eldoc)
   :init
-  (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook
-                                 ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
-                                 scheme-mode-hook clojure-mode-hook
-                                 cider-repl-mode-hook)
+  (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook ielm-mode-hook
+                                 lisp-mode-hook lisp-interaction-mode-hook scheme-mode-hook)
     (add-hook it #'enable-paredit-mode))
   :config
   (eldoc-add-command
    'paredit-backward-delete
    'paredit-close-round))
+
+(use-package clojure-mode
+  :ensure t
+  :after (eldoc paredit)
+  :init
+  (--each (list #'enable-paredit-mode #'eldoc-mode)
+    (add-hook 'clojure-mode-hook it)))
+
+(use-package cider
+  :ensure t
+  :after (clojure-mode eldoc paredit)
+  :init
+  (--each (list #'enable-paredit-mode #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook it))
+  :config
+  (setf cider-lein-command (f-full "~/bin/lein")))
