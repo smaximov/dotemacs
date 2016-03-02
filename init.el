@@ -313,6 +313,7 @@ With prefix argument, find the file in other window."
 
 (use-package eldoc
   :ensure t
+  :diminish eldoc-mode
   :after dash
   :init
   (--each '(emacs-lisp-mode-hook ielm-mode-hook)
