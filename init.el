@@ -45,7 +45,6 @@
 (load custom-file)
 
 ;;; custom keybindings
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
@@ -96,7 +95,6 @@ With prefix argument, open the file in other window."
 
 ;; Various Lisps
 (--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook clojure-mode-hook cider-repl-mode-hook)
-  (add-hook it #'company-mode)
   (add-hook it #'eldoc-mode))
 
 ;; Paredit
@@ -127,7 +125,6 @@ With prefix argument, open the file in other window."
 (setf org-default-notes-file (f-join org-directory "notes.org")
       org-src-fontify-natively t)
 (define-key global-map "\C-cc" 'org-capture)
-
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
@@ -198,8 +195,7 @@ suitable major mode according to `auto-mode-alist'"
 (add-hook 'rust-mode-hook #'cargo-minor-mode)
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
-(setf company-tooltip-align-annotations t)
+
 
 (defun nameless/rust-mode-hook ()
   (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
@@ -310,9 +306,7 @@ With prefix argument, find the file in other window."
   :ensure t
   :after (elixir-mode company-mode)
   :init
-  (add-hook 'elixir-mode-hook #'alchemist-mode)
-  (add-hook 'alchemist-mode-hook #'company-mode)
-  (add-hook 'alchemist-iex-mode-hook #'company-mode))
+  (add-hook 'elixir-mode-hook #'alchemist-mode))
 
 (use-package flycheck
   :ensure t
@@ -330,3 +324,12 @@ With prefix argument, find the file in other window."
   :after (flycheck haskell-mode)
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
+  :bind ([C-tab] . company-indent-or-complete-common)
+  :config
+  (setf company-tooltip-align-annotations t))
