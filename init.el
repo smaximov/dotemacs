@@ -153,16 +153,6 @@ suitable major mode according to `auto-mode-alist'"
                      (not (equal mode major-mode)))
             (funcall mode)))))))
 
-;; Rust customization
-(setf racer-rust-src-path (f-full "~/src/rust/src"))
-
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-(add-hook 'rust-mode-hook #'cargo-minor-mode)
-(add-hook 'rust-mode-hook #'racer-mode)
-
-(defun nameless/rust-mode-hook ()
-  (local-set-key (kbd "C-c f c") #'nameless/find-cargo-file))
-
 (defun nameless/find-cargo-file ()
   "Find project's Cargo.toml file.
 
@@ -172,8 +162,6 @@ With prefix argument, find the file in other window."
       (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                        (f-expand "Cargo.toml" crate-root))
     (error "No `Cargo.toml` found")))
-
-(add-hook 'rust-mode-hook #'nameless/rust-mode-hook)
 
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
@@ -327,7 +315,7 @@ With prefix argument, find the file in other window."
   :ensure t
   :after dash
   :init
-  (--each '(emacs-lisp-mode-hook ielm-mode-hook racer-mode-hook)
+  (--each '(emacs-lisp-mode-hook ielm-mode-hook)
     (add-hook it #'eldoc-mode)))
 
 (use-package paredit
@@ -364,3 +352,31 @@ With prefix argument, find the file in other window."
   (add-hook 'scss-mode-hook #'whitespace-mode)
   :config
   (setf css-indent-offset 2))
+
+(use-package rust-mode
+  :ensure t
+  :bind (:map rust-mode-map
+              ("C-c f c" . nameless/find-cargo-file)))
+
+(use-package cargo
+  :ensure t
+  :diminish cargo-minor-mode
+  :after rust-mode
+  :init
+  (add-hook 'rust-mode-hook #'cargo-minor-mode))
+
+(use-package racer
+  :ensure t
+  :diminish racer-mode
+  :after (rust-mode f eldoc)
+  :init
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  :config
+  (setf racer-rust-src-path (f-full "~/src/rust/src")))
+
+(use-package flycheck-rust
+  :ensure t
+  :after flycheck
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
