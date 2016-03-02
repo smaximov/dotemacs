@@ -13,8 +13,6 @@
 
 (require 'use-package)
 
-;;; startup customization of UI
-
 ;; when emacs is built without X frontend some features like
 ;; toolbar or scrollbar are unavailable; that causes
 ;; initialization to fail. To avoid that, check if the feature is present first
@@ -57,65 +55,8 @@
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Terminus-12"))
 
-;; Choose function to apply depending on the presence of prefix argument
-(defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
-  "Choose function based on the presence of prefix argument."
-  (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
-
-;; Switch to scratch buffer
-(defun nameless/find-scratch-buffer ()
-  "Switch to the scratch buffer (create one if necessary).
-
-With prefix argument, switch to the scratch buffer in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
-                                   "*scratch*"))
-
-;; Utility function to quickly open user's init file
-(defun nameless/find-user-init-file ()
-  "Find user's initialization file.
-
-With prefix argument, open the file in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                   user-init-file))
-
-;; Utility function to quickly open user's cask file
-(defun nameless/find-user-cask-file ()
-  "Find user's cask file.
-
-With prefix argument, open the file in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                   user-cask-file))
-
 ;; Emacs Lisp
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
-
-(defun nameless/file-make-executable (file)
-  "Make file FILE executable"
-  (interactive "fSelect file: ")
-  (let* ((file-modes (file-modes file))
-         (new-modes (logior #o100 file-modes)))
-    (set-file-modes file new-modes)
-    (message "Set mode 0%s (octal) for file `%s'" new-modes file)))
-
-(defun nameless/file-make-executable-if-shebang ()
-  "Make the file associated with the current buffer executable if it has shebang"
-  (and buffer-file-name
-       (save-excursion
-         (save-restriction
-           (widen)
-           (goto-char (point-min))
-           (when (and (looking-at auto-mode-interpreter-regexp)
-                      (not (f-executable? buffer-file-name)))
-             (nameless/file-make-executable buffer-file-name))))))
-
-(defun nameless/set-auto-mode ()
-  "Call `set-auto-mode' if `major-mode' is fundamental-mode"
-  (interactive)
-  (when (equal major-mode 'fundamental-mode)
-    (set-auto-mode t)))
 
 ;; Make files with shebang executable
 (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
@@ -132,36 +73,6 @@ With prefix argument, open the file in other window."
           (lambda ()
             (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
 (put 'narrow-to-region 'disabled nil)
-
-;; Narrow to region in indirect buffer
-(defun nameless/narrow-to-region-in-indirect-buffer (start end name)
-  "Narrow to the current region in indirect buffer
-
-NAME is the name of new buffer. It's also used to determine
-suitable major mode according to `auto-mode-alist'"
-  (interactive "r\nsBuffer name: ")
-  (deactivate-mark)
-  (let ((buffer (clone-indirect-buffer name nil))
-        (switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
-    (with-current-buffer buffer
-      (funcall switch buffer)
-      (narrow-to-region start end)
-      ;; Try to guess major mode from indirect buffer's file name
-      (when name
-        (let ((mode (assoc-default name auto-mode-alist 'string-match)))
-          (when (and mode
-                     (not (equal mode major-mode)))
-            (funcall mode)))))))
-
-(defun nameless/find-cargo-file ()
-  "Find project's Cargo.toml file.
-
-With prefix argument, find the file in other window."
-  (interactive)
-  (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
-      (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                       (f-expand "Cargo.toml" crate-root))
-    (error "No `Cargo.toml` found")))
 
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
@@ -385,3 +296,86 @@ With prefix argument, find the file in other window."
   :ensure t
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
+
+;;; Custom commands
+(defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
+  "Choose function based on the presence of prefix argument."
+  (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
+
+(defun nameless/find-scratch-buffer ()
+  "Switch to the scratch buffer (create one if necessary).
+
+With prefix argument, switch to the scratch buffer in other window."
+  (interactive)
+  (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
+                                   "*scratch*"))
+
+(defun nameless/find-user-init-file ()
+  "Find user's initialization file.
+
+With prefix argument, open the file in other window."
+  (interactive)
+  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                   user-init-file))
+
+(defun nameless/find-user-cask-file ()
+  "Find user's cask file.
+
+With prefix argument, open the file in other window."
+  (interactive)
+  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                   user-cask-file))
+
+(defun nameless/file-make-executable (file)
+  "Make file FILE executable"
+  (interactive "fSelect file: ")
+  (let* ((file-modes (file-modes file))
+         (new-modes (logior #o100 file-modes)))
+    (set-file-modes file new-modes)
+    (message "Set mode 0%s (octal) for file `%s'" new-modes file)))
+
+(defun nameless/file-make-executable-if-shebang ()
+  "Make the file associated with the current buffer executable if it has shebang"
+  (and buffer-file-name
+       (save-excursion
+         (save-restriction
+           (widen)
+           (goto-char (point-min))
+           (when (and (looking-at auto-mode-interpreter-regexp)
+                      (not (f-executable? buffer-file-name)))
+             (nameless/file-make-executable buffer-file-name))))))
+
+(defun nameless/set-auto-mode ()
+  "Call `set-auto-mode' if `major-mode' is fundamental-mode"
+  (interactive)
+  (when (equal major-mode 'fundamental-mode)
+    (set-auto-mode t)))
+
+(defun nameless/narrow-to-region-in-indirect-buffer (start end name)
+  "Narrow to the current region in indirect buffer
+
+NAME is the name of new buffer. It's also used to determine
+suitable major mode according to `auto-mode-alist'"
+  (interactive "r\nsBuffer name: ")
+  (deactivate-mark)
+  (let ((buffer (clone-indirect-buffer name nil))
+        (switch (if current-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer)))
+    (with-current-buffer buffer
+      (funcall switch buffer)
+      (narrow-to-region start end)
+      ;; Try to guess major mode from indirect buffer's file name
+      (when name
+        (let ((mode (assoc-default name auto-mode-alist 'string-match)))
+          (when (and mode
+                     (not (equal mode major-mode)))
+            (funcall mode)))))))
+
+(defun nameless/find-cargo-file ()
+  "Find project's Cargo.toml file.
+
+With prefix argument, find the file in other window."
+  (interactive)
+  (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
+      (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                       (f-expand "Cargo.toml" crate-root))
+    (error "No `Cargo.toml` found")))
