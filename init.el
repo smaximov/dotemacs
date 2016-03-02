@@ -91,15 +91,6 @@ With prefix argument, open the file in other window."
                                    user-cask-file))
 
 
-
-
-;; Haskell
-(add-hook 'haskell-mode-hook #'haskell-indentation-mode)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
-(add-hook 'haskell-mode-hook #'company-mode)
-(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-
 (add-hook 'prog-mode-hook #'emr-initialize)
 (define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
 
@@ -327,3 +318,15 @@ With prefix argument, find the file in other window."
   :ensure t
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package haskell-mode
+  :ensure t
+  :init
+  (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
+
+(use-package flycheck-haskell
+  :ensure t
+  :after (flycheck haskell-mode)
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
