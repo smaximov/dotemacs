@@ -120,12 +120,6 @@ With prefix argument, open the file in other window."
 (setf js-indent-level 2)
 (add-hook 'js-mode-hook #'electric-pair-mode)
 
-;; Org Mode
-(require 'org)
-(setf org-default-notes-file (f-join org-directory "notes.org")
-      org-src-fontify-natively t)
-(define-key global-map "\C-cc" 'org-capture)
-
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
   (interactive "fSelect file: ")
@@ -333,3 +327,10 @@ With prefix argument, find the file in other window."
   :bind ([C-tab] . company-indent-or-complete-common)
   :config
   (setf company-tooltip-align-annotations t))
+
+(use-package org
+  :ensure t
+  :config
+  (setf org-default-notes-file (f-join org-directory "notes.org")
+        org-src-fontify-natively t)
+  :bind ("C-c c" . org-capture))
