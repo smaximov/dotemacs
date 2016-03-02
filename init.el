@@ -275,6 +275,10 @@ With prefix argument, find the file in other window."
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
 ;;; Packages configuration
+(use-package diminish
+  :ensure t
+  :demand t)
+
 (use-package material-theme
   :if window-system
   :ensure t
