@@ -288,3 +288,7 @@ With prefix argument, find the file in other window."
 (use-package magit
   :ensure t
   :bind ("C-c m s" . magit-status))
+
+(use-package dash
+  :ensure t
+  :demand t)
