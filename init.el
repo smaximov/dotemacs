@@ -171,9 +171,6 @@ With prefix argument, find the file in other window."
       show-paren-style 'mixed)
 (add-hook 'after-init-hook #'show-paren-mode)
 
-;; Ruby
-(add-hook 'after-init-hook #'rvm-use-default)
-
 ;;; Packages configuration
 (use-package diminish
   :ensure t
@@ -384,3 +381,7 @@ With prefix argument, find the file in other window."
   :init
   (add-hook 'after-init-hook #'yas-global-mode))
 
+(use-package rvm
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'rvm-use-default))
