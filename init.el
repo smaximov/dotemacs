@@ -49,7 +49,6 @@
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
-(global-set-key (kbd "C-c t l d r") #'tldr)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
 
 ;; Follow links to VCS-controlled source files
@@ -313,3 +312,7 @@ With prefix argument, find the file in other window."
   (setf ido-auto-merge-work-directories-length -1)
   (ido-mode 1)
   (ido-everywhere t))
+
+(use-package tldr
+  :ensure t
+  :bind ("C-c t l d r" . tldr))
