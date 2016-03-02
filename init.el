@@ -254,11 +254,6 @@ With prefix argument, find the file in other window."
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
 
-;; Env variables from shell
-(let ((-compare-fn #'eq))
-  (when (-contains? '(ns x) window-system)
-    (exec-path-from-shell-initialize)))
-
 ;; Helm
 (require 'helm-config)
 (require 'helm)
@@ -311,3 +306,8 @@ With prefix argument, find the file in other window."
   (add-hook 'before-save-hook #'delete-trailing-whitespace)
   :config
   (setf whitespace-line-column 120))
+
+(use-package exec-path-from-shell
+  :if window-system
+  :config
+  (exec-path-from-shell-initialize))
