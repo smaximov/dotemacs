@@ -1,3 +1,10 @@
+;;; init.el --- Emacs configuration
+
+;;; Commentary:
+
+;; See https://github.com/smaximov/dotemacs
+
+;;; Code:
 (require 'package)
 (setf package-enable-at-startup nil
       package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -198,6 +205,9 @@
 (use-package scss-mode
   :ensure t
   :after whitespace
+  :preface
+  ;; Get rid of "assignment to free variable `css-indent-offset'" warning
+  (defvar css-indent-offset)
   :init
   (add-hook 'scss-mode-hook #'whitespace-mode)
   :config
@@ -248,9 +258,13 @@
   :config
   (setf show-paren-delay 0
         show-paren-style 'mixed))
+
 ;;; Custom commands
 (defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
-  "Choose function based on the presence of prefix argument."
+  "Choose function based on the presence of prefix argument.
+
+If the command invoked with prefix argument, PREFIX-PRESENT-FUN is called,
+PREFIX-ABSENT-FUN otherwise, with  ARGS as their arguments."
   (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
 
 (defun nameless/find-scratch-buffer ()
@@ -270,7 +284,7 @@ With prefix argument, open the file in other window."
                                    user-init-file))
 
 (defun nameless/file-make-executable (file)
-  "Make file FILE executable"
+  "Make file FILE executable."
   (interactive "fSelect file: ")
   (let* ((file-modes (file-modes file))
          (new-modes (logior #o100 file-modes)))
@@ -278,7 +292,7 @@ With prefix argument, open the file in other window."
     (message "Set mode 0%s (octal) for file `%s'" new-modes file)))
 
 (defun nameless/file-make-executable-if-shebang ()
-  "Make the file associated with the current buffer executable if it has shebang"
+  "Make the file associated with the current buffer executable if it has shebang."
   (and buffer-file-name
        (save-excursion
          (save-restriction
@@ -289,7 +303,7 @@ With prefix argument, open the file in other window."
              (nameless/file-make-executable buffer-file-name))))))
 
 (defun nameless/set-auto-mode ()
-  "Call `set-auto-mode' if `major-mode' is fundamental-mode"
+  "Call `set-auto-mode' if `major-mode' is `fundamental-mode'."
   (interactive)
   (when (equal major-mode 'fundamental-mode)
     (set-auto-mode t)))
@@ -362,3 +376,6 @@ With prefix argument, find the file in other window."
 
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
+
+(provide 'init)
+;;; init.el ends here
