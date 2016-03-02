@@ -57,6 +57,7 @@
   (setf whitespace-line-column 120))
 
 (use-package exec-path-from-shell
+  :ensure t
   :if window-system
   :config
   (exec-path-from-shell-initialize))
