@@ -197,6 +197,7 @@
   (setf cider-lein-command (f-full "~/bin/lein")))
 
 (use-package scss-mode
+  :ensure t
   :after whitespace
   :init
   (add-hook 'scss-mode-hook #'whitespace-mode)
