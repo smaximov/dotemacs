@@ -8,7 +8,7 @@ My Emacs configuration.
 
 * Things I use
 
-  + package.el + Cask + Pallet for managing packages.
+  + package.el + use-package.el for managing packages.
   + company-mode for completion.
   + magit (it's awesome!).
   + flycheck for syntax checking.
