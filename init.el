@@ -258,9 +258,6 @@ With prefix argument, find the file in other window."
 (setf css-indent-offset 2)
 (add-hook 'scss-mode-hook #'whitespace-mode)
 
-;; Projectile
-(add-hook 'after-init-hook #'projectile-global-mode)
-
 ;; Env variables from shell
 (let ((-compare-fn #'eq))
   (when (-contains? '(ns x) window-system)
@@ -300,3 +297,8 @@ With prefix argument, find the file in other window."
 (use-package s
   :ensure t
   :demand t)
+
+(use-package projectile
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'projectile-global-mode))
