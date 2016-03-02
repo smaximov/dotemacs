@@ -55,7 +55,6 @@
   :diminish whitespace-mode
   :init
   (add-hook 'prog-mode-hook #'whitespace-mode)
-  (add-hook 'before-save-hook #'delete-trailing-whitespace)
   :config
   (setf whitespace-line-column 120))
 
@@ -395,3 +394,6 @@ With prefix argument, find the file in other window."
 (setf show-paren-delay 0
       show-paren-style 'mixed)
 (add-hook 'after-init-hook #'show-paren-mode)
+
+;; Handle whitespace
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
