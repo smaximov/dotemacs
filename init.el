@@ -184,6 +184,9 @@
   :config
   (setf company-tooltip-align-annotations t))
 
+(use-package bookmark+
+  :ensure t)
+
 (use-package org
   :ensure t
   :config
