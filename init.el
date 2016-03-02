@@ -93,11 +93,6 @@ With prefix argument, open the file in other window."
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; Elixir Lang
-(add-hook 'elixir-mode-hook #'alchemist-mode)
-(add-hook 'alchemist-mode-hook #'company-mode)
-(add-hook 'alchemist-iex-mode-hook #'company-mode)
-
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
 (eval-after-load 'flycheck
@@ -316,3 +311,14 @@ With prefix argument, find the file in other window."
 (use-package tldr
   :ensure t
   :bind ("C-c t l d r" . tldr))
+
+(use-package elixir-mode
+  :ensure t)
+
+(use-package alchemist
+  :ensure t
+  :after (elixir-mode company-mode)
+  :init
+  (add-hook 'elixir-mode-hook #'alchemist-mode)
+  (add-hook 'alchemist-mode-hook #'company-mode)
+  (add-hook 'alchemist-iex-mode-hook #'company-mode))
