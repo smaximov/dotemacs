@@ -189,10 +189,15 @@
 
 (use-package org
   :ensure t
+  :after htmlize
   :config
   (setf org-default-notes-file (f-join org-directory "notes.org")
         org-src-fontify-natively t)
   :bind ("C-c c" . org-capture))
+
+(use-package htmlize
+  :ensure t
+  :defer t)
 
 (use-package emr
   :ensure t
