@@ -189,10 +189,6 @@ With prefix argument, find the file in other window."
 ;; Ruby
 (add-hook 'after-init-hook #'rvm-use-default)
 
-;; SCSS
-(setf css-indent-offset 2)
-(add-hook 'scss-mode-hook #'whitespace-mode)
-
 ;;; Packages configuration
 (use-package diminish
   :ensure t
@@ -361,3 +357,10 @@ With prefix argument, find the file in other window."
     (add-hook 'cider-repl-mode-hook it))
   :config
   (setf cider-lein-command (f-full "~/bin/lein")))
+
+(use-package scss-mode
+  :after whitespace
+  :init
+  (add-hook 'scss-mode-hook #'whitespace-mode)
+  :config
+  (setf css-indent-offset 2))
