@@ -240,6 +240,13 @@
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
 
+(use-package paren
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'show-paren-mode)
+  :config
+  (setf show-paren-delay 0
+        show-paren-style 'mixed))
 ;;; Custom commands
 (defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
   "Choose function based on the presence of prefix argument."
@@ -371,11 +378,6 @@ With prefix argument, find the file in other window."
 
 ;; It's not like we are 800x600 nowadays
 (setf fill-column 120)
-
-;; Highlight matching parentheses
-(setf show-paren-delay 0
-      show-paren-style 'mixed)
-(add-hook 'after-init-hook #'show-paren-mode)
 
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
