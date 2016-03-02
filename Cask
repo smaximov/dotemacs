@@ -40,6 +40,7 @@
 (depends-on "spinner")
 (depends-on "tldr")
 (depends-on "toml-mode")
+(depends-on "use-package")
 (depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
