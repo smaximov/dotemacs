@@ -261,14 +261,6 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-init-file))
 
-(defun nameless/find-user-cask-file ()
-  "Find user's cask file.
-
-With prefix argument, open the file in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                   user-cask-file))
-
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
   (interactive "fSelect file: ")
@@ -356,7 +348,6 @@ With prefix argument, find the file in other window."
 
 ;;; custom keybindings
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
-(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
 
