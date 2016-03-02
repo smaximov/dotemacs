@@ -143,11 +143,6 @@ With prefix argument, open the file in other window."
       org-src-fontify-natively t)
 (define-key global-map "\C-cc" 'org-capture)
 
-;; Use Ido
-(setf ido-auto-merge-work-directories-length -1)
-(ido-mode 1)
-(ido-everywhere t)
-
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
@@ -311,3 +306,10 @@ With prefix argument, find the file in other window."
   :if window-system
   :config
   (exec-path-from-shell-initialize))
+
+(use-package ido
+  :ensure t
+  :config
+  (setf ido-auto-merge-work-directories-length -1)
+  (ido-mode 1)
+  (ido-everywhere t))
