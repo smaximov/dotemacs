@@ -2,6 +2,7 @@
 (source melpa)
 
 (depends-on "alchemist")
+(depends-on "async")
 (depends-on "bookmark+")
 (depends-on "cargo")
 (depends-on "cider")
@@ -39,5 +40,6 @@
 (depends-on "spinner")
 (depends-on "tldr")
 (depends-on "toml-mode")
+(depends-on "with-editor")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
