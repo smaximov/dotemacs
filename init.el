@@ -1,10 +1,8 @@
-;; Use cask for Emacs configuration
-(defvar user-cask-file "~/.emacs.d/Cask"
-  "Cask file for emacs configuration")
-
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-(pallet-mode t)
+(require 'package)
+(setf package-enable-at-startup nil
+      package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+(package-initialize)
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)

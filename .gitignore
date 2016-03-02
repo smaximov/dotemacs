@@ -3,7 +3,6 @@
 /*/
 
 # …excepts these:
-!Cask
 !custom.el
 !init.el
 !snippets/
