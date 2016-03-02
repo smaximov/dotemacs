@@ -111,11 +111,6 @@ With prefix argument, open the file in other window."
  'paredit-backward-delete
  'paredit-close-round)
 
-;; Javascript
-(setf flycheck-disabled-checkers '(javascript-jshint))
-(setf js-indent-level 2)
-(add-hook 'js-mode-hook #'electric-pair-mode)
-
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
   (interactive "fSelect file: ")
@@ -301,7 +296,9 @@ With prefix argument, find the file in other window."
 (use-package flycheck
   :ensure t
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :config
+  (setf flycheck-disabled-checkers '(javascript-jshint)))
 
 (use-package haskell-mode
   :ensure t
@@ -336,3 +333,12 @@ With prefix argument, find the file in other window."
   :init
   (add-hook 'prog-mode-hook #'emr-initialize)
   :bind ([M-return] . emr-show-refactor-menu))
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js$"
+  :init
+  (add-hook 'js2-mode-hook #'electric-pair-mode)
+  :config
+  (setf js2-basic-offset 2
+        js2-strict-missing-semi-warning nil))
