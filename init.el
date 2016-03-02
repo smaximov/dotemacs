@@ -148,10 +148,6 @@ With prefix argument, open the file in other window."
 (ido-mode 1)
 (ido-everywhere t)
 
-;; Handle whitespace
-(setf whitespace-line-column 120)
-(add-hook 'prog-mode-hook #'whitespace-mode)
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
@@ -306,3 +302,12 @@ With prefix argument, find the file in other window."
   :ensure t
   :init
   (add-hook 'after-init-hook #'projectile-global-mode))
+
+(use-package whitespace
+  :ensure t
+  :diminish whitespace-mode
+  :init
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+  (add-hook 'before-save-hook #'delete-trailing-whitespace)
+  :config
+  (setf whitespace-line-column 120))
