@@ -6,6 +6,13 @@
 (cask-initialize)
 (pallet-mode t)
 
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
 ;;; startup customization of UI
 
 ;; when emacs is built without X frontend some features like
