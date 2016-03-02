@@ -13,75 +13,6 @@
 
 (require 'use-package)
 
-;; when emacs is built without X frontend some features like
-;; toolbar or scrollbar are unavailable; that causes
-;; initialization to fail. To avoid that, check if the feature is present first
-(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
-  (when (fboundp it)
-    (funcall it 0)))
-
-;; Start Emacs maximized
-(toggle-frame-maximized)
-
-;; Indent using spaces
-(setq-default indent-tabs-mode nil)
-
-;; Don't show splash screen at startup
-(setf inhibit-splash-screen t)
-
-;; Get rid of annoying backup files stored in-place
-(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
-
-;; Display current column position of the cursor
-(add-hook 'after-init-hook #'column-number-mode)
-
-;; Track recent files
-(add-hook 'after-init-hook #'recentf-mode)
-
-;; Detach the customization file
-(setf custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
-;;; custom keybindings
-(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
-(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
-(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
-(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
-
-;; Follow links to VCS-controlled source files
-(setf vc-follow-symlinks t)
-
-;; Customize fonts
-(when (display-graphic-p)
-  (set-face-attribute 'default nil :font "Terminus-12"))
-
-;; Emacs Lisp
-(define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
-
-;; Make files with shebang executable
-(add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
-
-;; Select auto mode for new files
-(add-hook 'after-save-hook #'nameless/set-auto-mode)
-
-(defun nameless/convert-lordown ()
-  (interactive)
-  (call-process-region (point-min) (point-max) "lordown" t t))
-
-
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
-(put 'narrow-to-region 'disabled nil)
-
-;; It's not like we are 800x600 nowadays
-(setf fill-column 120)
-
-;; Highlight matching parentheses
-(setf show-paren-delay 0
-      show-paren-style 'mixed)
-(add-hook 'after-init-hook #'show-paren-mode)
-
 ;;; Packages configuration
 (use-package diminish
   :ensure t
@@ -393,3 +324,74 @@ With prefix argument, find the file in other window."
       (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                        (f-expand "Cargo.toml" crate-root))
     (error "No `Cargo.toml` found")))
+
+;;; Other configuration
+
+;; when emacs is built without X frontend some features like
+;; toolbar or scrollbar are unavailable; that causes
+;; initialization to fail. To avoid that, check if the feature is present first
+(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
+  (when (fboundp it)
+    (funcall it 0)))
+
+;; Start Emacs maximized
+(toggle-frame-maximized)
+
+;; Indent using spaces
+(setq-default indent-tabs-mode nil)
+
+;; Don't show splash screen at startup
+(setf inhibit-splash-screen t)
+
+;; Get rid of annoying backup files stored in-place
+(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
+
+;; Display current column position of the cursor
+(add-hook 'after-init-hook #'column-number-mode)
+
+;; Track recent files
+(add-hook 'after-init-hook #'recentf-mode)
+
+;; Detach the customization file
+(setf custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;;; custom keybindings
+(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
+(global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
+(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
+(global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
+
+;; Follow links to VCS-controlled source files
+(setf vc-follow-symlinks t)
+
+;; Customize fonts
+(when (display-graphic-p)
+  (set-face-attribute 'default nil :font "Terminus-12"))
+
+;; Emacs Lisp
+(define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
+
+;; Make files with shebang executable
+(add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
+
+;; Select auto mode for new files
+(add-hook 'after-save-hook #'nameless/set-auto-mode)
+
+(defun nameless/convert-lordown ()
+  (interactive)
+  (call-process-region (point-min) (point-max) "lordown" t t))
+
+
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-e") #'nameless/convert-lordown)))
+(put 'narrow-to-region 'disabled nil)
+
+;; It's not like we are 800x600 nowadays
+(setf fill-column 120)
+
+;; Highlight matching parentheses
+(setf show-paren-delay 0
+      show-paren-style 'mixed)
+(add-hook 'after-init-hook #'show-paren-mode)
