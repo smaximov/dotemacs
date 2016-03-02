@@ -292,3 +292,7 @@ With prefix argument, find the file in other window."
 (use-package dash
   :ensure t
   :demand t)
+
+(use-package f
+  :ensure t
+  :demand t)
