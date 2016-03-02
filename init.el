@@ -89,23 +89,11 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-cask-file))
 
-;; Paredit
-(--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook
-                               ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
-                               scheme-mode-hook clojure-mode-hook
-                               cider-repl-mode-hook)
-  (add-hook it #'enable-paredit-mode))
-
 ;; Clojure
 (setf cider-lein-command (f-full "~/bin/lein"))
 
 ;; Emacs Lisp
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") #'eval-buffer)
-
-(require 'eldoc)
-(eldoc-add-command
- 'paredit-backward-delete
- 'paredit-close-round)
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable"
@@ -351,3 +339,16 @@ With prefix argument, find the file in other window."
                                  racer-mode-hook)
     (add-hook it #'eldoc-mode)))
 
+(use-package paredit
+  :ensure t
+  :after (dash eldoc)
+  :init
+  (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook
+                                 ielm-mode-hook lisp-mode-hook lisp-interaction-mode-hook
+                                 scheme-mode-hook clojure-mode-hook
+                                 cider-repl-mode-hook)
+    (add-hook it #'enable-paredit-mode))
+  :config
+  (eldoc-add-command
+   'paredit-backward-delete
+   'paredit-close-round))
