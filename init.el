@@ -172,6 +172,9 @@
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
+(use-package toml-mode
+  :ensure t)
+
 (use-package company
   :ensure t
   :diminish company-mode
