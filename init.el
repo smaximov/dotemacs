@@ -89,10 +89,6 @@ With prefix argument, open the file in other window."
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-cask-file))
 
-
-(add-hook 'prog-mode-hook #'emr-initialize)
-(define-key prog-mode-map (kbd "M-RET") #'emr-show-refactor-menu)
-
 ;; Various Lisps
 (--each '(emacs-lisp-mode-hook ielm-mode-hook cider-mode-hook clojure-mode-hook cider-repl-mode-hook)
   (add-hook it #'eldoc-mode))
@@ -334,3 +330,9 @@ With prefix argument, find the file in other window."
   (setf org-default-notes-file (f-join org-directory "notes.org")
         org-src-fontify-natively t)
   :bind ("C-c c" . org-capture))
+
+(use-package emr
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'emr-initialize)
+  :bind ([M-return] . emr-show-refactor-menu))
