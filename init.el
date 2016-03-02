@@ -214,9 +214,7 @@
   (setf css-indent-offset 2))
 
 (use-package rust-mode
-  :ensure t
-  :bind (:map rust-mode-map
-              ("C-c f c" . nameless/find-cargo-file)))
+  :ensure t)
 
 (use-package cargo
   :ensure t
@@ -307,16 +305,6 @@ With prefix argument, open the file in other window."
   (interactive)
   (when (equal major-mode 'fundamental-mode)
     (set-auto-mode t)))
-
-(defun nameless/find-cargo-file ()
-  "Find project's Cargo.toml file.
-
-With prefix argument, find the file in other window."
-  (interactive)
-  (-if-let (crate-root (locate-dominating-file (buffer-file-name) "Cargo.toml"))
-      (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                       (f-expand "Cargo.toml" crate-root))
-    (error "No `Cargo.toml` found")))
 
 ;;; Other configuration
 
