@@ -49,7 +49,6 @@
 (global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
 (global-set-key (kbd "C-c f u c") #'nameless/find-user-cask-file)
 (global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
-(global-set-key (kbd "C-c m s") #'magit-status)
 (global-set-key (kbd "C-c t l d r") #'tldr)
 (global-set-key (kbd "C-x n i") #'nameless/narrow-to-region-in-indirect-buffer)
 
@@ -285,3 +284,7 @@ With prefix argument, find the file in other window."
   :demand t
   :config
   (load-theme 'material t))
+
+(use-package magit
+  :ensure t
+  :bind ("C-c m s" . magit-status))
