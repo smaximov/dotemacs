@@ -6,6 +6,7 @@
 !custom.el
 !init.el
 !snippets/
+!lib/
 !.gitignore
 !COPYING
 !README.org

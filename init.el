@@ -257,29 +257,12 @@
   (setf show-paren-delay 0
         show-paren-style 'mixed))
 
+(use-package navigation
+  :load-path "lib"
+  :bind (("C-c f u i" . nameless/find-user-init-file)
+         ("C-c f s" . nameless/find-scratch-buffer)))
+
 ;;; Custom commands
-(defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
-  "Choose function based on the presence of prefix argument.
-
-If the command invoked with prefix argument, PREFIX-PRESENT-FUN is called,
-PREFIX-ABSENT-FUN otherwise, with  ARGS as their arguments."
-  (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
-
-(defun nameless/find-scratch-buffer ()
-  "Switch to the scratch buffer (create one if necessary).
-
-With prefix argument, switch to the scratch buffer in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
-                                   "*scratch*"))
-
-(defun nameless/find-user-init-file ()
-  "Find user's initialization file.
-
-With prefix argument, open the file in other window."
-  (interactive)
-  (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                   user-init-file))
 
 (defun nameless/file-make-executable (file)
   "Make file FILE executable."
@@ -336,10 +319,6 @@ With prefix argument, open the file in other window."
 ;; Detach the customization file
 (setf custom-file "~/.emacs.d/custom.el")
 (load custom-file)
-
-;;; custom keybindings
-(global-set-key (kbd "C-c f u i") #'nameless/find-user-init-file)
-(global-set-key (kbd "C-c f s") #'nameless/find-scratch-buffer)
 
 ;; Follow links to VCS-controlled source files
 (setf vc-follow-symlinks t)
