@@ -205,6 +205,9 @@
   (add-hook 'prog-mode-hook #'emr-initialize)
   :bind ([M-return] . emr-show-refactor-menu))
 
+(use-package json-mode
+  :ensure t)
+
 (use-package js2-mode
   :ensure t
   :mode "\\.js$"
