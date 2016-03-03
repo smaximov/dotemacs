@@ -55,6 +55,10 @@
   :init
   (add-hook 'after-init-hook #'projectile-global-mode))
 
+(use-package helm-projectile
+  :ensure t
+  :after (helm projectile))
+
 (use-package whitespace
   :ensure t
   :diminish whitespace-mode
