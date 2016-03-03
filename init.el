@@ -38,6 +38,10 @@
   :ensure t
   :bind ("C-c m s" . magit-status))
 
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.yml$")
+
 (use-package dash
   :ensure t
   :demand t)
