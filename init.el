@@ -93,6 +93,8 @@
 
 (use-package alchemist
   :ensure t
+  :if (and (>= emacs-major-version 24)
+           (>= emacs-minor-version 4))
   :after (elixir-mode company-mode)
   :init
   (add-hook 'elixir-mode-hook #'alchemist-mode))
