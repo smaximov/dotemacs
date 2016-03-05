@@ -154,14 +154,12 @@
 (use-package json-mode
   :ensure t)
 
-(use-package js2-mode
+(use-package js
   :ensure t
-  :mode "\\.js$"
   :init
-  (add-hook 'js2-mode-hook #'electric-pair-mode)
+  (add-hook 'js-mode-hook #'electric-pair-mode)
   :config
-  (setf js2-basic-offset 2
-        js2-strict-missing-semi-warning nil))
+  (setf js-indent-level 2))
 
 (use-package markdown-mode
   :ensure t
