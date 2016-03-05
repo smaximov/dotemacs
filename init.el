@@ -342,5 +342,9 @@
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
+;; Credentials
+(setf user-full-name "smaximov"
+      user-mail-address "s.b.maximov@gmail.com")
+
 (provide 'init)
 ;;; init.el ends here
