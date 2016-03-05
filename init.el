@@ -27,6 +27,11 @@
   :ensure t
   :demand t)
 
+(use-package org-page
+  :ensure t
+  :config
+  (setf op/site-preview-directory "/tmp/org-page-preview"))
+
 (use-package material-theme
   :if window-system
   :ensure t
