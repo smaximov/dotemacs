@@ -1,0 +1,3 @@
+[submodule "lib/org-page"]
+	path = lib/org-page
+	url = git@github.com:smaximov/org-page.git
