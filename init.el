@@ -66,6 +66,9 @@
   :ensure t
   :demand t)
 
+(use-package mustache-mode
+  :ensure t)
+
 (use-package f
   :ensure t
   :demand t)
