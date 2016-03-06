@@ -36,8 +36,13 @@
         op/site-domain "https://maximov.space"
         op/site-main-title "Untitled"
         op/site-sub-title "Emacs, Programming, an Anything"
-        op/personal-avatar "https://gravatar.com/avatar/4a1ba62971e109fc38bd3c7961d41d04?s=200"
 
+        op/highlight-render 'htmlize
+
+        op/theme 'mdo
+        op/theme-root-directory "~/src/maximov.space/themes"
+
+        op/personal-avatar "https://gravatar.com/avatar/4a1ba62971e109fc38bd3c7961d41d04?s=200"
         op/personal-disqus-shortname "smaximov"
         op/personal-github-link "https://github.com/smaximov"
         op/personal-google-analytics-id "UA-74709646-1"))
