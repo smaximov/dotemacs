@@ -142,6 +142,7 @@
   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 (use-package toml-mode
+  :mode "\\.cargo/config$"
   :ensure t)
 
 (use-package company
