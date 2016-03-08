@@ -54,6 +54,11 @@
   :config
   (load-theme 'material t))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (use-package magit
   :ensure t
   :bind ("C-c m s" . magit-status))
