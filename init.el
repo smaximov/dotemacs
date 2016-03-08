@@ -191,10 +191,12 @@
   :ensure t
   :init
   (require 'helm-config)
-  :bind (("M-x" . helm-M-x)
-         ("M-y" . helm-show-kill-ring)
-         ("C-x C-b" . helm-mini)
-         ("M-s o" . helm-occur)))
+  :bind (([remap execute-extended-command] . helm-M-x) ; M-x
+         ([remap yank-pop] . helm-show-kill-ring)      ; M-y
+         ([remap list-buffers] . helm-mini)            ; C-x C-b
+         ([remap switch-to-buffer] . helm-mini)        ; C-x b
+         ([remap find-file] . helm-find-files)         ; C-x C-f
+         ([remap occur] . helm-occur)))                ; M-s o
 
 (use-package eldoc
   :ensure t
