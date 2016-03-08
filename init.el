@@ -105,13 +105,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package ido
-  :ensure t
-  :config
-  (setf ido-auto-merge-work-directories-length -1)
-  (ido-mode 1)
-  (ido-everywhere t))
-
 (use-package tldr
   :ensure t
   :bind ("C-c t l d r" . tldr))
