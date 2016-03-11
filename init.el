@@ -54,6 +54,19 @@
   :config
   (load-theme 'material t))
 
+(use-package tern
+  :ensure t
+  :after js
+  :init
+  (--each '(tern-mode eldoc-mode)
+    (add-hook 'js-mode-hook it)))
+
+(use-package company-tern
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-tern))
+
 (use-package editorconfig
   :ensure t
   :config
