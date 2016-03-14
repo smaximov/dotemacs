@@ -56,7 +56,7 @@
 
 (use-package tern
   :ensure t
-  :after js
+  :after js2
   :diminish tern-mode
   :init
   (--each '(tern-mode eldoc-mode)
@@ -192,12 +192,14 @@
 (use-package json-mode
   :ensure t)
 
-(use-package js
+(use-package js2-mode
   :ensure t
+  :mode "\\.js$"
   :init
-  (add-hook 'js-mode-hook #'electric-pair-mode)
+  (add-hook 'js2-mode-hook #'electric-pair-mode)
   :config
-  (setf js-indent-level 2))
+  (setf js2-strict-missing-semi-warning nil
+        js2-basic-offset 2))
 
 (use-package markdown-mode
   :ensure t
