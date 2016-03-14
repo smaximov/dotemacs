@@ -57,6 +57,7 @@
 (use-package tern
   :ensure t
   :after js
+  :diminish tern-mode
   :init
   (--each '(tern-mode eldoc-mode)
     (add-hook 'js-mode-hook it)))
