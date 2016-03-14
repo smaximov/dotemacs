@@ -75,7 +75,9 @@
 
 (use-package magit
   :ensure t
-  :bind ("C-c m s" . magit-status))
+  :bind ("C-c m s" . magit-status)
+  :config
+  (setf git-commit-summary-max-length 100))
 
 (use-package yaml-mode
   :ensure t
@@ -360,7 +362,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; It's not like we are 800x600 nowadays
-(setf fill-column 120)
+(setq-default fill-column 120)
 
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
