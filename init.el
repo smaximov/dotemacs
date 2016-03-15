@@ -177,7 +177,8 @@
   :config
   (setf org-default-notes-file (f-join org-directory "notes.org")
         org-src-fontify-natively t)
-  :bind ("C-c c" . org-capture))
+  :bind (("C-c c" . org-capture)
+         ("C-c l" . org-store-link)))
 
 (use-package htmlize
   :ensure t
