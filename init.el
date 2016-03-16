@@ -323,6 +323,12 @@
   (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
   (add-hook 'after-save-hook #'nameless/set-auto-mode))
 
+(use-package term
+  :ensure t
+  :init
+  (add-hook 'term-mode-hook (lambda ()
+                              (setf yas-dont-activate t))))
+
 ;;; Custom commands
 
 ;;; Other configuration
