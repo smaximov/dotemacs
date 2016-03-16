@@ -191,7 +191,9 @@
   :bind ([M-return] . emr-show-refactor-menu))
 
 (use-package json-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setf js-indent-level 2))
 
 (use-package js2-mode
   :ensure t
