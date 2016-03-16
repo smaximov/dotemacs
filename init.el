@@ -206,7 +206,9 @@
 
 (use-package markdown-mode
   :ensure t
-  :mode ("\\.md$" "\\.markdown$"))
+  :mode ("\\.md$" "\\.markdown$")
+  :config
+  (setf markdown-command "kramdown"))
 
 (use-package helm
   :ensure t
