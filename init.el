@@ -327,7 +327,9 @@
   :ensure t
   :init
   (add-hook 'term-mode-hook (lambda ()
-                              (setf yas-dont-activate t))))
+                              (setf yas-dont-activate t)))
+  :bind
+  (("C-x t" . ansi-term)))
 
 ;;; Custom commands
 
