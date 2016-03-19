@@ -314,6 +314,7 @@
 
 (use-package navigation
   :load-path "lib"
+  :demand t
   :bind (("C-c f u i" . nameless/find-user-init-file)
          ("C-c f s" . nameless/find-scratch-buffer)))
 
@@ -325,11 +326,13 @@
 
 (use-package term
   :ensure t
+  :after navigation
   :init
   (add-hook 'term-mode-hook (lambda ()
                               (setf yas-dont-activate t)))
   :bind
-  (("C-x t" . ansi-term)))
+  (("C-x t" . ansi-term)
+   ("C-x C-t" . nameless/find-term-buffer)))
 
 ;;; Custom commands
 

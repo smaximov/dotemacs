@@ -14,7 +14,6 @@ If the command invoked with prefix argument, PREFIX-PRESENT-FUN is called,
 PREFIX-ABSENT-FUN otherwise, with  ARGS as their arguments."
   (apply (if current-prefix-arg prefix-present-fun prefix-absent-fun) args))
 
-;;;###autoload
 (defun nameless/find-scratch-buffer ()
   "Switch to the scratch buffer (create one if necessary).
 
@@ -23,7 +22,6 @@ With prefix argument, switch to the scratch buffer in other window."
   (nameless/dispatch-by-prefix-arg #'switch-to-buffer-other-window #'switch-to-buffer
                                    "*scratch*"))
 
-;;;###autoload
 (defun nameless/find-user-init-file ()
   "Find user's initialization file.
 
@@ -31,6 +29,14 @@ With prefix argument, open the file in other window."
   (interactive)
   (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
                                    user-init-file))
+
+(defun nameless/find-term-buffer ()
+  "Switch to the latest TERM buffer, if any, or create one."
+  (interactive)
+  (--if-let (--first (eq 'term-mode (buffer-local-value 'major-mode it))
+                     (buffer-list))
+      (switch-to-buffer it)
+    (ansi-term (getenv "SHELL"))))
 
 (provide 'navigation)
 ;;; navigation.el ends here
