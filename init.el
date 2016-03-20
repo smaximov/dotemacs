@@ -265,6 +265,9 @@
   (defvar css-indent-offset)
   :init
   (add-hook 'scss-mode-hook #'whitespace-mode)
+  (add-hook 'scss-mode-hook (lambda ()
+                              (setf comment-start "//"
+                                    comment-end "")))
   :config
   (setf css-indent-offset 2))
 
