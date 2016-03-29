@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: defun
+# key: defun_
+# --
+(defun ${1:fun} (${2:args})${3:$(unless (string-empty-p yas-text) "\n  \\\"")}${3:doc}${3:$(unless (string-empty-p yas-text) "\\\"")}
+  $0)
