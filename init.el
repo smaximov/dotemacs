@@ -300,7 +300,9 @@
 (use-package yasnippet
   :ensure t
   :init
-  (add-hook 'after-init-hook #'yas-global-mode))
+  (add-hook 'after-init-hook #'yas-global-mode)
+  :config
+  (setf yas-snippet-dirs '("~/.emacs.d/snippets")))
 
 (use-package rvm
   :ensure t
