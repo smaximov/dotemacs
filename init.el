@@ -339,6 +339,11 @@
   (("C-x t" . ansi-term)
    ("C-x C-t" . nameless/find-term-buffer)))
 
+(use-package inf-ruby
+  :ensure t
+  :init
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+
 ;;; Custom commands
 
 ;;; Other configuration
