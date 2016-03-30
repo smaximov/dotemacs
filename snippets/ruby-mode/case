@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: case
+# key: case_
+# --
+case $1
+when $0
+end
