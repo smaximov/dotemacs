@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: use-package
+# key: use_
+# --
+(use-package ${1:pkg-name} ${2:$(unless (string-empty-p yas-text) "\n  :ensure ")}${2:t}
+  $0)
