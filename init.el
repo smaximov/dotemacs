@@ -35,7 +35,7 @@
 
         op/site-domain "https://maximov.space"
         op/site-main-title "Untitled"
-        op/site-sub-title "Emacs, Programming, an Anything"
+        op/site-sub-title "Emacs, Programming, and Anything"
 
         op/highlight-render 'htmlize
 
