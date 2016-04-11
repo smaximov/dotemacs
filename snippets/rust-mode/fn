@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fn
+# key: fn_
+# --
+fn ${1:name}${2:$(unless (string-empty-p yas-text) "<")}${2:T}${2:$(unless (string-empty-p yas-text) ">")}(${3:args}) {
+   $0
+}

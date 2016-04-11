@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: while
+# key: while_
+# --
+while ${1:expr} {
+    $0
+}

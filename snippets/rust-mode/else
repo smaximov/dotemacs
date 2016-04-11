@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: else
+# key: else_
+# --
+else ${1:expr}${1:$(unless (string-empty-p yas-text) " ")}{
+    $0
+}
