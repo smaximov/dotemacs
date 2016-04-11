@@ -272,7 +272,9 @@
   (setf css-indent-offset 2))
 
 (use-package rust-mode
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'rust-mode-hook #'electric-pair-mode))
 
 (use-package cargo
   :ensure t
