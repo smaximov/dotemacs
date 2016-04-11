@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: derive
+# key: derive_
+# --
+#[derive(${1:Trait})]
+$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: println!
+# key: println_
+# --
+println!("${1:format}"${2:$(unless (string-empty-p yas-text) ", ")}${2:arg})$0

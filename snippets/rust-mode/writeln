@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: writeln!
+# key: writeln_
+# --
+writeln!(${1:dst}, "${2:format}"${3:$(unless (string-empty-p yas-text) ", ")}${3:arg})$0

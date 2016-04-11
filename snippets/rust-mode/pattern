@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pattern
+# key: =>
+# --
+${1:pattern} => $0

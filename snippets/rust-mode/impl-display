@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: impl-display
+# key: idisplay_
+# expand-env: ((yas-indent-line 'fixed))
+# --
+impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} fmt::Display for ${2:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        $0
+    }
+}
