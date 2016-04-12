@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: getter
+# key: get-
+# expand-env: ((yas-indent-line 'fixed))
+# --
+${1:pub}${1:$(unless (string-empty-p yas-text) " ")}fn get_${2:name}(&self) -> ${3:Type} {
+    self.$2$0
+}
