@@ -1,7 +1,8 @@
 # -*- mode: snippet -*-
 # name: fn
 # key: fn-
+# expand-env: ((yas-indent-line 'fixed))
 # --
-fn ${1:name}${2:$(unless (string-empty-p yas-text) "<")}${2:T}${2:$(unless (string-empty-p yas-text) ">")}(${3:args}) {
-   $0
+${1:pub}${1:$(unless (string-empty-p yas-text) " ")}fn ${2:name}${3:$(unless (string-empty-p yas-text) "<")}${3:T}${3:$(unless (string-empty-p yas-text) ">")}(${4:args})${5:$(unless (string-empty-p yas-text) " -> ")}${5:Type} {
+    $0
 }
