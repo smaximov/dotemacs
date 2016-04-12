@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: impl-from
-# key: ifrom_
+# key: ifrom-
 # expand-env: ((yas-indent-line 'fixed))
 # --
 impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} convert::From<${2:Type}> for ${3:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {

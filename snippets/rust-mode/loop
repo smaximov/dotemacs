@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: loop
-# key: loop_
+# key: loop-
 # --
 loop {
     $0

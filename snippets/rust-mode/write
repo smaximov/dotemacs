@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: write!
-# key: write_
+# key: write-
 # --
 write!(${1:dst}, "${2:format}"${3:$(unless (string-empty-p yas-text) ", ")}${3:arg})$0

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: impl-error
-# key: ierror_
+# key: ierror-
 # expand-env: ((yas-indent-line 'fixed))
 # --
 impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} error::Error for ${2:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {
