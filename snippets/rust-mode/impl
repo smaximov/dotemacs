@@ -2,6 +2,6 @@
 # name: impl
 # key: impl-
 # --
-impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} ${2:trait}${2:$(unless (string-empty-p yas-text) " for ")}${3:type} {
+impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} ${2:Trait}${2:$(unless (string-empty-p yas-text) " for ")}${3:Type} {
     $0
 }

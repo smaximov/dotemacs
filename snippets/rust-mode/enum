@@ -2,6 +2,6 @@
 # name: enum
 # key: enum-
 # --
-${1:pub}${1:$(unless (string-empty-p yas-text) " ")}enum ${2:name}${3:$(unless (string-empty-p yas-text) "<")}${3:T}${3:$(unless (string-empty-p yas-text) ">")} {
+${1:pub}${1:$(unless (string-empty-p yas-text) " ")}enum ${2:Name}${3:$(unless (string-empty-p yas-text) "<")}${3:T}${3:$(unless (string-empty-p yas-text) ">")} {
     $0
 }
