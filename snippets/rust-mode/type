@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: type
+# key: type-
+# --
+${1:pub}${1:$(unless (string-empty-p yas-text) " ")}type ${2:Type}${3:$(unless (string-empty-p yas-text) "<")}${3:T}${3:$(unless (string-empty-p yas-text) ">")} = $0;
