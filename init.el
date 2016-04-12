@@ -157,6 +157,11 @@
 
 (use-package toml-mode
   :mode "\\.cargo/config$"
+  :init
+  (add-hook 'toml-mode-hook (lambda ()
+                              (when (s-equals? "Cargo.toml"
+                                               (f-filename (buffer-file-name)))
+                                (cargo-minor-mode))))
   :ensure t)
 
 (use-package company
