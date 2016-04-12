@@ -328,7 +328,8 @@
   :load-path "lib"
   :demand t
   :bind (("C-c f u i" . nameless/find-user-init-file)
-         ("C-c f s" . nameless/find-scratch-buffer)))
+         ("C-c f s" . nameless/find-scratch-buffer)
+         ("C-c f d f" . nameless/find-dominating-file)))
 
 (use-package file-helpers
   :load-path "lib"

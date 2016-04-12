@@ -38,5 +38,15 @@ With prefix argument, open the file in other window."
       (switch-to-buffer it)
     (ansi-term (getenv "SHELL"))))
 
+(defun nameless/find-dominating-file (file)
+  "Find FILE in directories up to root.
+
+With prefix argument, open the file in other window."
+  (interactive "sFile name: ")
+  (--if-let (locate-dominating-file (buffer-file-name) file)
+      (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
+                                       (f-join it file))
+    (error "Cannot find `%s'" file)))
+
 (provide 'navigation)
 ;;; navigation.el ends here
