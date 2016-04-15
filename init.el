@@ -54,6 +54,9 @@
   :config
   (load-theme 'material t))
 
+(use-package dockerfile-mode
+  :ensure t)
+
 (use-package tern
   :ensure t
   :after js2
@@ -127,14 +130,6 @@
 
 (use-package elixir-mode
   :ensure t)
-
-(use-package alchemist
-  :ensure t
-  :if (and (>= emacs-major-version 24)
-           (>= emacs-minor-version 4))
-  :after (elixir-mode company-mode)
-  :init
-  (add-hook 'elixir-mode-hook #'alchemist-mode))
 
 (use-package flycheck
   :ensure t
