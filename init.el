@@ -273,7 +273,8 @@
                               (setf comment-start "//"
                                     comment-end "")))
   :config
-  (setf css-indent-offset 2))
+  (setf css-indent-offset 2)
+  (setf require-final-newline t))
 
 (use-package rust-mode
   :ensure t
