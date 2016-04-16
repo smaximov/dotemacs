@@ -47,11 +47,19 @@
         op/personal-google-analytics-id "UA-74709646-1"))
 
 (use-package material-theme
-  :if window-system
   :ensure t
   :demand t
+  :init
+  (defun nameless/enable-theme (frame)
+    "Enable `material-theme' for new FRAME"
+    (with-selected-frame frame
+      (load-theme 'material t)))
+
   :config
-  (load-theme 'material t))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions #'nameless/enable-theme)
+    (when (window-system)
+      (load-theme 'material t))))
 
 (use-package dockerfile-mode
   :ensure t)
