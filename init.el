@@ -154,9 +154,13 @@
   :mode "\\.cargo/config$"
   :init
   (add-hook 'toml-mode-hook (lambda ()
-                              (when (s-equals? "Cargo.toml"
-                                               (f-filename (buffer-file-name)))
-                                (cargo-minor-mode))))
+                              (let* ((path (buffer-file-name))
+                                     (file (and path
+                                                (f-filename path)))
+                                     (is-cargo.toml (and file
+                                                    (s-equals? "Cargo.toml" file))))
+                                (when is-cargo.toml
+                                        (cargo-minor-mode)))))
   :ensure t)
 
 (use-package company
