@@ -64,18 +64,9 @@ frame is created."
 (use-package material-theme
   :ensure t
   :demand t
-  :init
-  (defun nameless/enable-theme (frame)
-    "Enable `material-theme' for new FRAME"
-    (with-selected-frame frame
-      (when (window-system frame)
-          (load-theme 'material t))))
-
   :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions #'nameless/enable-theme)
-    (when (window-system)
-      (load-theme 'material t))))
+  (with-daemon
+   (load-theme 'material t)))
 
 (use-package dockerfile-mode
   :ensure t)
@@ -143,9 +134,10 @@ frame is created."
 
 (use-package exec-path-from-shell
   :ensure t
-  :if window-system
+  :demand t
   :config
-  (exec-path-from-shell-initialize))
+  (with-daemon
+   (exec-path-from-shell-initialize)))
 
 (use-package tldr
   :ensure t
