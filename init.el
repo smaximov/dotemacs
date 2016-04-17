@@ -122,7 +122,8 @@ frame is created."
 
 (use-package helm-projectile
   :ensure t
-  :after (helm projectile))
+  :after (helm projectile)
+  :bind ([remap projectile-switch-project] . helm-projectile-switch-project))
 
 (use-package whitespace
   :ensure t
