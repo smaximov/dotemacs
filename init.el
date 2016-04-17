@@ -53,7 +53,8 @@
   (defun nameless/enable-theme (frame)
     "Enable `material-theme' for new FRAME"
     (with-selected-frame frame
-      (load-theme 'material t)))
+      (when (window-system frame)
+          (load-theme 'material t))))
 
   :config
   (if (daemonp)
