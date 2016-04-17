@@ -18,6 +18,21 @@
 
 (require 'use-package)
 
+;;; Macros and utilities
+
+(defmacro with-daemon (&rest body)
+  "Execute BODY immediately when Emacs started in non-daemon mode.
+If Emacs started as daemon, delay the execution of BODY until a new
+frame is created."
+  `(if (daemonp)
+       (add-hook 'after-make-frame-functions
+                 (lambda (frame)
+                   (with-selected-frame frame
+                     (when (window-system frame)
+                       ,@body))))
+    (when (window-system)
+      ,@body)))
+
 ;;; Packages configuration
 (use-package diminish
   :ensure t
