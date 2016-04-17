@@ -312,7 +312,8 @@ frame is created."
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   :config
-  (setf racer-rust-src-path (f-full "~/src/rust/src")))
+  (setf racer-rust-src-path (f-full "~/src/rust/src")
+        racer-cmd (executable-find "racer")))
 
 (use-package flycheck-rust
   :ensure t
