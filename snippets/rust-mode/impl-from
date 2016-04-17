@@ -4,7 +4,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} convert::From<${2:Type}> for ${3:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {
-    fn from(x: $2) -> Self {
+    fn from(${4:${2:$(downcase (let ((match (string-match "^[[:space:]]*[[:word:]]+" yas-text))) (if match (substring yas-text match (match-end 0)) yas-text)))}}: $2) -> Self {
         $0
     }
 }
