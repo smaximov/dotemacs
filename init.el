@@ -360,6 +360,12 @@
   :init
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
+(use-package neotree
+  :ensure t
+  :bind (("<f8>" . neotree-toggle))
+  :config
+  (setf projectile-switch-project-action 'neotree-projectile-action))
+
 ;;; Custom commands
 
 ;;; Other configuration
