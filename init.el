@@ -137,6 +137,7 @@ frame is created."
   :ensure t
   :demand t
   :config
+  (add-to-list 'exec-path-from-shell-variables "RUSTUP_HOME")
   (with-daemon
    (exec-path-from-shell-initialize)))
 
