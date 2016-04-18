@@ -375,7 +375,7 @@ frame is created."
 
 (use-package neotree
   :ensure t
-  :bind (("<f8>" . neotree-toggle))
+  :bind (([f8] . neotree-toggle))
   :config
   (setf projectile-switch-project-action 'neotree-projectile-action))
 
