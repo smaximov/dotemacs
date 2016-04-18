@@ -188,7 +188,9 @@ frame is created."
   (add-hook 'after-init-hook #'global-company-mode)
   :bind ([C-tab] . company-indent-or-complete-common)
   :config
-  (setf company-tooltip-align-annotations t))
+  (setf company-tooltip-align-annotations t
+        company-idle-delay 0.05
+        company-minimum-prefix-length 1))
 
 (use-package bookmark+
   :ensure t)
