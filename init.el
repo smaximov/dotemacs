@@ -302,7 +302,7 @@ frame is created."
   (add-hook 'rust-mode-hook #'electric-pair-mode))
 
 (use-package cargo
-  :ensure t
+  :load-path "lib/cargo"
   :diminish cargo-minor-mode
   :after rust-mode
   :init
