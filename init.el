@@ -388,6 +388,15 @@ frame is created."
    ("C-c C->" . mc/mark-all-like-this)
    ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
+(use-package phi-search
+  :ensure t
+  :init
+  (require 'phi-replace)
+  :bind
+  (([remap isearch-forward] . phi-search)
+   ([remap isearch-backward] . phi-search-backward)
+   ([remap query-replace] . phi-replace)))
+
 ;;; Custom commands
 
 ;;; Other configuration
