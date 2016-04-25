@@ -397,6 +397,9 @@ frame is created."
    ([remap isearch-backward] . phi-search-backward)
    ([remap query-replace] . phi-replace)))
 
+(use-package darkroom
+  :ensure t)
+
 ;;; Custom commands
 
 ;;; Other configuration
