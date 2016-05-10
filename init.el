@@ -130,6 +130,7 @@ frame is created."
   :diminish whitespace-mode
   :init
   (add-hook 'prog-mode-hook #'whitespace-mode)
+  (add-hook 'markdown-mode-hook #'whitespace-mode)
   :config
   (setf whitespace-line-column 120))
 
