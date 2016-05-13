@@ -401,6 +401,11 @@ frame is created."
 (use-package darkroom
   :ensure t)
 
+(use-package sh-mode
+  :ensure sh-script
+  :mode "\\.zsh$"
+  :mode "\\.zsh-theme$")
+
 ;;; Custom commands
 
 ;;; Other configuration
