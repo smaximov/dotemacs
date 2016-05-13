@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "/home/nameless/.emacs.d/bookmarks")
  '(flycheck-haskell-runhaskell "~/bin/stack-runhaskell")
- '(magit-tag-arguments (quote ("--annotate"))))
+ '(magit-tag-arguments nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
