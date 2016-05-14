@@ -227,7 +227,8 @@ frame is created."
   (add-hook 'js2-mode-hook #'electric-pair-mode)
   :config
   (setf js2-strict-missing-semi-warning nil
-        js2-basic-offset 2))
+        js2-basic-offset 2
+        js2-strict-trailing-comma-warning nil))
 
 (use-package markdown-mode
   :ensure t
