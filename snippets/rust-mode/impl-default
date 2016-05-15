@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: impl-default
+# key: idef-
+# expand-env: ((yas-indent-line 'fixed))
+# --
+impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} Default for ${2:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {
+    fn default() -> Self {
+        $0
+    }
+}

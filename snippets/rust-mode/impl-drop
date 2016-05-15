@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: impl-drop
+# key: idrop-
+# expand-env: ((yas-indent-line 'fixed))
+# --
+impl${1:$(unless (string-empty-p yas-text) "<")}${1:T}${1:$(unless (string-empty-p yas-text) ">")} Drop for ${2:Type}${1:$(unless (string-empty-p yas-text) "<")}$1${1:$(unless (string-empty-p yas-text) ">")} {
+    fn drop(&mut self) {
+        $0
+    }
+}
