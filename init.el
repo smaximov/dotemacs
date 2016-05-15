@@ -462,5 +462,12 @@ frame is created."
 (setf user-full-name "smaximov"
       user-mail-address "s.b.maximov@gmail.com")
 
+;; Visual line mode
+(setf visual-line-fringe-indicators
+      (or (cdr (assoc 'continuation fringe-indicator-alist))
+          visual-line-fringe-indicators))
+(add-hook 'compilation-mode-hook #'visual-line-mode)
+(add-hook 'flycheck-error-list-mode-hook #'visual-line-mode)
+
 (provide 'init)
 ;;; init.el ends here
