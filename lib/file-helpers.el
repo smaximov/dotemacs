@@ -5,6 +5,16 @@
 ;;; Code:
 
 (require 'f)
+(require 'rx)
+
+(defvar shebang-regexp
+  (rx line-start
+      "#!"
+      (zero-or-more blank)
+      (group "/" (one-or-more (not space)))
+      (optional (one-or-more blank)
+                (group (one-or-more (not (any "\n"))))))
+  "Regexp matching the shebang line.")
 
 (defun nameless/file-make-executable (file)
   "Make FILE executable."
@@ -21,7 +31,7 @@
          (save-restriction
            (widen)
            (goto-char (point-min))
-           (when (and (looking-at auto-mode-interpreter-regexp)
+           (when (and (looking-at shebang-regexp)
                       (not (f-executable? buffer-file-name)))
              (nameless/file-make-executable buffer-file-name))))))
 
