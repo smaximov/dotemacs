@@ -35,7 +35,12 @@ With prefix argument, open the file in other window."
   (interactive)
   (--if-let (--first (eq 'term-mode (buffer-local-value 'major-mode it))
                      (buffer-list))
-      (switch-to-buffer it)
+      (if (process-live-p (get-buffer-process it))
+          ;; the process is running
+          (switch-to-buffer (buffer-name it))
+        ;; the process is dead, reuse its buffer
+        (kill-buffer it)
+        (ansi-term (getenv "SHELL")))
     (ansi-term (getenv "SHELL"))))
 
 (defun nameless/find-dominating-file (file)
