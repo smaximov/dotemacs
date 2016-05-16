@@ -412,6 +412,11 @@ frame is created."
   :init
   (add-hook 'after-init-hook #'helm-descbinds-mode))
 
+(use-package asm-mode
+  :ensure t
+  :config
+  (setf tab-stop-list (number-sequence 4 200 4)))
+
 ;;; Custom commands
 
 ;;; Other configuration
