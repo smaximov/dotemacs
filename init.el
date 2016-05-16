@@ -407,6 +407,11 @@ frame is created."
   :mode "\\.zsh$"
   :mode "\\.zsh-theme$")
 
+(use-package helm-descbinds
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'helm-descbinds-mode))
+
 ;;; Custom commands
 
 ;;; Other configuration
