@@ -201,6 +201,7 @@ frame is created."
   :after htmlize
   :config
   (setf org-default-notes-file (f-join org-directory "notes.org")
+        org-agenda-files `(,org-default-notes-file)
         org-src-fontify-natively t)
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link)))
