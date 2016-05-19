@@ -418,6 +418,11 @@ frame is created."
   :config
   (setf tab-stop-list (number-sequence 4 200 4)))
 
+(use-package tramp
+  :ensure t
+  :config
+  (setf tramp-default-method "ssh"))
+
 ;;; Custom commands
 
 ;;; Other configuration
