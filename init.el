@@ -203,7 +203,8 @@ frame is created."
   (setf org-directory "~/share/owncloud/org"
         org-default-notes-file (f-join org-directory "notes.org")
         org-agenda-files `(,org-default-notes-file)
-        org-src-fontify-natively t)
+        org-src-fontify-natively t
+        org-goto-auto-isearch nil)
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link)))
 
