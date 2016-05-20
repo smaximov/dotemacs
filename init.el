@@ -93,6 +93,8 @@ frame is created."
 (use-package magit
   :ensure t
   :bind ("C-c m s" . magit-status)
+  :init
+  (add-hook 'after-init-hook #'global-magit-file-mode)
   :config
   (setf git-commit-summary-max-length 100))
 
