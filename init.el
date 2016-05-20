@@ -448,8 +448,15 @@ frame is created."
 ;; Don't show splash screen at startup
 (setf inhibit-splash-screen t)
 
-;; Get rid of annoying backup files stored in-place
-(setf backup-directory-alist `(("." . "~/.emacs.d/backup")))
+(defconst nameless/backup-dir "~/.emacs.d/backup/"
+  "Directory to put backup files.")
+
+(defconst nameless/auto-save-dir "~/.emacs.d/autosave/"
+  "Directory to put auto-save files.")
+
+;; Get rid of annoying backup & autosave files stored in-place
+(setf backup-directory-alist `(("." . ,nameless/backup-dir))
+      auto-save-file-name-transforms `((".*" ,nameless/auto-save-dir t)))
 
 ;; Display current column position of the cursor
 (add-hook 'after-init-hook #'column-number-mode)
