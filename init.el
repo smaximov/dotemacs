@@ -200,7 +200,8 @@ frame is created."
   :ensure t
   :after htmlize
   :config
-  (setf org-default-notes-file (f-join org-directory "notes.org")
+  (setf org-directory "~/share/owncloud/org"
+        org-default-notes-file (f-join org-directory "notes.org")
         org-agenda-files `(,org-default-notes-file)
         org-src-fontify-natively t)
   :bind (("C-c c" . org-capture)
@@ -422,6 +423,9 @@ frame is created."
   :ensure t
   :config
   (setf tramp-default-method "ssh"))
+
+(use-package php-mode
+  :ensure t)
 
 ;;; Custom commands
 
