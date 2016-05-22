@@ -499,5 +499,8 @@ frame is created."
 (add-hook 'compilation-mode-hook #'visual-line-mode)
 (add-hook 'flycheck-error-list-mode-hook #'visual-line-mode)
 
+;; Use UTF-8 by default
+(prefer-coding-system 'utf-8)
+
 (provide 'init)
 ;;; init.el ends here
