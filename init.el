@@ -430,6 +430,12 @@ frame is created."
 (use-package php-mode
   :ensure t)
 
+(use-package cask-mode
+  :ensure t
+  :after paredit
+  :init
+  (add-hook 'cask-mode-hook #'enable-paredit-mode))
+
 ;;; Custom commands
 
 ;;; Other configuration
