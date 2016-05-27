@@ -42,8 +42,13 @@ frame is created."
   :ensure t
   :demand t)
 
+(use-package dash
+  :ensure t
+  :demand t)
+
 (use-package org-page
   :load-path "lib/org-page"
+  :defer t
   :config
   (setf op/site-preview-directory "/tmp/org-page-preview"
         op/repository-directory "~/src/maximov.space"
@@ -74,6 +79,7 @@ frame is created."
 (use-package tern
   :ensure t
   :after js2
+  :after dash
   :diminish tern-mode
   :init
   (--each '(tern-mode eldoc-mode)
@@ -101,10 +107,6 @@ frame is created."
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
-
-(use-package dash
-  :ensure t
-  :demand t)
 
 (use-package mustache-mode
   :ensure t)
