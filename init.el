@@ -63,6 +63,7 @@ frame is created."
 
 (req-package org-page :loader :built-in
   :load-path "lib/org-page"
+  :if (file-exists-p (format "%s/lib/org-page/org-page.el" user-emacs-directory))
   :require dash ht
   :config
   (setf op/site-preview-directory "/tmp/org-page-preview"
@@ -291,6 +292,7 @@ frame is created."
 
 (req-package cargo :loader :built-in
   :load-path "lib/cargo"
+  :if (file-exists-p (format "%s/lib/cargo/cargo.el" user-emacs-directory))
   :require rust-mode diminish
   :diminish cargo-minor-mode
   :init
