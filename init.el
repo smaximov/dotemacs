@@ -28,6 +28,7 @@
 ;; write PID file on startup
 (add-hook 'emacs-startup-hook
           (lambda ()
+            (make-directory emacs-pid-dir t)
             (with-temp-file emacs-pid-file
               (insert (number-to-string (emacs-pid))))))
 
