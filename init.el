@@ -11,12 +11,12 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
+;; Bootstrap req-package
+(unless (package-installed-p 'req-package)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'req-package))
 
-(require 'use-package)
+(require 'req-package)
 
 ;;; Macros and utilities
 
@@ -28,27 +28,23 @@ frame is created."
        (add-hook 'after-make-frame-functions
                  (lambda (frame)
                    (with-selected-frame frame
-                     (when (window-system frame)
-                       ,@body))))
+                     ;; (when (window-system frame)
+                     ;;   ,@body)
+                     ,@body
+                     )))
     (when (window-system)
       ,@body)))
 
 ;;; Packages configuration
-(use-package diminish
-  :ensure t
-  :demand t)
+(req-package diminish)
 
-(use-package async
-  :ensure t
-  :demand t)
+(req-package async)
 
-(use-package dash
-  :ensure t
-  :demand t)
+(req-package dash)
 
-(use-package org-page
+(req-package org-page :loader :built-in
   :load-path "lib/org-page"
-  :defer t
+  :require dash ht
   :config
   (setf op/site-preview-directory "/tmp/org-page-preview"
         op/repository-directory "~/src/maximov.space"
@@ -66,71 +62,55 @@ frame is created."
         op/personal-github-link "https://github.com/smaximov"
         op/personal-google-analytics-id "UA-74709646-1"))
 
-(use-package material-theme
-  :ensure t
-  :demand t
+(req-package material-theme
   :config
   (with-daemon
    (load-theme 'material t)))
 
-(use-package dockerfile-mode
-  :ensure t)
+(req-package dockerfile-mode)
 
-(use-package tern
-  :ensure t
-  :after js2
-  :after dash
+(req-package tern
+  :require js2-mode dash
   :diminish tern-mode
   :init
   (--each '(tern-mode eldoc-mode)
     (add-hook 'js-mode-hook it)))
 
-(use-package company-tern
-  :ensure t
-  :after company
+(req-package company-tern
+  :require company
   :config
   (add-to-list 'company-backends 'company-tern))
 
-(use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
+(req-package editorconfig
+  :init
+  (add-hook 'after-init-hook #'editorconfig-mode))
 
-(use-package magit
-  :ensure t
+(req-package magit
   :bind ("C-c m s" . magit-status)
   :init
   (add-hook 'after-init-hook #'global-magit-file-mode)
   :config
   (setf git-commit-summary-max-length 100))
 
-(use-package yaml-mode
-  :ensure t
+(req-package yaml-mode
   :mode "\\.yml$")
 
-(use-package mustache-mode
-  :ensure t)
+(req-package mustache-mode)
 
-(use-package f
-  :ensure t
-  :demand t)
+(req-package f)
 
-(use-package s
-  :ensure t
-  :demand t)
+(req-package s)
 
-(use-package projectile
-  :ensure t
+(req-package projectile
   :init
   (add-hook 'after-init-hook #'projectile-global-mode))
 
-(use-package helm-projectile
-  :ensure t
-  :after (helm projectile)
+(req-package helm-projectile
+  :require projectile
   :bind ([remap projectile-switch-project] . helm-projectile-switch-project))
 
-(use-package whitespace
-  :ensure t
+(req-package whitespace
+  :require diminish
   :diminish whitespace-mode
   :init
   (add-hook 'prog-mode-hook #'whitespace-mode)
@@ -138,42 +118,36 @@ frame is created."
   :config
   (setf whitespace-line-column 120))
 
-(use-package exec-path-from-shell
-  :ensure t
-  :demand t
+(req-package exec-path-from-shell
   :config
   (add-to-list 'exec-path-from-shell-variables "CARGO_HOME")
   (add-to-list 'exec-path-from-shell-variables "RUSTUP_HOME")
   (with-daemon
    (exec-path-from-shell-initialize)))
 
-(use-package tldr
-  :ensure t
+(req-package tldr
   :bind ("C-c t l d r" . tldr))
 
-(use-package elixir-mode
-  :ensure t)
+(req-package elixir-mode)
 
-(use-package flycheck
-  :ensure t
+(req-package flycheck
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode)
   :config
   (setf flycheck-disabled-checkers '(javascript-jshint)))
 
-(use-package haskell-mode
-  :ensure t
+(req-package haskell-mode
   :init
   (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
   (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
 
-(use-package flycheck-haskell
-  :ensure t
-  :after (flycheck haskell-mode)
+(req-package flycheck-haskell
+  :require flycheck
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
-(use-package toml-mode
+(req-package toml-mode
+  :require f
   :mode "\\.cargo/config$"
   :init
   (add-hook 'toml-mode-hook (lambda ()
@@ -183,11 +157,10 @@ frame is created."
                                      (is-cargo.toml (and file
                                                     (s-equals? "Cargo.toml" file))))
                                 (when is-cargo.toml
-                                        (cargo-minor-mode)))))
-  :ensure t)
+                                        (cargo-minor-mode))))))
 
-(use-package company
-  :ensure t
+(req-package company
+  :require diminish
   :diminish company-mode
   :init
   (add-hook 'after-init-hook #'global-company-mode)
@@ -197,12 +170,10 @@ frame is created."
         company-idle-delay 0.05
         company-minimum-prefix-length 1))
 
-(use-package bookmark+
-  :ensure t)
+(req-package bookmark+ :loader :built-in)
 
-(use-package org
-  :ensure t
-  :after htmlize
+(req-package org
+  :require htmlize f
   :config
   (setf org-directory "~/share/owncloud/org"
         org-default-notes-file (f-join org-directory "notes.org")
@@ -212,23 +183,19 @@ frame is created."
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link)))
 
-(use-package htmlize
-  :ensure t
+(req-package htmlize
   :defer t)
 
-(use-package emr
-  :ensure t
+(req-package emr
   :init
   (add-hook 'prog-mode-hook #'emr-initialize)
   :bind ([M-return] . emr-show-refactor-menu))
 
-(use-package json-mode
-  :ensure t
+(req-package json-mode
   :config
   (setf js-indent-level 2))
 
-(use-package js2-mode
-  :ensure t
+(req-package js2-mode
   :mode "\\.js$"
   :init
   (add-hook 'js2-mode-hook #'electric-pair-mode)
@@ -237,14 +204,12 @@ frame is created."
         js2-basic-offset 2
         js2-strict-trailing-comma-warning nil))
 
-(use-package markdown-mode
-  :ensure t
+(req-package markdown-mode
   :mode ("\\.md$" "\\.markdown$")
   :config
   (setf markdown-command "kramdown"))
 
-(use-package helm
-  :ensure t
+(req-package helm
   :init
   (require 'helm-config)
   :bind (([remap execute-extended-command] . helm-M-x) ; M-x
@@ -254,17 +219,15 @@ frame is created."
          ([remap find-file] . helm-find-files)         ; C-x C-f
          ([remap occur] . helm-occur)))                ; M-s o
 
-(use-package eldoc
-  :ensure t
+(req-package eldoc
+  :require diminish dash
   :diminish eldoc-mode
-  :after dash
   :init
   (--each '(emacs-lisp-mode-hook ielm-mode-hook)
     (add-hook it #'eldoc-mode)))
 
-(use-package paredit
-  :ensure t
-  :after (dash eldoc)
+(req-package paredit
+  :require dash eldoc
   :init
   (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook ielm-mode-hook
                                  lisp-mode-hook lisp-interaction-mode-hook scheme-mode-hook)
@@ -274,25 +237,22 @@ frame is created."
    'paredit-backward-delete
    'paredit-close-round))
 
-(use-package clojure-mode
-  :ensure t
-  :after (eldoc paredit)
+(req-package clojure-mode
+  :require eldoc paredit
   :init
   (--each (list #'enable-paredit-mode #'eldoc-mode)
     (add-hook 'clojure-mode-hook it)))
 
-(use-package cider
-  :ensure t
-  :after (clojure-mode eldoc paredit)
+(req-package cider
+  :require eldoc paredit
   :init
   (--each (list #'enable-paredit-mode #'eldoc-mode)
     (add-hook 'cider-repl-mode-hook it))
   :config
   (setf cider-lein-command (f-full "~/bin/lein")))
 
-(use-package scss-mode
-  :ensure t
-  :after whitespace
+(req-package scss-mode
+  :require whitespace
   :preface
   ;; Get rid of "assignment to free variable `css-indent-offset'" warning
   (defvar css-indent-offset)
@@ -305,22 +265,20 @@ frame is created."
   (setf css-indent-offset 2)
   (setf require-final-newline t))
 
-(use-package rust-mode
-  :ensure t
+(req-package rust-mode
   :init
   (add-hook 'rust-mode-hook #'electric-pair-mode))
 
-(use-package cargo
+(req-package cargo :loader :built-in
   :load-path "lib/cargo"
+  :require rust-mode diminish
   :diminish cargo-minor-mode
-  :after rust-mode
   :init
   (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
-(use-package racer
-  :ensure t
+(req-package racer
+  :require rust-mode f eldoc
   :diminish racer-mode
-  :after (rust-mode f eldoc)
   :init
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
@@ -328,48 +286,42 @@ frame is created."
   (setf racer-rust-src-path (f-full "~/src/rust/src")
         racer-cmd (executable-find "racer")))
 
-(use-package flycheck-rust
-  :ensure t
-  :after flycheck
+(req-package flycheck-rust
+  :require flycheck
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-(use-package yasnippet
-  :ensure t
+(req-package yasnippet
   :init
   (add-hook 'after-init-hook #'yas-global-mode)
   :config
   (setf yas-snippet-dirs '("~/.emacs.d/snippets")))
 
-(use-package rvm
-  :ensure t
+(req-package rvm
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
 
-(use-package paren
-  :ensure t
+(req-package paren
   :init
   (add-hook 'after-init-hook #'show-paren-mode)
   :config
   (setf show-paren-delay 0
         show-paren-style 'mixed))
 
-(use-package navigation
+(req-package navigation :loader :built-in
   :load-path "lib"
-  :demand t
   :bind (("C-c f u i" . nameless/find-user-init-file)
          ("C-c f s" . nameless/find-scratch-buffer)
          ("C-c f d f" . nameless/find-dominating-file)))
 
-(use-package file-helpers
+(req-package file-helpers :loader :built-in
   :load-path "lib"
   :init
   (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
   (add-hook 'after-save-hook #'nameless/set-auto-mode))
 
-(use-package term
-  :ensure t
-  :after navigation
+(req-package term :loader :built-in
+  :require navigation
   :init
   (add-hook 'term-mode-hook (lambda ()
                               (setf yas-dont-activate-functions t)))
@@ -377,19 +329,17 @@ frame is created."
   (("C-x t" . ansi-term)
    ("C-x C-t" . nameless/find-term-buffer)))
 
-(use-package inf-ruby
-  :ensure t
+(req-package inf-ruby :loader :built-in
   :init
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
-(use-package neotree
-  :ensure t
+(req-package neotree
+  :require projectile
   :bind (([f8] . neotree-toggle))
   :config
   (setf projectile-switch-project-action 'neotree-projectile-action))
 
-(use-package multiple-cursors
-  :ensure t
+(req-package multiple-cursors
   :bind
   (("C-S-c C-S-c" . mc/edit-lines)
    ("C->" . mc/mark-next-like-this)
@@ -397,8 +347,7 @@ frame is created."
    ("C-c C->" . mc/mark-all-like-this)
    ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
-(use-package phi-search
-  :ensure t
+(req-package phi-search
   :init
   (require 'phi-replace)
   :bind
@@ -406,37 +355,29 @@ frame is created."
    ([remap isearch-backward] . phi-search-backward)
    ([remap query-replace] . phi-replace)))
 
-(use-package darkroom
-  :ensure t)
+(req-package darkroom)
 
-(use-package sh-mode
+(req-package sh-mode :loader :built-in
   :ensure sh-script
   :mode "\\.zsh$"
   :mode "\\.zsh-theme$")
 
-(use-package helm-descbinds
-  :ensure t
+(req-package helm-descbinds
   :init
   (add-hook 'after-init-hook #'helm-descbinds-mode))
 
-(use-package asm-mode
-  :ensure t
+(req-package asm-mode :loader :built-in
   :config
   (setf tab-stop-list (number-sequence 4 200 4)))
 
-(use-package tramp
-  :ensure t
-  :config
-  (setf tramp-default-method "ssh"))
+(req-package php-mode)
 
-(use-package php-mode
-  :ensure t)
-
-(use-package cask-mode
-  :ensure t
-  :after paredit
+(req-package cask-mode
+  :require paredit
   :init
   (add-hook 'cask-mode-hook #'enable-paredit-mode))
+
+(req-package-finish)
 
 ;;; Custom commands
 
