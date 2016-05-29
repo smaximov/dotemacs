@@ -106,6 +106,7 @@ frame is created."
 
 (req-package magit
   :bind ("C-c m s" . magit-status)
+  :if (version<= "24.4" emacs-version)
   :init
   (add-hook 'after-init-hook #'global-magit-file-mode)
   :config
