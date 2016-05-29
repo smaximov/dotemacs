@@ -170,7 +170,7 @@ frame is created."
         company-idle-delay 0.05
         company-minimum-prefix-length 1))
 
-(req-package bookmark+ :loader :built-in)
+(req-package bookmark+)
 
 (req-package org
   :require htmlize f
@@ -329,7 +329,7 @@ frame is created."
   (("C-x t" . ansi-term)
    ("C-x C-t" . nameless/find-term-buffer)))
 
-(req-package inf-ruby :loader :built-in
+(req-package inf-ruby
   :init
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
 
