@@ -429,6 +429,9 @@ frame is created."
 (defconst nameless/auto-save-dir "~/.emacs.d/autosave/"
   "Directory to put auto-save files.")
 
+(make-directory nameless/backup-dir t)
+(make-directory nameless/auto-save-dir t)
+
 ;; Get rid of annoying backup & autosave files stored in-place
 (setf backup-directory-alist `(("." . ,nameless/backup-dir))
       auto-save-file-name-transforms `((".*" ,nameless/auto-save-dir t)))
