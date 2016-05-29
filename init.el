@@ -18,6 +18,25 @@
 
 (require 'req-package)
 
+;; Save PID file
+(require 'server)
+(defvar emacs-pid-dir (or (getenv "XDG_RUNTIME_DIR")
+                          server-socket-dir
+                          temporary-file-directory))
+(defvar emacs-pid-file (format "%s/%s" emacs-pid-dir "emacs.pid"))
+
+;; write PID file on startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (with-temp-file emacs-pid-file
+              (insert (number-to-string (emacs-pid))))))
+
+;; remove PID file on exit
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (when (file-exists-p emacs-pid-file)
+              (delete-file emacs-pid-file))))
+
 ;;; Macros and utilities
 
 (defmacro with-daemon (&rest body)
