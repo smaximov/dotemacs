@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: trait
+# key: trait-
+# --
+trait ${1:Name}${2:$(unless (string-empty-p yas-text) "<")}${2:T}${2:$(unless (string-empty-p yas-text) ">")} {
+    $0
+}
