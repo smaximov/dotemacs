@@ -479,5 +479,8 @@ frame is created."
 ;; Use UTF-8 by default
 (prefer-coding-system 'utf-8)
 
+;; Cyrillic support
+(setf default-input-method 'russian-computer)
+
 (provide 'init)
 ;;; init.el ends here
