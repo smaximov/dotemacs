@@ -65,10 +65,14 @@ frame is created."
 
 (req-package simple-httpd)
 
+(req-package git)
+
+(req-package mustache)
+
 (req-package org-page :loader :built-in
   :load-path "lib/org-page"
   :if (file-exists-p (format "%s/lib/org-page/org-page.el" user-emacs-directory))
-  :require dash ht simple-httpd
+  :require dash ht simple-httpd git mustache
   :config
   (setf op/site-preview-directory "/tmp/org-page-preview"
         op/repository-directory "~/src/maximov.space"
