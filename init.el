@@ -63,10 +63,12 @@ frame is created."
 
 (req-package dash)
 
+(req-package simple-httpd)
+
 (req-package org-page :loader :built-in
   :load-path "lib/org-page"
   :if (file-exists-p (format "%s/lib/org-page/org-page.el" user-emacs-directory))
-  :require dash ht
+  :require dash ht simple-httpd
   :config
   (setf op/site-preview-directory "/tmp/org-page-preview"
         op/repository-directory "~/src/maximov.space"
@@ -336,7 +338,8 @@ frame is created."
   :load-path "lib"
   :bind (("C-c f u i" . nameless/find-user-init-file)
          ("C-c f s" . nameless/find-scratch-buffer)
-         ("C-c f d f" . nameless/find-dominating-file)))
+         ("C-c f d f" . nameless/find-dominating-file)
+         ("C-x C-t" . nameless/find-term-buffer)))
 
 (req-package file-helpers :loader :built-in
   :load-path "lib"
@@ -345,13 +348,11 @@ frame is created."
   (add-hook 'after-save-hook #'nameless/set-auto-mode))
 
 (req-package term :loader :built-in
-  :require navigation
   :init
   (add-hook 'term-mode-hook (lambda ()
                               (setf yas-dont-activate-functions t)))
   :bind
-  (("C-x t" . ansi-term)
-   ("C-x C-t" . nameless/find-term-buffer)))
+  (("C-x t" . ansi-term)))
 
 (req-package inf-ruby
   :init
