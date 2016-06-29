@@ -406,6 +406,8 @@ frame is created."
   :init
   (add-hook 'cask-mode-hook #'enable-paredit-mode))
 
+(req-package lua-mode)
+
 (req-package-finish)
 
 ;;; Custom commands
