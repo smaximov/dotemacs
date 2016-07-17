@@ -208,6 +208,9 @@ frame is created."
         org-default-notes-file (f-join org-directory "notes.org")
         org-agenda-files `(,org-default-notes-file)
         org-src-fontify-natively t
+        org-enforce-todo-checkbox-dependencies t
+        org-enforce-todo-dependencies t
+        org-agenda-dim-blocked-tasks t
         ;; Don't align a node's content with the headline
         org-adapt-indentation nil
         org-goto-auto-isearch nil)
