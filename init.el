@@ -211,6 +211,7 @@ frame is created."
         org-enforce-todo-checkbox-dependencies t
         org-enforce-todo-dependencies t
         org-agenda-dim-blocked-tasks t
+        org-archive-location (f-join org-directory "archive.org::* From %s")
         org-log-done 'time
         ;; Don't align a node's content with the headline
         org-adapt-indentation nil
