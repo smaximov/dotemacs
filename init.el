@@ -232,8 +232,7 @@ frame is created."
          ("C-c a" . org-agenda)
          ("C-c l" . org-store-link)))
 
-(req-package htmlize
-  :defer t)
+(req-package htmlize)
 
 (req-package emr
   :init
