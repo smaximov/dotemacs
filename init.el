@@ -18,6 +18,10 @@
 
 (require 'req-package)
 
+;;; FIXME: patch `req-package` to respect `:load-path` setting
+(add-to-list 'load-path (concat user-emacs-directory "/lib"))
+(add-to-list 'load-path (concat user-emacs-directory "/lib/org-page"))
+
 ;; Save PID file when running as a daemon
 (when (daemonp)
   (require 'server)
@@ -69,7 +73,7 @@ frame is created."
 
 (req-package mustache)
 
-(req-package org-page :loader :built-in
+(req-package org-page :loader :path
   :load-path "lib/org-page"
   :if (file-exists-p (format "%s/lib/org-page/org-page.el" user-emacs-directory))
   :require dash ht simple-httpd git mustache
@@ -289,7 +293,7 @@ frame is created."
     (add-hook 'clojure-mode-hook it)))
 
 (req-package cider
-  :require eldoc paredit
+  :require eldoc paredit f
   :init
   (--each (list #'enable-paredit-mode #'eldoc-mode)
     (add-hook 'cider-repl-mode-hook it))
@@ -314,7 +318,7 @@ frame is created."
   :init
   (add-hook 'rust-mode-hook #'electric-pair-mode))
 
-(req-package cargo :loader :built-in
+(req-package cargo
   :load-path "lib/cargo"
   :if (file-exists-p (format "%s/lib/cargo/cargo.el" user-emacs-directory))
   :require rust-mode diminish
@@ -354,14 +358,14 @@ frame is created."
   (setf show-paren-delay 0
         show-paren-style 'mixed))
 
-(req-package navigation :loader :built-in
+(req-package navigation :loader :path
   :load-path "lib"
   :bind (("C-c f u i" . nameless/find-user-init-file)
          ("C-c f s" . nameless/find-scratch-buffer)
          ("C-c f d f" . nameless/find-dominating-file)
          ("C-x C-t" . nameless/find-term-buffer)))
 
-(req-package file-helpers :loader :built-in
+(req-package file-helpers :loader :path
   :load-path "lib"
   :init
   (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
@@ -400,9 +404,7 @@ frame is created."
    ([remap isearch-backward] . phi-search-backward)
    ([remap query-replace] . phi-replace)))
 
-(req-package darkroom)
-
-(req-package sh-mode :loader :built-in
+(req-package sh-script :loader :built-in
   :ensure sh-script
   :mode "\\.zsh$"
   :mode "\\.zsh-theme$")
@@ -414,8 +416,6 @@ frame is created."
 (req-package asm-mode :loader :built-in
   :config
   (setf tab-stop-list (number-sequence 4 200 4)))
-
-(req-package php-mode)
 
 (req-package cask-mode
   :require paredit
