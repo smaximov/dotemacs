@@ -213,8 +213,16 @@ frame is created."
         org-agenda-dim-blocked-tasks t
         org-archive-location (f-join org-directory "archive.org::* From %s")
         org-log-done 'time
+
         ;; Don't align a node's content with the headline
         org-adapt-indentation nil
+
+        ;; Custom agenda views
+        org-agenda-custom-commands '(("h" "Agenda and home-related chores"
+                                      ((agenda)
+                                       (tags-todo "home"
+                                                  ((org-agenda-sorting-strategy '(priority-down)))))))
+
         org-goto-auto-isearch nil)
   :bind (("C-c c" . org-capture)
          ("C-c a" . org-agenda)
