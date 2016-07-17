@@ -217,6 +217,7 @@ frame is created."
         org-adapt-indentation nil
         org-goto-auto-isearch nil)
   :bind (("C-c c" . org-capture)
+         ("C-c a" . org-agenda)
          ("C-c l" . org-store-link)))
 
 (req-package htmlize
