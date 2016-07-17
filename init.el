@@ -211,6 +211,7 @@ frame is created."
         org-enforce-todo-checkbox-dependencies t
         org-enforce-todo-dependencies t
         org-agenda-dim-blocked-tasks t
+        org-log-done 'time
         ;; Don't align a node's content with the headline
         org-adapt-indentation nil
         org-goto-auto-isearch nil)
