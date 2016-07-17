@@ -208,6 +208,8 @@ frame is created."
         org-default-notes-file (f-join org-directory "notes.org")
         org-agenda-files `(,org-default-notes-file)
         org-src-fontify-natively t
+        ;; Don't align a node's content with the headline
+        org-adapt-indentation nil
         org-goto-auto-isearch nil)
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link)))
