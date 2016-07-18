@@ -230,6 +230,7 @@ frame is created."
         org-goto-auto-isearch nil)
   :bind (("C-c c" . org-capture)
          ("C-c a" . org-agenda)
+         ("C-c f a" . org-cycle-agenda-files)
          ("C-c l" . org-store-link)))
 
 (req-package htmlize)
