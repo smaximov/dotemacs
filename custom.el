@@ -4,7 +4,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "/home/nameless/.emacs.d/bookmarks")
- '(flycheck-haskell-runhaskell "~/bin/stack-runhaskell")
  '(magit-tag-arguments nil)
  '(package-selected-packages
    (quote
