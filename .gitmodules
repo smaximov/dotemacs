@@ -1,6 +1,3 @@
 [submodule "lib/org-page"]
 	path = lib/org-page
 	url = git@github.com:smaximov/org-page.git
-[submodule "lib/cargo"]
-	path = lib/cargo
-	url = git@github.com:smaximov/cargo.el.git
