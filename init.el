@@ -16,10 +16,6 @@
 
 (require 'req-package)
 
-;;; FIXME: patch `req-package` to respect `:load-path` setting
-(add-to-list 'load-path (concat user-emacs-directory "/lib"))
-(add-to-list 'load-path (concat user-emacs-directory "/lib/org-page"))
-
 ;; Save PID file when running as a daemon
 (when (daemonp)
   (require 'server)
