@@ -319,8 +319,6 @@ frame is created."
   (add-hook 'rust-mode-hook #'electric-pair-mode))
 
 (req-package cargo
-  :load-path "lib/cargo"
-  :if (file-exists-p (format "%s/lib/cargo/cargo.el" user-emacs-directory))
   :require rust-mode diminish
   :diminish cargo-minor-mode
   :init
