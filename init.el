@@ -12,9 +12,7 @@
 (package-initialize)
 
 ;; Bootstrap req-package
-(unless (package-installed-p 'req-package)
-  (package-refresh-contents)
-  (package-install 'req-package))
+(add-to-list 'load-path (concat user-emacs-directory "/lib/req-package"))
 
 (require 'req-package)
 
