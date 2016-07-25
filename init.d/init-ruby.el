@@ -9,7 +9,10 @@
 (req-package inf-ruby
   :require ruby-mode
   :init
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode))
+  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
+  :config
+  ;; may as well switch default implementaion to "ruby" ("irb")
+  (setf inf-ruby-default-implementation "pry"))
 
 (req-package ruby-mode :loader :built-in
   :mode "^Gemfile$"
