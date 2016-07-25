@@ -7,7 +7,7 @@
  '(magit-tag-arguments nil)
  '(package-selected-packages
    (quote
-    (load-dir org-doc undercover buttercup cargo smart-tabs-mode lua-mode yasnippet yaml-mode toml-mode tldr simple-httpd scss-mode rvm req-package racer php-mode phi-search org neotree mustache-mode mustache multiple-cursors material-theme markdown-mode magit json-mode js2-mode inf-ruby htmlize helm-projectile helm-descbinds git flycheck-rust flycheck-haskell exec-path-from-shell emr elixir-mode editorconfig dockerfile-mode darkroom company-tern cider cask-mode bookmark+))))
+    (rspec-mode robe load-dir org-doc undercover buttercup cargo smart-tabs-mode lua-mode yasnippet yaml-mode toml-mode tldr simple-httpd scss-mode rvm req-package racer php-mode phi-search org neotree mustache-mode mustache multiple-cursors material-theme markdown-mode magit json-mode js2-mode inf-ruby htmlize helm-projectile helm-descbinds git flycheck-rust flycheck-haskell exec-path-from-shell emr elixir-mode editorconfig dockerfile-mode darkroom company-tern cider cask-mode bookmark+))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
