@@ -20,5 +20,14 @@
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
 
+(req-package robe
+  :require company ruby-mode
+  :init
+  (add-hook 'ruby-mode-hook #'robe-mode)
+  :config
+  (push 'company-robe company-backends))
+
+(req-package rspec-mode)
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
