@@ -50,6 +50,16 @@ Install [[https://rvm.io][RVM]] to manage rubies.
 - =pry= ::
      a ruby interactive REPL on steroids. =pry-doc= should
      be installed too. Required for the =robe= code assistant tool.
+- =bundler= ::
+     bundler manages an application's dependencies though its entire life.
+
+** Markdown
+
+Requires the =kramdown= gem to render markdown files.
+
+** SCSS
+
+Requires the =sass= gem to compile SASS/SCSS files.
 
 ** Rust
 
