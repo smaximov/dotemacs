@@ -7,6 +7,7 @@
 !init.el
 !snippets/
 !lib/
+!init.d/
 !misc/
 !.gitignore
 !COPYING

@@ -16,6 +16,53 @@ My Emacs configuration.
   + helm.
   + yasnippet (check out my [[snippets/][snippets]]!).
 
+* Prerequisites
+
+** Lisp
+
+*** [[https://github.com/cask/cask][Cask]]
+
+Clone the repository:
+
+#+begin_src bash
+  $ git clone git@github.com:/cask/cask.git ~/.local/share/cask
+#+end_src
+
+Make a link to the executable appear somewhere on =PATH=:
+
+#+begin_src bash
+  $ cd ~/.local/bin
+  $ ln -s ../share/cask/bin/cask cask
+#+end_src
+
+** Ruby
+
+Install [[https://rvm.io][RVM]] to manage rubies.
+
+*** Required gems:
+
+- =rubocop= ::
+     a static code analyzer enforcing guidelines outlined
+     in the community Ruby Style Guide.
+- =ruby-lint= ::
+     another static code analyzer which focuses primarily
+     on technical problems in your code.
+- =pry= ::
+     a ruby interactive REPL on steroids. =pry-doc= should
+     be installed too. Required for the =robe= code assistant tool.
+
+** Rust
+
+I prefer installing Rust via [[https://rustup.rs][Rustup]].
+
+Installation locations:
+
+- =CARGO_HOME= - =$XDG_CACHE_HOME/cargo=;
+- =RUSTUP_HOME= - =$XDG_CACHE_HOME/rustup=.
+
+Rust sources (required for Racer) are stored in
+=~/src/rust=.
+
 * Licence
 
   Copyright © 2016 Sergei Maximov. Released under WTFTPL 2.0. See [[COPYING]].
