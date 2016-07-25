@@ -15,8 +15,11 @@
   (setf inf-ruby-default-implementation "pry"))
 
 (req-package ruby-mode :loader :built-in
+  :require smartparens
   :mode "^Gemfile$"
-  :mode "^Rakefile$")
+  :mode "^Rakefile$"
+  :init
+  (add-hook 'ruby-mode-hook #'smartparens-strict-mode))
 
 (req-package rvm
   :require exec-path-from-shell
