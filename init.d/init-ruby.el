@@ -24,11 +24,14 @@
   (add-hook 'after-init-hook #'rvm-use-default))
 
 (req-package robe
-  :require company ruby-mode
+  :require company ruby-mode rvm inf-ruby
   :init
   (add-hook 'ruby-mode-hook #'robe-mode)
   :config
-  (push 'company-robe company-backends))
+  (push 'company-robe company-backends)
+
+  (advice-add 'inf-ruby-console-auto
+              :before #'rvm-activate-corresponding-ruby))
 
 (req-package rspec-mode)
 
