@@ -15,11 +15,17 @@
   (setf inf-ruby-default-implementation "pry"))
 
 (req-package ruby-mode :loader :built-in
-  :require smartparens
+  :require smartparens autoinsert
   :mode "^Gemfile$"
   :mode "^Rakefile$"
   :init
-  (add-hook 'ruby-mode-hook #'smartparens-strict-mode))
+  (add-hook 'ruby-mode-hook #'smartparens-strict-mode)
+  :config
+  (define-auto-insert '(ruby-mode . "Ruby skeleton")
+    '(nil
+      "# coding: utf-8" ?\n
+      "# frozen_string_literal: true" ?\n
+      _)))
 
 (req-package rvm
   :require exec-path-from-shell
