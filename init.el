@@ -142,5 +142,11 @@ frame is created."
 ;; Cyrillic support
 (setf default-input-method 'russian-computer)
 
+;; FIXME: a dirty hack to make Emacs split windows vertically
+;; by default when the server is started by systemd. I should
+;; investigate the cause of this issue when I have some time.
+;; It can be related to the environment the server is started in.
+(setf split-height-threshold 200)
+
 (provide 'init)
 ;;; init.el ends here
