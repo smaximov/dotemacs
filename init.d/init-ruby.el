@@ -23,7 +23,6 @@
   :config
   (define-auto-insert '(ruby-mode . "Ruby skeleton")
     '(nil
-      "# coding: utf-8" ?\n
       "# frozen_string_literal: true" ?\n
       _)))
 
