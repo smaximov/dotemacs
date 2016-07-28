@@ -49,7 +49,9 @@
 (req-package rake
   :require ruby-mode helm
   :config
-  (setf rake-completion-system 'helm))
+  (setf rake-completion-system 'helm)
+  :bind (("C-c . t"  . rake)
+         ("C-c . r" . rake-rerun)))
 
 (req-package rspec-mode)
 
