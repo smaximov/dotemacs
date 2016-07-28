@@ -46,6 +46,11 @@
   :init
   (add-hook 'ruby-mode-hook #'yard-mode))
 
+(req-package rake
+  :require ruby-mode helm
+  :config
+  (setf rake-completion-system 'helm))
+
 (req-package rspec-mode)
 
 (provide 'init-ruby)
