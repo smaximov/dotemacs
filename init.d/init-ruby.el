@@ -41,6 +41,11 @@
   (advice-add 'inf-ruby-console-auto
               :before #'rvm-activate-corresponding-ruby))
 
+(req-package yard-mode
+  :require ruby-mode
+  :init
+  (add-hook 'ruby-mode-hook #'yard-mode))
+
 (req-package rspec-mode)
 
 (provide 'init-ruby)
