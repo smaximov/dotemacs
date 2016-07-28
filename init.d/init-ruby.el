@@ -51,7 +51,8 @@
   :config
   (setf rake-completion-system 'helm)
   :bind (("C-c . t"  . rake)
-         ("C-c . r" . rake-rerun)))
+         ("C-c . r" . rake-rerun)
+         ("C-c . c" . rake-regenerate-cache)))
 
 (req-package rspec-mode)
 
