@@ -4,10 +4,11 @@
 
 ;;; Code:
 
+(require 'req-package)
+
 (req-package sh-script :loader :built-in
-  :ensure sh-script
-  :mode "\\.zsh$"
-  :mode "\\.zsh-theme$")
+  :mode ("\\.zsh$" . sh-mode)
+  :mode ("\\.zsh-theme$" . sh-mode))
 
 (provide 'init-shell)
 ;;; init-shell.el ends here
