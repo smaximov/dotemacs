@@ -8,6 +8,7 @@
 
 (req-package powerline
   :config
+  (setf powerline-gui-use-vcs-glyph t)
   (powerline-default-theme))
 
 (provide 'init-powerline)
