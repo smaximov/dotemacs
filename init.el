@@ -62,7 +62,8 @@ frame is created."
 ;;; Package configuration
 
 ;; Bootstrap req-package
-(add-to-list 'load-path (concat user-emacs-directory "/lib/req-package"))
+(add-to-list 'load-path (expand-file-name "lib/req-package"
+                                          user-emacs-directory))
 (require 'req-package)
 
 (req-package load-dir
