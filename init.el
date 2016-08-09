@@ -55,8 +55,6 @@ frame is created."
        (add-hook 'after-make-frame-functions
                  (lambda (frame)
                    (with-selected-frame frame
-                     ;; (when (window-system frame)
-                     ;;   ,@body)
                      ,@body)))
     (when (window-system)
       ,@body)))
