@@ -8,13 +8,14 @@ My Emacs configuration.
 
 * Things I use
 
-  + package.el + use-package.el for managing packages.
+  + package.el + req-package.el for managing packages.
   + company-mode for completion.
-  + magit (it's awesome!).
+  + magit for interfacing with Git.
+  + Org mode for notes and stuff.
   + flycheck for syntax checking.
   + projectile for project management.
   + helm.
-  + yasnippet (check out my [[snippets/][snippets]]!).
+  + yasnippet (custom [[snippets/][snippets]]).
 
 * Prerequisites
 
