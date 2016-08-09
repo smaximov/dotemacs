@@ -108,6 +108,8 @@ frame is created."
 
 ;; Detach the customization file
 (setf custom-file "~/.emacs.d/custom.el")
+(unless (f-exists? custom-file)
+  (f-touch custom-file))
 (load custom-file t t)
 
 ;; Follow links to VCS-controlled source files
