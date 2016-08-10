@@ -26,5 +26,8 @@
   :init
   (add-hook 'after-init-hook #'helm-descbinds-mode))
 
+(req-package helm-describe-modes
+  :bind (([remap describe-mode] . helm-describe-modes)))
+
 (provide 'init-helm)
 ;;; init-helm.el ends here
