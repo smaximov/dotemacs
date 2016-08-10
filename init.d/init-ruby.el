@@ -32,7 +32,7 @@
   (add-hook 'after-init-hook #'rvm-use-default))
 
 (req-package robe
-  :require company ruby-mode rvm inf-ruby
+  :require company ruby-mode rvm inf-ruby diminish
   :diminish robe-mode
   :init
   (add-hook 'ruby-mode-hook #'robe-mode)
@@ -43,7 +43,7 @@
               :before #'rvm-activate-corresponding-ruby))
 
 (req-package yard-mode
-  :require ruby-mode
+  :require ruby-mode diminish
   :diminish yard-mode
   :init
   (add-hook 'ruby-mode-hook #'yard-mode))
