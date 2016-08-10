@@ -26,6 +26,10 @@
   :init
   (add-hook 'after-init-hook #'helm-descbinds-mode))
 
+(req-package helm-ag
+  :require helm
+  :bind (([remap helm-do-grep-ag] . helm-do-ag)))
+
 (req-package helm-describe-modes
   :bind (([remap describe-mode] . helm-describe-modes)))
 
