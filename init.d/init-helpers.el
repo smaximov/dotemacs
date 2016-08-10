@@ -29,7 +29,8 @@
 
 (req-package s)
 
-(req-package diminish)
+(req-package diminish
+  :diminish auto-revert-mode)
 
 (req-package async)
 
