@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: req-package
+# key: req_
+# --
+(req-package ${1:pkg-name} ${2:$(unless (string-empty-p yas-text) "\n  :ensure ")}${2:t}
+  $0)
