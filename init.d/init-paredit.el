@@ -7,7 +7,8 @@
 (require 'req-package)
 
 (req-package paredit
-  :require dash eldoc
+  :require dash eldoc diminish
+  :diminish paredit-mode
   :init
   (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook ielm-mode-hook
                                  lisp-mode-hook lisp-interaction-mode-hook scheme-mode-hook)
