@@ -11,6 +11,7 @@
   (require 'helm-config)
   (require 'helm-files)
   (require 'helm-buffers)
+  (add-hook 'after-init-hook #'helm-mode)
   :bind (([remap execute-extended-command] . helm-M-x) ; M-x
          ([remap yank-pop] . helm-show-kill-ring)      ; M-y
          ([remap list-buffers] . helm-mini)            ; C-x C-b
