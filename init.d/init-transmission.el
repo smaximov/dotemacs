@@ -13,7 +13,11 @@
         transmission-service 8090
         transmission-rpc-path "/transmission/rpc"
         ;; password is read from ~/.netrc
-        transmission-rpc-auth '(:username "admin")))
+        transmission-rpc-auth '(:username "admin")
+        transmission-refresh-modes '(transmission-mode
+                                     transmission-files-mode
+                                     transmission-info-mode
+                                     transmission-peers-mode)))
 
 (provide 'init-transmission)
 ;;; init-transmission ends here
