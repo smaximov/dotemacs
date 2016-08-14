@@ -111,7 +111,8 @@ in BODY."
 
 ;; Start Emacs maximized
 (with-daemon
- (toggle-frame-maximized))
+ (when (window-system)
+  (toggle-frame-maximized)))
 
 ;; Indent using spaces
 (setq-default indent-tabs-mode nil)
