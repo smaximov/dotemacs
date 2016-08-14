@@ -46,18 +46,45 @@
   (expand-file-name "init.d" user-emacs-directory)
   "Directory where `load-dir' will search for elisp files.")
 
+(defun nameless:split-list (list elem &optional test)
+  "Split LIST into two lists at ELEM.
+
+TEST is a predicate which specifies how to compare two elements.
+Default is `eql'.
+
+The function returns a cons (BEFORE-ELEM . AFTER-ELEM), where
+BEFORE-ELEM is a list of items before the first occurence of ELEM
+and AFTER-ELEM is a list of items after the first occurence of ELEM,
+if any."
+  (unless test (setf test #'eql))
+  (let ((before-elem nil)
+        (after-elem nil)
+        (elem-found nil))
+    (dolist (item list)
+      (if (funcall test item elem)
+          (if elem-found
+              (push item after-elem)
+            (setf elem-found t))
+        (push item (if elem-found after-elem before-elem))))
+    (cons (reverse before-elem) (reverse after-elem))))
+
 ;;; Macros and utilities
 (defmacro with-daemon (&rest body)
   "Execute BODY immediately when Emacs started in non-daemon mode.
 If Emacs started as daemon, delay the execution of BODY until a new
-frame is created."
-  `(if (daemonp)
-       (add-hook 'after-make-frame-functions
-                 (lambda (frame)
-                   (with-selected-frame frame
-                     ,@body)))
-    (when (window-system)
-      ,@body)))
+frame is created.
+
+You can separate daemon code from non-daemon using :otherwise keyword
+in BODY."
+  (let* ((split (nameless:split-list body :otherwise #'eq))
+         (daemon-body (car split))
+         (otherwise-body (or (cdr split) daemon-body)))
+    `(if (daemonp)
+         (add-hook 'after-make-frame-functions
+                   (lambda (frame)
+                     (with-selected-frame frame
+                       ,@daemon-body)))
+       ,@otherwise-body)))
 
 ;;; Package configuration
 
