@@ -4,3 +4,6 @@
 [submodule "lib/req-package"]
 	path = lib/req-package
 	url = git@github.com:smaximov/req-package.git
+[submodule "lib/transmission"]
+	path = lib/transmission
+	url = git@github.com:smaximov/transmission.git

@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package transmission
+  :loader :path
+  :load-path "lib/transmission"
   :commands (transmission transmission-add)
   :preface
   ;; Work around https://github.com/holomorph/transmission/issues/2
