@@ -7,7 +7,8 @@
 (require 'req-package)
 
 (req-package magit
-  :bind ("C-c m s" . magit-status)
+  :bind (("C-x g" . magit-status)
+         ("C-x C-g" . magit-dispatch-popup))
   :if (version<= "24.4" emacs-version)
   :init
   (add-hook 'after-init-hook #'global-magit-file-mode)
