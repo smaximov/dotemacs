@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package helm
+  :require diminish
+  :diminish helm-mode
   :init
   (require 'helm-config)
   (require 'helm-files)
