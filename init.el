@@ -109,6 +109,9 @@ in BODY."
   (when (fboundp it)
     (funcall it 0)))
 
+;; Diminish
+(diminish 'auto-revert-mode)
+
 ;; Start Emacs maximized
 (with-daemon
  (when (window-system)
