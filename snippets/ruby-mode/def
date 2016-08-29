@@ -2,6 +2,6 @@
 # name: def
 # key: def-
 # --
-def ${1:name}(${2:args})
+def ${1:name}${2:$(unless (string-empty-p yas-text) "(")}${2:args}${2:$(unless (string-empty-p yas-text) ")")}
   $0
 end
