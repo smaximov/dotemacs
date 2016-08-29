@@ -56,6 +56,10 @@
          ("C-c . r" . rake-rerun)
          ("C-c . c" . rake-regenerate-cache)))
 
+(req-package projectile-rails
+  :init
+  (add-hook 'projectile-mode-hook #'projectile-rails-on))
+
 (req-package rspec-mode)
 
 (provide 'init-ruby)
