@@ -14,8 +14,8 @@
   :bind ([C-tab] . company-indent-or-complete-common)
   :config
   (setf company-tooltip-align-annotations t
-        company-idle-delay 0.05
-        company-minimum-prefix-length 1))
+        company-idle-delay 0.1
+        company-minimum-prefix-length 3))
 
 (provide 'init-company)
 ;;; init-company.el ends here
