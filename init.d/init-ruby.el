@@ -49,8 +49,6 @@
   (add-hook 'ruby-mode-hook #'yard-mode))
 
 (req-package rake
-  :loader :path
-  :load-path "lib/rake"
   :require ruby-mode helm
   :config
   (setf rake-completion-system 'helm)
