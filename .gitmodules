@@ -10,3 +10,6 @@
 [submodule "lib/rake"]
 	path = lib/rake
 	url = git@github.com:smaximov/rake.git
+[submodule "lib/projectile-rails"]
+	path = lib/projectile-rails
+	url = git@github.com:smaximov/projectile-rails.git

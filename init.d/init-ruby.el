@@ -59,6 +59,8 @@
          ("C-c . c" . rake-regenerate-cache)))
 
 (req-package projectile-rails
+  :loader :path
+  :load-path "lib/projectile-rails"
   :init
   (add-hook 'projectile-mode-hook #'projectile-rails-on)
   :config
