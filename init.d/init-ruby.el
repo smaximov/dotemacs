@@ -60,7 +60,11 @@
 
 (req-package projectile-rails
   :init
-  (add-hook 'projectile-mode-hook #'projectile-rails-on))
+  (add-hook 'projectile-mode-hook #'projectile-rails-on)
+  :config
+  (add-hook 'projectile-rails-server-mode-hook
+            (lambda ()
+              (setq-local compilation-scroll-output t))))
 
 (req-package rspec-mode)
 
