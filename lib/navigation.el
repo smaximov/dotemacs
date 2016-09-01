@@ -33,11 +33,10 @@ With prefix argument, open the file in other window."
 (defun nameless/find-term-buffer ()
   "Switch to the latest TERM buffer, if any, or create one."
   (interactive)
-  (--if-let (--first (eq 'term-mode (buffer-local-value 'major-mode it))
-                     (buffer-list))
-      (if (process-live-p (get-buffer-process it))
+  (--if-let (get-buffer "*ansi-term*")
+      (if (comint-check-proc it)
           ;; the process is running
-          (switch-to-buffer (buffer-name it))
+          (pop-to-buffer it)
         ;; the process is dead, reuse its buffer
         (kill-buffer it)
         (ansi-term (getenv "SHELL")))
