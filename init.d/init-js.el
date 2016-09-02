@@ -31,5 +31,9 @@
   (--each '(tern-mode eldoc-mode)
     (add-hook 'js-mode-hook it)))
 
+(req-package coffee-mode
+  :config
+  (setf coffee-tab-width 2))
+
 (provide 'init-js)
 ;;; init-js.el ends here
