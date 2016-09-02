@@ -64,7 +64,8 @@
   :config
   (add-hook 'projectile-rails-server-mode-hook
             (lambda ()
-              (setq-local compilation-scroll-output t))))
+              (setq-local compilation-scroll-output t)))
+  (setf projectile-rails-expand-snippet nil))
 
 (req-package rspec-mode)
 
