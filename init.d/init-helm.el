@@ -19,7 +19,9 @@
          ([remap list-buffers] . helm-mini)            ; C-x C-b
          ([remap switch-to-buffer] . helm-mini)        ; C-x b
          ([remap find-file] . helm-find-files)         ; C-x C-f
-         ([remap occur] . helm-occur)))                ; M-s o
+         ([remap occur] . helm-occur))                 ; M-s o
+  :config
+  (push '(ruby-load-file) helm-completing-read-handlers-alist))
 
 (req-package helm-projectile
   :require projectile
