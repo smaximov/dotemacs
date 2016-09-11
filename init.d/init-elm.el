@@ -10,6 +10,7 @@
   :require company
   :config
   (add-hook 'elm-mode-hook #'elm-oracle-setup-completion)
+  (add-hook 'elm-mode-hook #'electric-pair-local-mode)
   (add-to-list 'company-backends #'company-elm))
 
 (req-package flycheck-elm
