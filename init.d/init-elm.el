@@ -12,5 +12,10 @@
   (add-hook 'elm-mode-hook #'elm-oracle-setup-completion)
   (add-to-list 'company-backends #'company-elm))
 
+(req-package flycheck-elm
+  :require flycheck
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
+
 (provide 'init-elm)
 ;;; init-elm.el ends here
