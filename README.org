@@ -74,6 +74,14 @@ Installation locations:
 Rust sources (required for Racer) are stored in
 =~/src/rust=.
 
+** ELM
+
+You need to install following NPM packages:
+
+- =elm= - ELM compiler and utilities;
+- =elm-oracle= - a tool to query information about an ELM project's source code;
+  used for completion.
+
 * Licence
 
   Copyright © 2016 Sergei Maximov. Released under WTFTPL 2.0. See [[COPYING]].
