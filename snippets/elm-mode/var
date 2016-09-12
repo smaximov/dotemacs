@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: update
+# key: update-
+# --
+update : ${1:Msg} -> ${2:Model} -> ($2, Cmd $1)
+update ${1:$(downcase yas-text)} ${2:$(downcase yas-text)} =
+    case ${1:$(downcase yas-text)} of
+        ${3:pattern} ->
+            $0

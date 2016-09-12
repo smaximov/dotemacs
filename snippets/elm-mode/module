@@ -1,0 +1,6 @@
+# key: mod-
+# name: module
+# --
+module ${1:`(or (nameless:elm-buffer-module-name) "Mod")`} exposing (${2:..})
+
+$0

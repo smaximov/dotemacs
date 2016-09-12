@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: main
+# key: main-
+# --
+main : Program Never
+main =
+    $0

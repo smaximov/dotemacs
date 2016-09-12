@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Msg
+# key: Msg-
+# --
+type ${1:Msg}
+    = $0

@@ -1,0 +1,8 @@
+# key: init-
+# name: init
+# --
+init : (${1:Model}, Cmd ${2:Msg})
+init =
+     (${3:model}, ${4:Cmd.none})
+
+$0

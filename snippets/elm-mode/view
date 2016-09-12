@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: view
+# key: view-
+# --
+view : ${1:Model} -> Html ${2:Msg}
+view ${1:$(downcase yas-text)} =
+    $0

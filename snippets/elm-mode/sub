@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: sub
+# key: sub-
+# --
+subscriptions : ${1:Model} -> Sub ${2:Msg}
+subscriptions ${1:$(downcase yas-text)} =
+    $0

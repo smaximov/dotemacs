@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: program
+# key: program-
+# --
+${1:Html.App.program}
+    { init = ${2:init}
+    , view = ${3:view}
+    , update = ${4:update}
+    , subscriptions = ${5:subscriptions}
+    }
+
+$0

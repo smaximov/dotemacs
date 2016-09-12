@@ -1,0 +1,5 @@
+# key: type-
+# name: type
+# --
+type ${1:alias}${1:$(unless (string-empty-p yas-text) " ")}${2:Name} =
+    $0
