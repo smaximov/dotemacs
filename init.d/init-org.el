@@ -11,7 +11,8 @@
   :config
   (setf org-directory "~/share/owncloud/org"
         org-default-notes-file (f-join org-directory "notes.org")
-        org-agenda-files `(,org-default-notes-file)
+        org-agenda-files `(,org-default-notes-file
+                           ,(f-join org-directory "tasks.org"))
         org-src-fontify-natively t
         org-enforce-todo-checkbox-dependencies t
         org-enforce-todo-dependencies t
