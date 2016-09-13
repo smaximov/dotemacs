@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: let
+# key: let-
+# --
+let
+    ${1:pattern} =
+        ${2:value}
+in
+    $0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rec
+# key: |
+# --
+{ ${1:record} | ${2:update} }$0
