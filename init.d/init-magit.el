@@ -13,7 +13,8 @@
   :init
   (add-hook 'after-init-hook #'global-magit-file-mode)
   :config
-  (setf git-commit-summary-max-length 100))
+  (setf git-commit-summary-max-length 100
+        magit-completing-read-function #'ivy-completing-read))
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
