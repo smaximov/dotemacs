@@ -50,5 +50,9 @@
   :init
   (add-hook 'after-init-hook #'counsel-projectile-on))
 
+(req-package ivy-pages
+  :force t
+  :bind (("C-c p" . ivy-pages)))
+
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
