@@ -166,6 +166,8 @@ in BODY."
 
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
+(require 'hl-line)
+(global-hl-line-mode)
 
 ;; Credentials
 (setf user-full-name "Sergei Maximov"
