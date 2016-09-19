@@ -21,9 +21,7 @@
   :init
   (require 'phi-replace)
   :bind
-  (([remap isearch-forward] . phi-search)
-   ([remap isearch-backward] . phi-search-backward)
-   ([remap query-replace] . phi-replace)))
+  (([remap query-replace] . phi-replace)))
 
 (req-package f)
 
