@@ -34,6 +34,7 @@
          ("C-c r" . ivy-resume)
 
          ([remap isearch-forward] . swiper)
+         ("C-S" . swiper-all)
 
          :map ivy-minibuffer-map
          ("C-c o" . ivy-occur)
