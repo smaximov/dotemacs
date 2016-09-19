@@ -52,12 +52,6 @@
   (--each '(emacs-lisp-mode-hook ielm-mode-hook)
     (add-hook it #'eldoc-mode)))
 
-(req-package neotree
-  :require projectile
-  :bind (([f8] . neotree-toggle))
-  :config
-  (setf projectile-switch-project-action 'neotree-projectile-action))
-
 (req-package term :loader :built-in
   :init
   (add-hook 'term-mode-hook (lambda ()

@@ -7,7 +7,7 @@
  '(magit-tag-arguments nil)
  '(package-selected-packages
    (quote
-    (counsel-projectile counsel ivy use-package diminish bind-key log4e flycheck-elm elm-mode mmm-mode coffee-mode emmet-mode projectile-rails transmission mingus-stays-home mingus-stays-homet mingus powerline auctex cask flycheck-package rake yard-mode smartparens-config smartparens ruby-electric rspec-mode robe load-dir undercover buttercup cargo smart-tabs-mode lua-mode yasnippet yaml-mode toml-mode tldr simple-httpd scss-mode rvm req-package racer php-mode phi-search org neotree mustache-mode mustache multiple-cursors material-theme markdown-mode magit json-mode js2-mode inf-ruby htmlize git flycheck-rust flycheck-haskell exec-path-from-shell emr elixir-mode editorconfig dockerfile-mode darkroom company-tern cider cask-mode bookmark+))))
+    (counsel-projectile counsel ivy use-package diminish bind-key log4e flycheck-elm elm-mode mmm-mode coffee-mode emmet-mode projectile-rails transmission mingus-stays-home mingus-stays-homet mingus powerline auctex cask flycheck-package rake yard-mode smartparens-config smartparens ruby-electric rspec-mode robe load-dir undercover buttercup cargo smart-tabs-mode lua-mode yasnippet yaml-mode toml-mode tldr simple-httpd scss-mode rvm req-package racer php-mode phi-search org mustache-mode mustache multiple-cursors material-theme markdown-mode magit json-mode js2-mode inf-ruby htmlize git flycheck-rust flycheck-haskell exec-path-from-shell emr elixir-mode editorconfig dockerfile-mode darkroom company-tern cider cask-mode bookmark+))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
