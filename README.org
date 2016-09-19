@@ -14,7 +14,8 @@ My Emacs configuration.
   + Org mode for notes and stuff.
   + flycheck for syntax checking.
   + projectile for project management.
-  + helm.
+  + ivy + counsel as generic completion backend.
+  + swiper as an alternative to isearch.
   + yasnippet (custom [[snippets/][snippets]]).
 
 * Prerequisites
