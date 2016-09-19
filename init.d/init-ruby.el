@@ -49,9 +49,9 @@
   (add-hook 'ruby-mode-hook #'yard-mode))
 
 (req-package rake
-  :require ruby-mode helm
+  :require ruby-mode ivy
   :config
-  (setf rake-completion-system 'helm)
+  (setf rake-completion-system 'ivy-completing-read)
   :bind (("C-c . t"  . rake)
          ("C-c . r" . rake-rerun)
          ("C-c . c" . rake-regenerate-cache)))
