@@ -56,6 +56,9 @@
          ("C-c . r" . rake-rerun)
          ("C-c . c" . rake-regenerate-cache)))
 
+;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
+(setq projectile-rails-keymap-prefix (kbd "C-c C-r"))
+
 (req-package projectile-rails
   :loader :path
   :load-path "lib/projectile-rails"
