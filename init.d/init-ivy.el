@@ -26,6 +26,9 @@
          ("C-c P" . counsel-list-processes)
          ("C-c t" . counsel-recentf)
 
+         ("C-h F" . find-function)
+         ("C-h V" . find-variable)
+
          ([remap switch-to-buffer] . ivy-switch-buffer)          ; C-x b
          ([remap list-buffers] . ivy-switch-buffer)              ; C-x C-b
          ("C-c r" . ivy-resume)
