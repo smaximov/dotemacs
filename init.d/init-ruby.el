@@ -1,4 +1,4 @@
-;;; init-ruby.el --- `ruby-mode' configuration -*- lexical-binding: t; -*-
+;;; init-ruby.el --- Ruby, Rails, and supporting tools -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
