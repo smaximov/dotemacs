@@ -62,8 +62,11 @@
 (req-package projectile-rails
   :loader :path
   :load-path "lib/projectile-rails"
+  :require rvm
   :init
   (add-hook 'projectile-mode-hook #'projectile-rails-on)
+  :bind (:map projectile-rails-command-map
+              ("#" . rvm-activate-corresponding-ruby))
   :config
   (add-hook 'projectile-rails-server-mode-hook
             (lambda ()
