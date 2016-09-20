@@ -75,5 +75,7 @@
 
 (req-package rspec-mode)
 
+(req-package slim-mode)
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
