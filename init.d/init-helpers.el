@@ -42,8 +42,7 @@
   :config
   (setf whitespace-line-column 120))
 
-(req-package tldr
-  :bind ("C-c t l d r" . tldr))
+(req-package tldr)
 
 (req-package eldoc
   :require diminish dash
