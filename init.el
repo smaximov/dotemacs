@@ -192,5 +192,14 @@ in BODY."
 ;; It can be related to the environment the server is started in.
 (validate-setq split-height-threshold 200)
 
+(defun delete-whitespace-till-next-word ()
+  "Delete all white space from point to the next word."
+  (interactive)
+  (if (looking-at "[ \t\n]+")
+      (replace-match "")
+    (ding)))
+
+(global-set-key (kbd "M-\\") #'delete-whitespace-till-next-word)
+
 (provide 'init)
 ;;; init.el ends here
