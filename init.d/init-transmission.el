@@ -9,6 +9,7 @@
 (req-package transmission
   :loader :path
   :load-path "lib/transmission"
+  :require validate :force t
   :commands (transmission transmission-add)
   :preface
   ;; Work around https://github.com/holomorph/transmission/issues/2
@@ -17,15 +18,15 @@
     (interactive "sMagnet URI: ")
     (transmission-add magnet))
   :config
-  (setf transmission-host "my.keenetic.net"
-        transmission-service 8090
-        transmission-rpc-path "/transmission/rpc"
-        ;; password is read from ~/.netrc
-        transmission-rpc-auth '(:username "admin")
-        transmission-refresh-modes '(transmission-mode
-                                     transmission-files-mode
-                                     transmission-info-mode
-                                     transmission-peers-mode))
+  (validate-setq transmission-host "my.keenetic.net"
+                 transmission-service 8090
+                 transmission-rpc-path "/transmission/rpc"
+                 ;; password is read from ~/.netrc
+                 transmission-rpc-auth '(:username "admin")
+                 transmission-refresh-modes '(transmission-mode
+                                              transmission-files-mode
+                                              transmission-info-mode
+                                              transmission-peers-mode))
   :bind (:map transmission-mode-map
               ("A" . transmission-add-magnet)))
 

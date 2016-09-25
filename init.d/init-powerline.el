@@ -7,8 +7,9 @@
 (require 'req-package)
 
 (req-package powerline
+  :require validate
   :config
-  (setf powerline-gui-use-vcs-glyph t)
+  (validate-setq powerline-gui-use-vcs-glyph t)
   (powerline-default-theme))
 
 (provide 'init-powerline)

@@ -7,7 +7,7 @@
 (require 'req-package)
 
 (req-package counsel
-  :require diminish
+  :require diminish validate
   :diminish ivy-mode
   :init
   (require 'ivy)
@@ -42,8 +42,8 @@
          :map read-expression-map
          ("C-r" . counsel-expression-history))
   :config
-  (setf ivy-use-virtual-buffers t
-        ivy-height 30))
+  (validate-setq ivy-use-virtual-buffers t
+                 ivy-height 30))
 
 (req-package counsel-projectile
   :require counsel

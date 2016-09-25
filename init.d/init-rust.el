@@ -17,14 +17,14 @@
   (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
 (req-package racer
-  :require rust-mode f eldoc exec-path-from-shell
+  :require rust-mode f eldoc exec-path-from-shell validate
   :diminish racer-mode
   :init
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   :config
-  (setf racer-rust-src-path (f-full "~/src/rust/src")
-        racer-cmd (executable-find "racer")))
+  (validate-setq racer-rust-src-path (f-full "~/src/rust/src")
+                 racer-cmd (executable-find "racer")))
 
 (req-package flycheck-rust
   :require flycheck

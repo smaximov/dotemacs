@@ -11,7 +11,7 @@
   :init
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
   :config
-  ;; may as well switch default implementaion to "ruby" ("irb")
+  ;; may as well switch default implementaion to "ruby" (== "irb")
   (setf inf-ruby-default-implementation "pry"))
 
 (req-package ruby-mode :loader :built-in
@@ -62,7 +62,7 @@
 (req-package projectile-rails
   :loader :path
   :load-path "lib/projectile-rails"
-  :require rvm
+  :require rvm validate
   :init
   (add-hook 'projectile-mode-hook #'projectile-rails-on)
   :bind (:map projectile-rails-command-map
@@ -71,7 +71,7 @@
   (add-hook 'projectile-rails-server-mode-hook
             (lambda ()
               (setq-local compilation-scroll-output t)))
-  (setf projectile-rails-expand-snippet nil))
+  (validate-setq projectile-rails-expand-snippet nil))
 
 (req-package rspec-mode)
 

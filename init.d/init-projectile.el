@@ -10,11 +10,11 @@
 (setf projectile-keymap-prefix (kbd "C-x p"))
 
 (req-package projectile
-  :require ivy
+  :require ivy validate
   :init
   (add-hook 'after-init-hook #'projectile-global-mode)
   :config
-  (setf projectile-completion-system 'ivy-completing-read))
+  (validate-setq projectile-completion-system 'ivy-completing-read))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here

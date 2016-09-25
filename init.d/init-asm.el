@@ -7,8 +7,9 @@
 (require 'req-package)
 
 (req-package asm-mode :loader :built-in
+  :require validate
   :config
-  (setf tab-stop-list (number-sequence 4 200 4)))
+  (validate-setq tab-stop-list (number-sequence 4 200 4)))
 
 (provide 'init-asm)
 ;;; init-asm.el ends here

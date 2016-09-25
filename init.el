@@ -131,14 +131,14 @@ in BODY."
 (setq-default indent-tabs-mode nil)
 
 ;; Don't show splash screen at startup
-(setf inhibit-splash-screen t)
+(validate-setq inhibit-splash-screen t)
 
 (make-directory nameless/backup-dir t)
 (make-directory nameless/auto-save-dir t)
 
 ;; Get rid of annoying backup & autosave files stored in-place
-(setf backup-directory-alist `(("." . ,nameless/backup-dir))
-      auto-save-file-name-transforms `((".*" ,nameless/auto-save-dir t)))
+(validate-setq backup-directory-alist `(("." . ,nameless/backup-dir))
+               auto-save-file-name-transforms `((".*" ,nameless/auto-save-dir t)))
 
 ;; Display current column position of the cursor
 (add-hook 'after-init-hook #'column-number-mode)
@@ -147,13 +147,13 @@ in BODY."
 (add-hook 'after-init-hook #'recentf-mode)
 
 ;; Detach the customization file
-(setf custom-file "~/.emacs.d/custom.el")
+(validate-setq custom-file "~/.emacs.d/custom.el")
 (unless (f-exists? custom-file)
   (f-touch custom-file))
 (load custom-file t t)
 
 ;; Follow links to VCS-controlled source files
-(setf vc-follow-symlinks t)
+(validate-setq vc-follow-symlinks t)
 
 ;; Customize fonts
 (when (display-graphic-p)
@@ -170,13 +170,13 @@ in BODY."
 (global-hl-line-mode)
 
 ;; Credentials
-(setf user-full-name "Sergei Maximov"
-      user-mail-address "s.b.maximov@gmail.com")
+(validate-setq user-full-name "Sergei Maximov"
+               user-mail-address "s.b.maximov@gmail.com")
 
 ;; Visual line mode
-(setf visual-line-fringe-indicators
-      (or (cdr (assoc 'continuation fringe-indicator-alist))
-          visual-line-fringe-indicators))
+(validate-setq visual-line-fringe-indicators
+               (or (cdr (assoc 'continuation fringe-indicator-alist))
+                   visual-line-fringe-indicators))
 (add-hook 'compilation-mode-hook #'visual-line-mode)
 (add-hook 'flycheck-error-list-mode-hook #'visual-line-mode)
 
@@ -184,13 +184,13 @@ in BODY."
 (prefer-coding-system 'utf-8)
 
 ;; Cyrillic support
-(setf default-input-method 'russian-computer)
+(validate-setq default-input-method 'russian-computer)
 
 ;; FIXME: a dirty hack to make Emacs split windows vertically
 ;; by default when the server is started by systemd. I should
 ;; investigate the cause of this issue when I have some time.
 ;; It can be related to the environment the server is started in.
-(setf split-height-threshold 200)
+(validate-setq split-height-threshold 200)
 
 (provide 'init)
 ;;; init.el ends here
