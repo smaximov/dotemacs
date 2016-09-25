@@ -44,6 +44,8 @@
 
 (req-package tldr)
 
+(req-package validate)
+
 (req-package eldoc
   :require diminish dash
   :diminish eldoc-mode
