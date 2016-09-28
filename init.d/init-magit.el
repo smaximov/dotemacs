@@ -17,5 +17,8 @@
   (validate-setq git-commit-summary-max-length 100
                  magit-completing-read-function #'ivy-completing-read))
 
+(req-package magithub
+  :require magit)
+
 (provide 'init-magit)
 ;;; init-magit.el ends here
