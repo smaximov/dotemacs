@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: screen
+# key: screen-
+# --
+save_and_open_screenshot

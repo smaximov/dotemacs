@@ -7,7 +7,7 @@
 (require 'req-package)
 
 (req-package yasnippet
-  :require validate
+  :require validate s
   :init
   (add-hook 'after-init-hook #'yas-global-mode)
   :config

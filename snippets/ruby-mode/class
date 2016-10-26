@@ -1,7 +1,6 @@
-# -*- mode: snippet -*-
+# key: class-
 # name: class
-# key: class_
 # --
-class ${1:Name}
+class ${1:Derived$(s-upper-camel-case yas-text)}${2:$(unless (string-empty-p yas-text) " < ")}${2:Base$(s-upper-camel-case yas-text)}
   $0
 end
