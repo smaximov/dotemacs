@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: desc
+# key: desc-
+# --
+RSpec.describe ${1:desc}${2:$(unless (string-empty-p yas-text) ", type: :")}${2:type} do
+  $0
+end
