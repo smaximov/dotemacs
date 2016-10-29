@@ -62,9 +62,7 @@
 (req-package projectile-rails
   :loader :path
   :load-path "lib/projectile-rails"
-  :require rvm validate
-  :init
-  (add-hook 'projectile-mode-hook #'projectile-rails-on)
+  :require rvm validate projectile-hanami
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))
   :config
@@ -72,6 +70,19 @@
             (lambda ()
               (setq-local compilation-scroll-output t)))
   (validate-setq projectile-rails-expand-snippet nil))
+
+(req-package projectile-hanami
+  :require rvm validate
+  :preface
+  (defun projectile-rails-or-hanami-on ()
+    "Activate either `projectile-rails-mode` or `projectile-hanami-mode`."
+    (if (projectile-hanami-applicable-p)
+        (projectile-hanami-mode +1)
+      (projectile-rails-on)))
+  :init
+  (add-hook 'projectile-mode-hook #'projectile-rails-or-hanami-on)
+  :bind (:map projectile-hanami-mode-command-map
+              ("#" . rvm-activate-corresponding-ruby)))
 
 (req-package rspec-mode)
 
