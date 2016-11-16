@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package editorconfig
+  :require diminish
+  :diminish editorconfig-mode
   :init
   (add-hook 'after-init-hook #'editorconfig-mode))
 
