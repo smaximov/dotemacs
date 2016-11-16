@@ -43,7 +43,7 @@
          ("C-r" . counsel-expression-history))
   :config
   (validate-setq ivy-use-virtual-buffers t
-                 ivy-height 30))
+                 ivy-height 10))
 
 (req-package counsel-projectile
   :require counsel
