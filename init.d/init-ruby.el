@@ -60,8 +60,6 @@
 (setq projectile-rails-keymap-prefix (kbd "C-c C-r"))
 
 (req-package projectile-rails
-  :loader :path
-  :load-path "lib/projectile-rails"
   :require rvm validate projectile-hanami
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))

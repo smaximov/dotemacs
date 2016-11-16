@@ -89,8 +89,10 @@ in BODY."
 ;;; Package configuration
 
 ;; Bootstrap req-package
-(add-to-list 'load-path (expand-file-name "lib/req-package"
-                                          user-emacs-directory))
+(unless (package-installed-p 'req-package)
+  (package-refresh-contents)
+  (package-install 'req-package))
+
 (require 'req-package)
 
 (req-package load-dir
