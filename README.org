@@ -83,6 +83,14 @@ You need to install following NPM packages:
 - =elm-oracle= - a tool to query information about an ELM project's source code;
   used for completion.
 
+** Misc
+
+- Terminus fonts (=terminus-fonts= RPM package in Fedora).
+- [[https://hub.github.com/][Hub]] --- command line Git wrapper, used for Magithub (=hub= RPM package in
+  Fedora). Before starting to use Hub with Magithub, you need to authenticate
+  first. It can be done by running =hub browse= from shell inside some Github
+  project.
+
 * Licence
 
   Copyright © 2016 Sergei Maximov. Released under WTFTPL 2.0. See [[COPYING]].
