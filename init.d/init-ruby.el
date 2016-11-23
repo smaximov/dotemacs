@@ -64,7 +64,7 @@
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))
   :init
-  (add-hook 'projectile-mode-hook #'projectile-rails-on)
+  (add-hook 'projectile-mode-hook #'projectile-rails-global-mode)
   :config
   (add-hook 'projectile-rails-server-mode-hook
             (lambda ()
