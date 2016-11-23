@@ -60,9 +60,11 @@
 (setq projectile-rails-keymap-prefix (kbd "C-c C-r"))
 
 (req-package projectile-rails
-  :require rvm validate projectile-hanami
+  :require rvm validate
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))
+  :init
+  (add-hook 'projectile-mode-hook #'projectile-rails-on)
   :config
   (add-hook 'projectile-rails-server-mode-hook
             (lambda ()
@@ -71,6 +73,7 @@
 
 (req-package projectile-hanami
   :require rvm validate
+  :disabled
   :preface
   (defun projectile-rails-or-hanami-on ()
     "Activate either `projectile-rails-mode` or `projectile-hanami-mode`."
