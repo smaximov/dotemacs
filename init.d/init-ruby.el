@@ -19,7 +19,7 @@
   :mode "^Gemfile$"
   :mode "^Rakefile$"
   :init
-  (add-hook 'ruby-mode-hook #'smartparens-strict-mode)
+  (add-hook 'ruby-mode-hook #'smartparens-mode)
   :config
   (define-auto-insert '(ruby-mode . "Ruby skeleton")
     '(nil
@@ -30,6 +30,12 @@
   :require exec-path-from-shell
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
+
+(req-package rbenv :force t
+  :require exec-path-from-shell-arguments
+  :init
+  (add-hook 'after-init-hook #'global-rbenv-mode)
+  (add-hook 'after-init-hook #'rbenv-use-global))
 
 (req-package robe
   :require company ruby-mode rvm inf-ruby diminish
