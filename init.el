@@ -137,8 +137,10 @@ in BODY."
 (validate-setq vc-follow-symlinks t)
 
 ;; Customize fonts
-(when (display-graphic-p)
-  (set-face-attribute 'default nil :font "Terminus-12"))
+(ignore-errors
+  (when (display-graphic-p)
+    (set-face-attribute 'default nil :font "Terminus-12")))
+
 
 (put 'narrow-to-region 'disabled nil)
 
@@ -166,12 +168,6 @@ in BODY."
 
 ;; Cyrillic support
 (validate-setq default-input-method 'russian-computer)
-
-;; FIXME: a dirty hack to make Emacs split windows vertically
-;; by default when the server is started by systemd. I should
-;; investigate the cause of this issue when I have some time.
-;; It can be related to the environment the server is started in.
-(validate-setq split-height-threshold 200)
 
 (defun delete-whitespace-till-next-word ()
   "Delete all white space from point to the next word."
