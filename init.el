@@ -178,5 +178,8 @@ in BODY."
 
 (global-set-key (kbd "M-\\") #'delete-whitespace-till-next-word)
 
+(validate-setq split-height-threshold nil)
+(validate-setq split-width-threshold 160)
+
 (provide 'init)
 ;;; init.el ends here
