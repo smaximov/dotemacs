@@ -21,7 +21,7 @@
          ([remap yank-pop] . counsel-yank-pop)                   ; M-y
          ("C-c I" . counsel-info-lookup-symbol)
          ("C-c i" . counsel-imenu)
-         ("C-c g" . counsel-ag)
+         ("C-c g" . counsel-rg)
          ("C-c u" . counsel-unicode-char)
          ("C-c P" . counsel-list-processes)
          ("C-c t" . counsel-recentf)
