@@ -1,12 +1,6 @@
 [submodule "lib/org-page"]
 	path = lib/org-page
 	url = git@github.com:smaximov/org-page.git
-[submodule "lib/req-package"]
-	path = lib/req-package
-	url = git@github.com:smaximov/req-package.git
 [submodule "lib/transmission"]
 	path = lib/transmission
 	url = git@github.com:smaximov/transmission.git
-[submodule "lib/projectile-rails"]
-	path = lib/projectile-rails
-	url = git@github.com:smaximov/projectile-rails.git
