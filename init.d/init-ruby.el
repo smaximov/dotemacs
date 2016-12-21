@@ -95,5 +95,12 @@
 
 (req-package slim-mode)
 
+(req-package rubocop-toggle-cops
+  :loader :path
+  :load-path "lib"
+  :require flycheck ruby-mode
+  :bind (:map ruby-mode-map
+              ("C-c :" . rubocop-toggle-cops)))
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
