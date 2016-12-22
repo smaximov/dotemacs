@@ -7,12 +7,13 @@
 (require 'req-package)
 
 (req-package inf-ruby
-  :require ruby-mode
+  :require ruby-mode validate
   :init
   (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
   :config
   ;; may as well switch default implementaion to "ruby" (== "irb")
-  (setf inf-ruby-default-implementation "pry"))
+  (validate-setq inf-ruby-default-implementation "pry"
+                 ruby-insert-encoding-magic-comment nil))
 
 (req-package ruby-mode :loader :built-in
   :require smartparens autoinsert
