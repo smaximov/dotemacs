@@ -18,7 +18,8 @@
                  magit-completing-read-function #'ivy-completing-read))
 
 (req-package magithub
-  :require magit)
+  :require magit
+  :config (magithub-feature-autoinject t))
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
