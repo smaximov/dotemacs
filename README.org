@@ -72,7 +72,7 @@ Installation locations:
 - =CARGO_HOME= - =$XDG_CACHE_HOME/cargo=;
 - =RUSTUP_HOME= - =$XDG_CACHE_HOME/rustup=.
 
-You may also consider to add =rustup= completions to
+You may also consider to add =rustup= command completions to
 your shell by running ~rustup completions SHELL > DEST~, where
 =SHELL= is the name of your shell (e.g., ZSH or Bash), and
 ~DEST~ is the destination where completion function is to be stored.
@@ -83,8 +83,13 @@ For my ZSH setup the following command will do:
 $ rustup completions zsh > $ZDOTDIR/completions/_rustup
 #+end_src
 
-Rust sources (required for Racer) are stored in
-=~/src/rust=.
+Rust code completion achieved with [[https://github.com/phildawes/racer][Racer]]. Racer requires Rust
+source code in order to work; the following command installs
+Rust source code (and keeps it in sync):
+
+#+begin_src bash
+$ rustup component add rust-src
+#+end_src
 
 ** ELM
 
