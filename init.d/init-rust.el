@@ -21,10 +21,7 @@
   :diminish racer-mode
   :init
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  :config
-  (validate-setq racer-rust-src-path (f-full "~/src/rust/src")
-                 racer-cmd (executable-find "racer")))
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 
 (req-package flycheck-rust
   :require flycheck
