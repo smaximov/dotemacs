@@ -6,11 +6,11 @@
 
 (require 'req-package)
 
-;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
-(setf projectile-keymap-prefix (kbd "C-x p"))
-
 (req-package projectile
   :require ivy validate
+  :preface
+  ;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
+  (defvar projectile-keymap-prefix (kbd "C-x p"))
   :init
   (add-hook 'after-init-hook #'projectile-global-mode)
   :config
