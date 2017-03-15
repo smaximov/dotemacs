@@ -63,13 +63,13 @@
          ("C-c . r" . rake-rerun)
          ("C-c . c" . rake-regenerate-cache)))
 
-;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
-(setq projectile-rails-keymap-prefix (kbd "C-c C-r"))
-
 (req-package projectile-rails
   :require rvm validate
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))
+  :preface
+  ;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
+  (defvar projectile-rails-keymap-prefix (kbd "C-c C-r"))
   :init
   (add-hook 'projectile-mode-hook #'projectile-rails-global-mode)
   :config
