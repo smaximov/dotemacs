@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pass
+# key: pass-
+# --
+raise NotImplementedError${1:$(unless (string-empty-p yas-text) ", \\\"")}${1:Description}${1:$(unless (string-empty-p yas-text) "\\\"")}
