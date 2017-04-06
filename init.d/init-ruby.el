@@ -32,12 +32,6 @@
   :init
   (add-hook 'after-init-hook #'rvm-use-default))
 
-(req-package rbenv :force t
-  :require exec-path-from-shell-arguments
-  :init
-  (add-hook 'after-init-hook #'global-rbenv-mode)
-  (add-hook 'after-init-hook #'rbenv-use-global))
-
 (req-package robe
   :require company ruby-mode rvm inf-ruby diminish
   :diminish robe-mode
