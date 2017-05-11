@@ -181,5 +181,8 @@ in BODY."
 (validate-setq split-height-threshold nil)
 (validate-setq split-width-threshold 160)
 
+(global-set-key (kbd "C-,") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-.") (lambda () (interactive) (other-window +1)))
+
 (provide 'init)
 ;;; init.el ends here
