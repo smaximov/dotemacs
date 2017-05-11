@@ -37,5 +37,7 @@
   :config
   (validate-setq coffee-tab-width 2))
 
+(req-package rjsx-mode)
+
 (provide 'init-js)
 ;;; init-js.el ends here
