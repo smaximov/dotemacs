@@ -1,20 +1,17 @@
 # Place the unit to ~/.config/systemd/user/
-# start: systemctl --user start emacsd
-# stop: systemctl --user stop emacsd
-# restart: systemctl --user restart emacsd
-# enable on user login: systemctl --user enable emacsd
 [Unit]
 Description=Emacs: the extensible, self-documenting text editor
 Documentation=man:emacs(1) info:Emacs
 
+
 [Service]
 Type=forking
 ExecStart=/usr/bin/emacs --daemon
-ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
-PIDFile=%t/emacs.pid
+ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
+Restart=on-failure
+Environment=DISPLAY=:%i
 Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 TimeoutStartSec=0
-Restart=on-failure
 
 [Install]
 WantedBy=default.target
