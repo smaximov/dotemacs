@@ -31,7 +31,8 @@
 
 (req-package magithub
   :require magit
-  :config (magithub-feature-autoinject t))
+  :config (magithub-feature-autoinject t)
+  :pin melpa-stable)
 
 (provide 'init-magit)
 ;;; init-magit.el ends here

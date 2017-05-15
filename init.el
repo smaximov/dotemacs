@@ -10,7 +10,11 @@
 (require 'package)
 (setf package-enable-at-startup nil
       package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/"))
+      package-archive-priorities '(("gnu" . 1)
+                                   ("melpa" . 2)
+                                   ("melpa-stable" . 0)))
 (package-initialize)
 
 ;;; Various definitions
