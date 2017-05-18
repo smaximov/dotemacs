@@ -30,8 +30,14 @@
                  magit-completing-read-function #'ivy-completing-read))
 
 (req-package magithub
-  :require magit
-  :config (magithub-feature-autoinject t)
+  :require magit exec-path-from-shell validate
+  :config
+  (magithub-feature-autoinject t)
+  (validate-setq magithub-dir
+                 (expand-file-name "magithub" (let ((cache-home (or (getenv "XDG_CACHE_HOME")
+                                                                    (expand-file-name "~/.cache"))))
+                                                (make-directory cache-home t)
+                                                cache-home)))
   :pin melpa-stable)
 
 (provide 'init-magit)
