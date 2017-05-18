@@ -20,6 +20,27 @@ My Emacs configuration.
 
 * Prerequisites
 
+** Magithub
+
+Magithub (at the moment of writing) uses two backends to access github API.
+
+- [[https://github.com/tarsius/ghub][ghub]] :: Emacs Lisp package which wraps Github HTTP API.
+
+     =ghub= needs Github API token, which can be obtained [[https://github.com/settings/tokens][here]]. After generating the token,
+     save it in =/.authinfo.gpg= (don't forget to install GnuPG and generate a key pair):
+
+     #+begin_src text
+       # -*- epa-file-encrypt-to: ("s.b.maximov@gmail.com") -*-
+       machine api.github.com login smaximov password <token>
+     #+end_src
+
+- [[https://hub.github.com/][Hub]] :: command line Git wrapper, used for Magithub (=hub= RPM package in
+     Fedora).
+
+     Before starting to use Hub with Magithub, you need to authenticate
+     first. It can be done by running =hub browse= from shell inside some Github
+     project.
+
 ** Lisp
 
 *** [[https://github.com/cask/cask][Cask]]
@@ -102,10 +123,6 @@ You need to install following NPM packages:
 ** Misc
 
 - Terminus fonts (=terminus-fonts= RPM package in Fedora).
-- [[https://hub.github.com/][Hub]] --- command line Git wrapper, used for Magithub (=hub= RPM package in
-  Fedora). Before starting to use Hub with Magithub, you need to authenticate
-  first. It can be done by running =hub browse= from shell inside some Github
-  project.
 
 * Licence
 
