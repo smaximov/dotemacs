@@ -188,6 +188,8 @@ in BODY."
 (global-set-key (kbd "C-,") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-.") (lambda () (interactive) (other-window +1)))
 
+(require 'epa)
+
 ;; Use minibuffer to ask for the GPG passphrase
 (validate-setq epa-pinentry-mode 'loopback)
 
