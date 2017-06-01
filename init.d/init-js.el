@@ -12,6 +12,7 @@
 
 (req-package js2-mode
   :require validate
+  :disabled
   :mode "\\.js$"
   :init
   (add-hook 'js2-mode-hook #'electric-pair-mode)
@@ -37,7 +38,8 @@
   :config
   (validate-setq coffee-tab-width 2))
 
-(req-package rjsx-mode)
+(req-package rjsx-mode
+  :mode "\\.js$")
 
 (provide 'init-js)
 ;;; init-js.el ends here
