@@ -141,9 +141,15 @@ in BODY."
 (validate-setq vc-follow-symlinks t)
 
 ;; Customize fonts
+;; TODO: have more flexible font selection process at startup:
+;;   * have a list of preferred fonts, some good candidates are
+;;     1) Fira Mono, 2) Anonymous Pro, 3) and good ol' Terminus;
+;;   * choose (first) available font from that list;
+;;   * customize its height according to the DPI and OS.
 (ignore-errors
   (when (display-graphic-p)
-    (set-face-attribute 'default nil :font "Terminus-12")))
+   (set-face-attribute 'default nil :family "Fira Mono" :foundry "CTDB"
+                       :slant 'normal :weight 'normal :height 140 :width 'normal)))
 
 
 (put 'narrow-to-region 'disabled nil)
