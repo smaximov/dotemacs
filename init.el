@@ -140,17 +140,16 @@ in BODY."
 ;; Follow links to VCS-controlled source files
 (validate-setq vc-follow-symlinks t)
 
-;; Customize fonts
-;; TODO: have more flexible font selection process at startup:
-;;   * have a list of preferred fonts, some good candidates are
-;;     1) Fira Mono, 2) Anonymous Pro, 3) and good ol' Terminus;
-;;   * choose (first) available font from that list;
-;;   * customize its height according to the DPI and OS.
-(ignore-errors
-  (when (display-graphic-p)
-   (set-face-attribute 'default nil :family "Fira Mono" :foundry "CTDB"
-                       :slant 'normal :weight 'normal :height 140 :width 'normal)))
+(defconst nameless:font-families '("Iosevka Type" "Fira Mono" "Anonymous Pro")
+  "List of preferred font families ordered by priority.")
 
+;; Enable first available font fron `nameless:font-families'
+(when (display-graphic-p)
+  (when-let ((family (cl-find-if (lambda (family) (member family (font-family-list)))
+                                 nameless:font-families)))
+    (set-face-attribute 'default nil
+                        :family family :slant 'normal :weight 'normal :height 140 :width 'normal)
+    family))
 
 (put 'narrow-to-region 'disabled nil)
 
