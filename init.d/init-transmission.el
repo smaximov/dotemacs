@@ -9,7 +9,7 @@
 (req-package transmission
   :loader :path
   :load-path "lib/transmission"
-  :require validate :force t
+  :require validate
   :commands (transmission transmission-add)
   :preface
   ;; Work around https://github.com/holomorph/transmission/issues/2

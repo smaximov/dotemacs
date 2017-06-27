@@ -9,7 +9,7 @@
 (req-package yaml-mode
   :mode "\\.yml$")
 
-(req-package yaml-path :loader :path :force t
+(req-package yaml-path :loader :path
   :load-path "lib"
   :require yaml-mode
   :bind (:map yaml-mode-map
