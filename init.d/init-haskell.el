@@ -11,6 +11,11 @@
   (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
   (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
 
+(req-package ebal
+  :require validate
+  :config
+  (validate-setq ebal-operation-mode 'stack))
+
 (req-package flycheck-haskell
   :require flycheck
   :init
