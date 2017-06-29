@@ -7,9 +7,17 @@
 (require 'req-package)
 
 (req-package haskell-mode
+  :require validate
   :init
   (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
-  (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+  :config
+  (validate-setq haskell-font-lock-symbols t))
+
+(req-package ebal
+  :require validate
+  :config
+  (validate-setq ebal-operation-mode 'stack))
 
 (req-package flycheck-haskell
   :require flycheck

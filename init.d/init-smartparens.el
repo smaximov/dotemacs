@@ -7,7 +7,6 @@
 (require 'req-package)
 
 (req-package smartparens
-  :force t
   :diminish smartparens-mode
   :config
   (require 'smartparens-config))
