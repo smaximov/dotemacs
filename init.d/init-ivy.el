@@ -28,9 +28,6 @@
 
          ("C-h F" . find-function)
          ("C-h V" . find-variable)
-
-         ([remap switch-to-buffer] . ivy-switch-buffer)          ; C-x b
-         ([remap list-buffers] . ivy-switch-buffer)              ; C-x C-b
          ("C-c r" . ivy-resume)
 
          ([remap isearch-forward] . swiper)
