@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package persp-mode
+  :disabled
   :require ivy
   :preface
   (defvar persp-keymap-prefix (kbd "C-x x"))
@@ -30,8 +31,6 @@
                     (persp-switch        . nil)
                     (persp-window-switch . nil)
                     (persp-frame-switch  . nil)))))
-
-(global-set-key (kbd "C-x b") 'persp-switch-to-buffer)
 
 (provide 'init-persp)
 ;;; init-persp.el ends here
