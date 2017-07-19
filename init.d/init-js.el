@@ -39,7 +39,10 @@
   (validate-setq coffee-tab-width 2))
 
 (req-package rjsx-mode
-  :mode "\\.js$")
+  :require validate
+  :mode "\\.js$"
+  :config
+  (validate-setq js2-strict-missing-semi-warning nil))
 
 (provide 'init-js)
 ;;; init-js.el ends here
