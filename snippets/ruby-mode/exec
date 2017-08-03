@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: exec
+# key: exec-
+# --
+execute <<-SQL.squish
+  $0
+SQL
