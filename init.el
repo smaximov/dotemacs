@@ -151,6 +151,9 @@ in BODY."
                         :family family :slant 'normal :weight 'normal :height 140 :width 'normal)
     family))
 
+(define-key indent-rigidly-map (kbd "C-f") #'indent-rigidly-right)
+(define-key indent-rigidly-map (kbd "C-b") #'indent-rigidly-left)
+
 (put 'narrow-to-region 'disabled nil)
 
 ;; It's not like we are 800x600 nowadays
