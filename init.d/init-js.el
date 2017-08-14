@@ -44,5 +44,7 @@
   :config
   (validate-setq js2-strict-missing-semi-warning nil))
 
+(req-package vue-mode)
+
 (provide 'init-js)
 ;;; init-js.el ends here
