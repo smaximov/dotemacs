@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package emojify
+  :disabled
   :init
   (add-hook 'after-init-hook #'global-emojify-mode))
 
