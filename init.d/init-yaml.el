@@ -10,6 +10,7 @@
   :mode "\\.yml$")
 
 (req-package yaml-path :loader :path
+  :disabled
   :load-path "lib"
   :require yaml-mode
   :bind (:map yaml-mode-map

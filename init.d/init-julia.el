@@ -9,6 +9,7 @@
 (req-package julia-mode)
 
 (req-package julia-shell
+  :disabled
   :require julia-mode
   :mode ("\\.jl$" . julia-mode)
   :bind (:map julia-mode-map

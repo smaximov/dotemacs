@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package transmission
+  :disabled
   :loader :path
   :load-path "lib/transmission"
   :require validate

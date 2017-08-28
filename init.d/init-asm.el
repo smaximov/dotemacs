@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package asm-mode :loader :built-in
+  :disabled
   :require validate
   :config
   (validate-setq tab-stop-list (number-sequence 4 200 4)))

@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package mingus-stays-home
+  :disabled
   :ensure mingus
   :bind (("C-c m >" . mingus-next)
          ("C-c m <" . mingus-prev)

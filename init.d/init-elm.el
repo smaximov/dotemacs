@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package elm-mode
+  :disabled
   :require company f dash json
   :preface
   (defconst nameless:elm-package "elm-package.json")
@@ -47,6 +48,7 @@
   (add-to-list 'company-backends #'company-elm))
 
 (req-package flycheck-elm
+  :disabled
   :require flycheck
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-elm-setup))

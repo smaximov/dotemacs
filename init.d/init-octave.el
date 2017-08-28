@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package octave
+  :disabled
   :mode ("\\.m$" . octave-mode))
 
 (provide 'init-octave)

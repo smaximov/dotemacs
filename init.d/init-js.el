@@ -27,6 +27,7 @@
   (add-to-list 'company-backends 'company-tern))
 
 (req-package tern
+  :disabled
   :require js2-mode dash
   :diminish tern-mode
   :init

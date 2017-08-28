@@ -6,7 +6,8 @@
 
 (require 'req-package)
 
-(req-package lua-mode)
+(req-package lua-mode
+  :disabled)
 
 (provide 'init-lua)
 ;;; init-lua.el ends here
