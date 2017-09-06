@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: exec
 # key: exec-
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 execute <<-SQL.squish
   $0
