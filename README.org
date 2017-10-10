@@ -120,9 +120,13 @@ You need to install following NPM packages:
 - =elm-oracle= - a tool to query information about an ELM project's source code;
   used for completion.
 
-** Misc
+** Fonts
 
-- Terminus fonts (=terminus-fonts= RPM package in Fedora).
+First font family available is used:
+
+- Iosevka Type;
+- Fira Mono;
+- Anonymous Pro.
 
 * Licence
 
