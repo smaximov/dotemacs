@@ -7,7 +7,10 @@
 (require 'req-package)
 
 (req-package yaml-mode
-  :mode "\\.yml$")
+  :mode "\\.yml$"
+  :require highlight-indentation
+  :init
+  (add-hook 'yaml-mode-hook #'highlight-indentation-current-column-mode))
 
 (req-package yaml-path :loader :path
   :disabled
