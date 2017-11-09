@@ -14,8 +14,10 @@
     (let ((branch (magit-get-current-branch)))
       (if branch
           (save-match-data
-            (if (string-match "TCHM[-_]\\([[:digit:]]+\\)" branch)
-                (insert (format "TCHM-%s " (match-string-no-properties 1 branch)))
+            (if (string-match "^\\([A-Z]+\\)[-_]\\([[:digit:]]+\\)" branch)
+                (insert (format "%s-%s "
+                                (match-string-no-properties 1 branch)
+                                (match-string-no-properties 2 branch)))
               (user-error "This branch doesn't reference a JIRA issue")))
         (user-error "There is no current branch"))))
   :require validate
