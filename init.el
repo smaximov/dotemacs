@@ -203,8 +203,9 @@ in BODY."
 
 ;; Preserve buffer position when calling auto-insert
 (defun auto-insert-save-excursion-advice (original-fun &rest args)
-  (save-excursion
-    (apply original-fun args)))
+  (if (= (point) (point-min))
+      (apply original-fun args)
+    (save-excursion (apply original-fun args))))
 
 (advice-add 'auto-insert :around #'auto-insert-save-excursion-advice)
 
