@@ -4,10 +4,9 @@
 
 ;;; Code:
 
-(require req-package)
+(require 'req-package)
 
 (req-package circe
-  :force t
   :require validate
   :config
   (validate-setq circe-network-options
