@@ -201,8 +201,9 @@ in BODY."
 ;; Use minibuffer to ask for the GPG passphrase
 (validate-setq epa-pinentry-mode 'loopback)
 
-;; Preserve buffer position when calling auto-insert
+
 (defun auto-insert-save-excursion-advice (original-fun &rest args)
+  "Preserve buffer position when calling `auto-insert'."
   (if (= (point) (point-min))
       (apply original-fun args)
     (save-excursion (apply original-fun args))))
