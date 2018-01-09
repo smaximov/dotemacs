@@ -17,9 +17,6 @@
   (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
   (add-hook 'after-save-hook #'nameless/set-auto-mode))
 
-(req-package platform :loader :path
-  :load-path "lib")
-
 (req-package phi-search
   :init
   (require 'phi-replace)

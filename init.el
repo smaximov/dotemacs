@@ -108,8 +108,7 @@ in BODY."
 
 ;; Start Emacs maximized
 (with-daemon
- (when (and (window-system)
-            (not (nameless:platform:tiling-p)))
+ (when (window-system)
   (toggle-frame-maximized)))
 
 ;; Indent using spaces
