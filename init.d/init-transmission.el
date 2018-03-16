@@ -8,7 +8,6 @@
 
 (req-package transmission
   :disabled
-  :loader :path
   :load-path "lib/transmission"
   :require validate
   :commands (transmission transmission-add)

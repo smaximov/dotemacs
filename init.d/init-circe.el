@@ -8,6 +8,7 @@
 
 (req-package circe
   :require validate
+  :ensure t
   :config
   (validate-setq circe-network-options
                  '(("Freenode"

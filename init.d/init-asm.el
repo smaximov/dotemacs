@@ -6,7 +6,7 @@
 
 (require 'req-package)
 
-(req-package asm-mode :loader :built-in
+(req-package asm-mode
   :disabled
   :require validate
   :config

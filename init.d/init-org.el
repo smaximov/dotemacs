@@ -38,7 +38,7 @@
          ("C-c f a" . org-cycle-agenda-files)
          ("C-c l" . org-store-link)))
 
-(req-package org-page :loader :path
+(req-package org-page
   :load-path "lib/org-page"
   :if (file-exists-p (expand-file-name "lib/org-page/org-page.el" user-emacs-directory))
   :require dash ht simple-httpd git mustache validate

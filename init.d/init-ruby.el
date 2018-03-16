@@ -15,7 +15,7 @@
   (validate-setq inf-ruby-default-implementation "pry"
                  ruby-insert-encoding-magic-comment nil))
 
-(req-package ruby-mode :loader :built-in
+(req-package ruby-mode
   :require smartparens autoinsert
   :mode "^Gemfile$"
   :mode "^Rakefile$"
@@ -91,7 +91,6 @@
 (req-package slim-mode)
 
 (req-package rubocop-toggle-cops
-  :loader :path
   :load-path "lib"
   :require flycheck ruby-mode
   :bind (:map ruby-mode-map

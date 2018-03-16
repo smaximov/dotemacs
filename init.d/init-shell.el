@@ -6,7 +6,7 @@
 
 (require 'req-package)
 
-(req-package sh-script :loader :built-in
+(req-package sh-script
   :mode ("\\.zsh$" . sh-mode)
   :mode ("\\.zsh-theme$" . sh-mode))
 

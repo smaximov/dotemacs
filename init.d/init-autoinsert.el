@@ -6,7 +6,7 @@
 
 (require 'req-package)
 
-(req-package autoinsert :loader :built-in)
+(req-package autoinsert)
 
 (provide 'init-autoinsert)
 ;;; init-autoinsert.el ends here

@@ -4,14 +4,14 @@
 
 ;;; Code:
 
-(req-package navigation :loader :path
+(req-package navigation
   :load-path "lib"
   :bind (("C-c f u i" . nameless/find-user-init-file)
          ("C-c f s" . nameless/find-scratch-buffer)
          ("C-c f d f" . nameless/find-dominating-file)
          ("C-x C-t" . nameless/find-term-buffer)))
 
-(req-package file-helpers :loader :path
+(req-package file-helpers
   :load-path "lib"
   :init
   (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
@@ -53,7 +53,7 @@
   (--each '(emacs-lisp-mode-hook ielm-mode-hook)
     (add-hook it #'eldoc-mode)))
 
-(req-package term :loader :built-in
+(req-package term
   :init
   (add-hook 'term-mode-hook (lambda ()
                               (setf yas-dont-activate-functions t)))

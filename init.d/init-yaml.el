@@ -12,7 +12,7 @@
   :init
   (add-hook 'yaml-mode-hook #'highlight-indentation-current-column-mode))
 
-(req-package yaml-path :loader :path
+(req-package yaml-path
   :disabled
   :load-path "lib"
   :require yaml-mode
