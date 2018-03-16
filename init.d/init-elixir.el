@@ -11,5 +11,12 @@
 (req-package alchemist
   :require elixir-mode)
 
+(req-package flycheck-credo
+  :require flycheck validate
+  :init
+  (flycheck-credo-setup)
+  :config
+  (validate-setq flycheck-elixir-credo-strict t))
+
 (provide 'init-elixir)
 ;;; init-elixir.el ends here
