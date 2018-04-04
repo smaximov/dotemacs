@@ -85,6 +85,8 @@ in BODY."
 (require-package 'use-package)
 (require-package 'f)
 
+(setf use-package-verbose t)
+
 (use-package req-package
   :ensure t
   :pin melpa-stable)
