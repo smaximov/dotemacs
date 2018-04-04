@@ -13,6 +13,7 @@
 
 (req-package flycheck-credo
   :require flycheck validate
+  :ensure t
   :init
   (flycheck-credo-setup)
   :config
