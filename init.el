@@ -217,6 +217,20 @@ in BODY."
 ;; Use minibuffer to ask for the GPG passphrase
 (validate-setq epa-pinentry-mode 'loopback)
 
+(defun create-lex-comparator-with-ext (ext)
+  "Create pathnames comparator which prefers pathnames which have EXT extension."
+  (lambda (a b)
+    (let ((a-base (file-name-sans-extension a))
+          (b-base (file-name-sans-extension b)))
+      (cond
+       ((string-lessp a-base b-base)
+        t)
+       ((string-lessp b-base a-base)
+        nil)
+       (t
+        (string-equal (file-name-extension a) ext))))))
+
+(setf auth-sources (sort auth-sources (create-lex-comparator-with-ext "gpg")))
 
 (defun auto-insert-save-excursion-advice (original-fun &rest args)
   "Preserve buffer position when calling `auto-insert'."
