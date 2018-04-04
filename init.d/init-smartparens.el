@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package smartparens
+  :ensure t
+  :pin melpa-stable
   :diminish smartparens-mode
   :config
   (require 'smartparens-config))

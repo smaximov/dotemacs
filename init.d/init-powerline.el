@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package powerline
+  :ensure t
+  :pin melpa-stable
   :require validate
   :config
   (validate-setq powerline-gui-use-vcs-glyph t)

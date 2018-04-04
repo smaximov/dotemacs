@@ -9,6 +9,7 @@
 (req-package magit
   :pin melpa-stable
   :ensure t
+  :require validate dash f
   :preface
   (defconst nameless:magit-dotjira ".jira")
 
@@ -39,8 +40,6 @@
                              (insert-file-contents dotjira)
                              (buffer-string)))))
         (user-error "Unable to infer JIRA issue number"))))
-
-  :require validate dash f
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-dispatch-popup)
          ("C-x j" . nameless:magit-insert-current-jira-issue-number))

@@ -7,12 +7,13 @@
 (require 'req-package)
 
 (req-package paredit
-  :require dash eldoc diminish
+  :ensure t
+  :pin melpa-stable
+  :require eldoc diminish
   :diminish paredit-mode
-  :init
-  (--each '(emacs-lisp-mode-hook eval-expression-minibuffer-setup-hook ielm-mode-hook
-                                 lisp-mode-hook lisp-interaction-mode-hook scheme-mode-hook)
-    (add-hook it #'enable-paredit-mode))
+  :hook
+  ((emacs-lisp-mode eval-expression-minibuffer-setup ielm-mode
+    lisp-mode lisp-interaction-mode scheme-mode) . enable-paredit-mode)
   :config
   (eldoc-add-command
    'paredit-backward-delete

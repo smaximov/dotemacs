@@ -7,10 +7,11 @@
 (require 'req-package)
 
 (req-package company
+  :ensure t
+  :pin melpa-stable
   :require diminish validate
   :diminish company-mode
-  :init
-  (add-hook 'after-init-hook #'global-company-mode)
+  :hook (after-init . global-company-mode)
   :bind ([C-tab] . company-indent-or-complete-common)
   :config
   (validate-setq company-tooltip-align-annotations t

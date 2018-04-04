@@ -7,10 +7,11 @@
 (require 'req-package)
 
 (req-package yaml-mode
+  :ensure t
+  :pin melpa-stable
   :mode "\\.yml$"
   :require highlight-indentation
-  :init
-  (add-hook 'yaml-mode-hook #'highlight-indentation-current-column-mode))
+  :hook (yaml-mode . highlight-indentation-current-column-mode))
 
 (req-package yaml-path
   :disabled

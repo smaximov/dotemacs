@@ -7,8 +7,9 @@
 (require 'req-package)
 
 (req-package emr
-  :init
-  (add-hook 'prog-mode-hook #'emr-initialize)
+  :ensure t
+  :pin melpa-stable
+  :hook (prog-mode . emr-initialize)
   :bind ([M-return] . emr-show-refactor-menu))
 
 (provide 'init-emr)

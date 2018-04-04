@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package markdown-mode
+  :ensure t
+  :pin melpa-stable
   :require validate
   :mode "\\.md$" "\\.markdown$"
   :config

@@ -7,20 +7,21 @@
 (require 'req-package)
 
 (req-package inf-ruby
+  :ensure t
+  :pin melpa-stable
   :require ruby-mode validate
-  :init
-  (add-hook 'ruby-mode-hook #'inf-ruby-minor-mode)
+  :hook (ruby-mode . inf-ruby-minor-mode)
   :config
   ;; may as well switch default implementaion to "ruby" (== "irb")
   (validate-setq inf-ruby-default-implementation "pry"
                  ruby-insert-encoding-magic-comment nil))
 
-(req-package ruby-mode
+(req-package ruby-mode ; built-in
+  :ensure t
   :require smartparens autoinsert
   :mode "^Gemfile$"
   :mode "^Rakefile$"
-  :init
-  (add-hook 'ruby-mode-hook #'smartparens-mode)
+  :hook (ruby-mode . smartparens-mode)
   :config
   (define-auto-insert '(ruby-mode . "Ruby skeleton")
     '(nil
@@ -28,15 +29,17 @@
       _)))
 
 (req-package rvm
+  :ensure t
+  :pin melpa-stable
   :require exec-path-from-shell
-  :init
-  (add-hook 'after-init-hook #'rvm-use-default))
+  :hook (after-init . rvm-use-default))
 
 (req-package robe
+  :ensure t
+  :pin melpa-stable
   :require company ruby-mode rvm inf-ruby diminish
   :diminish robe-mode
-  :init
-  (add-hook 'ruby-mode-hook #'robe-mode)
+  :hook (ruby-mode . robe-mode)
   :config
   (push 'company-robe company-backends)
 
@@ -44,12 +47,15 @@
               :before #'rvm-activate-corresponding-ruby))
 
 (req-package yard-mode
+  :ensure t
+  :pin melpa
   :require ruby-mode diminish
   :diminish yard-mode
-  :init
-  (add-hook 'ruby-mode-hook #'yard-mode))
+  :hook ruby-mode)
 
 (req-package rake
+  :ensure t
+  :pin melpa-stable
   :require ruby-mode ivy
   :config
   (setf rake-completion-system 'ivy-completing-read)
@@ -58,18 +64,19 @@
          ("C-c . c" . rake-regenerate-cache)))
 
 (req-package projectile-rails
+  :ensure t
+  :pin melpa-stable
+  :disabled
   :require rvm validate
   :bind (:map projectile-rails-command-map
               ("#" . rvm-activate-corresponding-ruby))
   :preface
   ;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
   (defvar projectile-rails-keymap-prefix (kbd "C-c C-r"))
-  :init
-  (add-hook 'projectile-mode-hook #'projectile-rails-global-mode)
+  :hook ((projectile-mode . projectile-rails-global-mode)
+         (projectile-rails-server-mode . (lambda ()
+                                           (setq-local compilation-scroll-output t))))
   :config
-  (add-hook 'projectile-rails-server-mode-hook
-            (lambda ()
-              (setq-local compilation-scroll-output t)))
   (validate-setq projectile-rails-expand-snippet nil))
 
 (req-package projectile-hanami
@@ -81,14 +88,17 @@
     (if (projectile-hanami-applicable-p)
         (projectile-hanami-mode +1)
       (projectile-rails-on)))
-  :init
-  (add-hook 'projectile-mode-hook #'projectile-rails-or-hanami-on)
+  :hook (projectile-mode . projectile-rails-or-hanami-on)
   :bind (:map projectile-hanami-mode-command-map
               ("#" . rvm-activate-corresponding-ruby)))
 
-(req-package rspec-mode)
+(req-package rspec-mode
+  :ensure t
+  :pin melpa-stable)
 
-(req-package slim-mode)
+(req-package slim-mode
+  :ensure t
+  :pin melpa-stable)
 
 (req-package rubocop-toggle-cops
   :load-path "lib"

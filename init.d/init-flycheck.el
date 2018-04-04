@@ -7,8 +7,9 @@
 (require 'req-package)
 
 (req-package flycheck
-  :init
-  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :ensure t
+  :pin melpa-stable
+  :hook (after-init . global-flycheck-mode)
   :config
   (setf flycheck-disabled-checkers '(javascript-jshint)))
 

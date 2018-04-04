@@ -24,6 +24,8 @@
       (setf nameless:theme-terminal-loaded t))))
 
 (req-package material-theme
+  :ensure t
+  :pin melpa-stable
   :config
   (with-daemon
    (nameless:load-theme-once 'material)))

@@ -6,10 +6,10 @@
 
 (require 'req-package)
 
-(req-package paren
+(req-package paren ; built-in
+  :ensure t
   :require validate
-  :init
-  (add-hook 'after-init-hook #'show-paren-mode)
+  :hook (after-init . show-paren-mode)
   :config
   (validate-setq show-paren-delay 0
                  show-paren-style 'mixed))

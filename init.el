@@ -73,14 +73,25 @@ in BODY."
 
 ;;; Package configuration
 
-;; Bootstrap req-package
-(unless (package-installed-p 'req-package)
-  (package-refresh-contents)
-  (package-install 'req-package))
+(defun require-package (package)
+  "Install package PACKAGE unless already installed."
+  (unless (package-installed-p package)
+    (message "Package %s is not available, installing..." package)
+    (package-refresh-contents)
+    (package-install package))
+  (require package))
 
-(require 'req-package)
+;; Bootstrap use-package
+(require-package 'use-package)
+(require-package 'f)
+
+(use-package req-package
+  :ensure t
+  :pin melpa-stable)
 
 (req-package load-dir
+  :ensure t
+  :pin gnu
   :force t
   :config
   (setf load-dir-recursive t)
@@ -97,6 +108,7 @@ in BODY."
     (funcall it 0)))
 
 ;; Diminish
+(require 'diminish)
 (diminish 'auto-revert-mode)
 
 ;; Emacs package header skeleton

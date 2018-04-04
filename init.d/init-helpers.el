@@ -13,56 +13,62 @@
 
 (req-package file-helpers
   :load-path "lib"
-  :init
-  (add-hook 'after-save-hook #'nameless/file-make-executable-if-shebang)
-  (add-hook 'after-save-hook #'nameless/set-auto-mode))
+  :hook ((after-save . nameless/file-make-executable-if-shebang)
+         (after-save . nameless/set-auto-mode)))
 
 (req-package phi-search
+  :ensure t
+  :pin melpa
   :init
   (require 'phi-replace)
   :bind
   (([remap query-replace] . phi-replace)))
 
-(req-package f)
+(req-package f
+  ;; Not working for some reason; installed in init.el during req-package bootstrapping:
+  ;; :ensure t 
+  :pin melpa-stable)
 
-(req-package s)
+(req-package s
+  :ensure t
+  :pin melpa-stable)
 
-(req-package diminish)
+(req-package diminish
+  :ensure t
+  :pin melpa-stable)
 
-(req-package async)
+(req-package async
+  :ensure t
+  :pin melpa-stable)
 
-(req-package dash)
+(req-package dash
+  :ensure t
+  :pin melpa-stable)
 
 (req-package whitespace
+  :ensure t
   :require diminish
   :diminish whitespace-mode
-  :init
-  (add-hook 'prog-mode-hook #'whitespace-mode)
-  (add-hook 'markdown-mode-hook #'whitespace-mode)
+  :hook ((prog-mode markdown-mode) . whitespace-mode)
   :config
   (setf whitespace-line-column 120))
 
-(req-package tldr)
-
-(req-package validate)
+(req-package validate
+  :ensure t)
 
 (req-package eldoc
-  :require diminish dash
+  :require diminish
   :diminish eldoc-mode
-  :init
-  (--each '(emacs-lisp-mode-hook ielm-mode-hook)
-    (add-hook it #'eldoc-mode)))
+  :hook ((emacs-lisp-mode ielm-mode) . eldoc-mode))
 
 (req-package term
-  :init
-  (add-hook 'term-mode-hook (lambda ()
-                              (setf yas-dont-activate-functions t)))
+  :hook (term-mode . (lambda () (setf yas-dont-activate-functions t)))
   :bind
   (("C-x t" . ansi-term)))
 
-
-
 (req-package multiple-cursors
+  :ensure t
+  :pin melpa-stable
   :bind
   (("C-S-c C-S-c" . mc/edit-lines)
    ("C->" . mc/mark-next-like-this)

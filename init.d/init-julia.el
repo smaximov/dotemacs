@@ -6,7 +6,8 @@
 
 (require 'req-package)
 
-(req-package julia-mode)
+(req-package julia-mode
+  :disabled)
 
 (req-package julia-shell
   :disabled

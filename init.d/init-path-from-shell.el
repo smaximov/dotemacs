@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package exec-path-from-shell
+  :ensure t
+  :pin melpa-stable
   :config
   (add-to-list 'exec-path-from-shell-variables "CARGO_HOME")
   (add-to-list 'exec-path-from-shell-variables "RUSTUP_HOME")

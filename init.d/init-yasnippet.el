@@ -7,10 +7,12 @@
 (require 'req-package)
 
 (req-package yasnippet
+  :ensure t
+  :pin melpa-stable
   :require validate s diminish
   :diminish yas-minor-mode
-  :init
-  (add-hook 'after-init-hook #'yas-global-mode)
+  :hook
+  (after-init . yas-global-mode)
   :config
   (validate-setq yas-snippet-dirs `(,(expand-file-name "snippets"
                                                        user-emacs-directory))))

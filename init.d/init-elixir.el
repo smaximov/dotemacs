@@ -6,14 +6,19 @@
 
 (require 'req-package)
 
-(req-package elixir-mode)
+(req-package elixir-mode
+  :ensure t
+  :pin melpa-stable)
 
 (req-package alchemist
+  :ensure t
+  :pin melpa-stable
   :require elixir-mode)
 
 (req-package flycheck-credo
-  :require flycheck validate
   :ensure t
+  :pin melpa
+  :require flycheck validate
   :init
   (flycheck-credo-setup)
   :config

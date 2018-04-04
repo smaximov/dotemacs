@@ -7,39 +7,44 @@
 (require 'req-package)
 
 (req-package rust-mode
-  :init
-  (add-hook 'rust-mode-hook #'electric-pair-mode))
+  :ensure t
+  :pin melpa-stable
+  :mode "\\.rs$"
+  :hook (rust-mode . electric-pair-mode))
 
 (req-package cargo
+  :ensure t
+  :pin melpa-stable
   :require rust-mode diminish
   :diminish cargo-minor-mode
-  :init
-  (add-hook 'rust-mode-hook #'cargo-minor-mode))
+  :hook (rust-mode . cargo-minor-mode))
 
 (req-package racer
+  :ensure t
+  :pin melpa-stable
   :require rust-mode f eldoc exec-path-from-shell validate
   :diminish racer-mode
-  :init
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+  :hook ((rust-mode racer-mode) . racer-mode))
 
 (req-package flycheck-rust
+  :ensure t
+  :pin melpa
   :require flycheck
-  :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  :hook (flycheck-mode . flycheck-rust-setup))
 
 (req-package toml-mode
+  :ensure t
+  :pin melpa
   :require f cargo
   :mode "\\.cargo/config$"
-  :init
-  (add-hook 'toml-mode-hook (lambda ()
-                              (let* ((path (buffer-file-name))
-                                     (file (and path
-                                                (f-filename path)))
-                                     (is-cargo.toml (and file
-                                                    (s-equals? "Cargo.toml" file))))
-                                (when is-cargo.toml
-                                        (cargo-minor-mode))))))
+  :hook (toml-mode . (lambda ()
+                       (let* ((path (buffer-file-name))
+                              (file (and path
+                                         (f-filename path)))
+                              (is-cargo.toml (and file
+                                                  (s-equals? "Cargo.toml" file))))
+                         (when is-cargo.toml
+                           (cargo-minor-mode))))))
 
 (provide 'init-rust)
 ;;; init-rust.el ends here

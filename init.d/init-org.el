@@ -6,8 +6,12 @@
 
 (require 'req-package)
 
+(req-package htmlize
+  :ensure t
+  :pin melpa-stable)
+
 (req-package org
-  :require htmlize f validate
+  :require f validate
   :init
   (require 'org-agenda)
   :config
@@ -39,9 +43,10 @@
          ("C-c l" . org-store-link)))
 
 (req-package org-page
+  :disabled
   :load-path "lib/org-page"
   :if (file-exists-p (expand-file-name "lib/org-page/org-page.el" user-emacs-directory))
-  :require dash ht simple-httpd git mustache validate
+  :require dash ht validate htmlize
   :config
   (validate-setq op/site-preview-directory "/tmp/org-page-preview"
                  op/repository-directory "~/src/maximov.space"

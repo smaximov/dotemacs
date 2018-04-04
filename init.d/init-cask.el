@@ -7,11 +7,14 @@
 (require 'req-package)
 
 (req-package cask-mode
+  :ensure t
+  :pin melpa-stable
   :require paredit
-  :init
-  (add-hook 'cask-mode-hook #'enable-paredit-mode))
+  :hook (cask-mode . enable-paredit-mode))
 
 (req-package cask
+  :ensure t
+  :pin melpa-stable
   :require dash f
   :config
   ;; TODO refactor this mess

@@ -6,13 +6,28 @@
 
 (require 'req-package)
 
-(req-package counsel
+(req-package ivy
+  :ensure t
+  :pin melpa-stable
   :require diminish validate
   :diminish ivy-mode
-  :init
-  (require 'ivy)
-  (require 'swiper)
-  (add-hook 'after-init-hook #'ivy-mode)
+  :hook (after-init . ivy-mode)
+  :bind (("C-c r" . ivy-resume)
+	 :map ivy-minibuffer-map
+	 ("C-c o" . ivy-occur))
+  :config
+  (validate-setq ivy-use-virtual-buffers t
+                 ivy-height 10))
+
+(req-package swiper
+  :ensure t
+  :pin melpa-stable
+  :bind (([remap isearch-forward] . swiper)
+         ("C-S-s" . swiper-all)))
+
+(req-package counsel
+  :ensure t
+  :pin melpa-stable
   :bind (([remap execute-extended-command] . counsel-M-x)        ; M-x
          ([remap describe-function] . counsel-describe-function) ; C-h f
          ([remap describe-variable] . counsel-describe-variable) ; C-h v
@@ -28,26 +43,18 @@
 
          ("C-h F" . find-function)
          ("C-h V" . find-variable)
-         ("C-c r" . ivy-resume)
-
-         ([remap isearch-forward] . swiper)
-         ("C-S-s" . swiper-all)
-
-         :map ivy-minibuffer-map
-         ("C-c o" . ivy-occur)
 
          :map read-expression-map
-         ("C-r" . counsel-expression-history))
-  :config
-  (validate-setq ivy-use-virtual-buffers t
-                 ivy-height 10))
+         ("C-r" . counsel-expression-history)))
 
 (req-package counsel-projectile
-  :require counsel
-  :init
-  (add-hook 'after-init-hook #'counsel-projectile-on))
+  :ensure t
+  :pin melpa-stable
+  :hook (after-init . counsel-projectile-mode))
 
 (req-package ivy-pages
+  :ensure t
+  :pin melpa-stable
   :bind (("C-c p" . ivy-pages)))
 
 (provide 'init-ivy)
