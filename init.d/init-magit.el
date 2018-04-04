@@ -7,6 +7,8 @@
 (require 'req-package)
 
 (req-package magit
+  :pin melpa-stable
+  :ensure t
   :preface
   (defconst nameless:magit-dotjira ".jira")
 
@@ -50,6 +52,8 @@
                  magit-completing-read-function #'ivy-completing-read))
 
 (req-package magithub
+  :pin melpa-stable
+  :ensure t
   :require magit exec-path-from-shell validate
   :config
   (magithub-feature-autoinject t)
@@ -57,8 +61,7 @@
                  (expand-file-name "magithub" (let ((cache-home (or (getenv "XDG_CACHE_HOME")
                                                                     (expand-file-name "~/.cache"))))
                                                 (make-directory cache-home t)
-                                                cache-home)))
-  :pin melpa-stable)
+                                                cache-home))))
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
