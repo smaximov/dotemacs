@@ -6,6 +6,9 @@
 
 ;;; Code:
 
+;; Tweak GC
+(setf gc-cons-threshold 50000000)
+
 ;; Initialize Emacs package system
 (require 'package)
 (setf package-enable-at-startup nil
