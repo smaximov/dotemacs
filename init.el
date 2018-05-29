@@ -83,7 +83,6 @@ in BODY."
 
 ;; Bootstrap use-package
 (require-package 'use-package)
-(require-package 'f)
 
 (setf use-package-verbose t)
 

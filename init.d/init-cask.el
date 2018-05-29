@@ -13,6 +13,7 @@
   :hook (cask-mode . enable-paredit-mode))
 
 (req-package cask
+  :disabled
   :ensure t
   :pin melpa-stable
   :require dash f

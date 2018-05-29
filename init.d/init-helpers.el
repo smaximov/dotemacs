@@ -25,8 +25,7 @@
   (([remap query-replace] . phi-replace)))
 
 (req-package f
-  ;; Not working for some reason; installed in init.el during req-package bootstrapping:
-  ;; :ensure t 
+  :ensure t
   :pin melpa-stable)
 
 (req-package s
