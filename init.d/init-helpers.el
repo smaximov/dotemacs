@@ -52,6 +52,9 @@
   :config
   (setf whitespace-line-column 120))
 
+(req-package pixel-scroll
+  :hook (prog-mode . pixel-scroll-mode))
+
 (req-package display-line-numbers
   :preface
   (defconst display-line-numbers::relative-type-threshold 1000)
