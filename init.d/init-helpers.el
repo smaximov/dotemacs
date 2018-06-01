@@ -52,6 +52,16 @@
   :config
   (setf whitespace-line-column 120))
 
+(req-package display-line-numbers
+  :preface
+  (defconst display-line-numbers::relative-type-threshold 1000)
+  :hook (prog-mode . (lambda ()
+                       (setf display-line-numbers
+                             (if (>= (count-lines (point-min) (point-max))
+                                    display-line-numbers::relative-type-threshold)
+                                 'relative
+                               t)))))
+
 (req-package validate
   :ensure t)
 
