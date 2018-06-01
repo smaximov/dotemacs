@@ -31,13 +31,13 @@
   (defun nameless:elm-buffer-module-name ()
     "Return the current Elm buffer's corresponding module name."
     (when buffer-file-name
-      (-if-let* ((project-root (locate-dominating-file buffer-file-name
-                                                       nameless:elm-package))
-                 (package-file (f-join project-root nameless:elm-package))
-                 (source-dirs (--map (f-join project-root it)
-                                     (nameless:parse-elm-package-src package-file)))
-                 (relative-path (nameless:resolve-relative-path buffer-file-name
-                                                                source-dirs)))
+      (if-let* ((project-root (locate-dominating-file buffer-file-name
+                                                      nameless:elm-package))
+                (package-file (f-join project-root nameless:elm-package))
+                (source-dirs (--map (f-join project-root it)
+                                    (nameless:parse-elm-package-src package-file)))
+                (relative-path (nameless:resolve-relative-path buffer-file-name
+                                                               source-dirs)))
           (replace-regexp-in-string (regexp-quote (f-path-separator)) "."
                                     (f-no-ext relative-path)
                                     'case-sensitive 'literal)

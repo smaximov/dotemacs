@@ -21,12 +21,12 @@
   ;; TODO refactor this mess
   (defun cask-update-load-path ()
     (interactive)
-    (when-let ((project-path (and buffer-file-name
-                                  (locate-dominating-file buffer-file-name cask-filename)))
-               (bundle (cask-setup project-path))
-               (elisp-files (--map (f-canonical (f-expand it project-path))
-                                   (--filter (equal "el" (f-ext it))
-                                             (cask-files bundle)))))
+    (when-let* ((project-path (and buffer-file-name
+                                   (locate-dominating-file buffer-file-name cask-filename)))
+                (bundle (cask-setup project-path))
+                (elisp-files (--map (f-canonical (f-expand it project-path))
+                                    (--filter (equal "el" (f-ext it))
+                                              (cask-files bundle)))))
       (let* ((included-p (-contains? elisp-files buffer-file-name))
              (elisp-dirs (-distinct (cons (f-dirname buffer-file-name)
                                           (--map (f-dirname it) elisp-files))))

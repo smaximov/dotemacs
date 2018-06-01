@@ -30,9 +30,9 @@
 
   (defun nameless:magit-insert-current-jira-issue-prefix ()
     (interactive)
-    (when-let ((root (locate-dominating-file default-directory
-                                             nameless:magit-dotjira))
-               (dotjira (concat root nameless:magit-dotjira)))
+    (when-let* ((root (locate-dominating-file default-directory
+                                              nameless:magit-dotjira))
+                (dotjira (concat root nameless:magit-dotjira)))
       (if (file-exists-p dotjira)
           (insert (format "%s-"
                           (string-trim-right

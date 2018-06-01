@@ -160,8 +160,8 @@ in BODY."
 
 ;; Enable first available font fron `nameless:font-families'
 (when (display-graphic-p)
-  (when-let ((family (cl-find-if (lambda (family) (member family (font-family-list)))
-                                 nameless:font-families)))
+  (when-let* ((family (cl-find-if (lambda (family) (member family (font-family-list)))
+                                  nameless:font-families)))
     (set-face-attribute 'default nil
                         :family family :slant 'normal :weight 'normal :height 140 :width 'normal)
     family))

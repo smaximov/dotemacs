@@ -4,8 +4,8 @@
 
 ;;; Code:
 
-(require 'f)
-(require 'dash)
+(require 'subr-x)
+(require 'comint)
 
 (defun nameless/dispatch-by-prefix-arg (prefix-present-fun prefix-absent-fun &rest args)
   "Choose function based on the presence of prefix argument.
@@ -33,12 +33,12 @@ With prefix argument, open the file in other window."
 (defun nameless/find-term-buffer ()
   "Switch to the latest TERM buffer, if any, or create one."
   (interactive)
-  (--if-let (get-buffer "*ansi-term*")
-      (if (comint-check-proc it)
+  (if-let* ((buffer (get-buffer "*ansi-term*")))
+      (if (comint-check-proc buffer)
           ;; the process is running
-          (pop-to-buffer it)
+          (pop-to-buffer buffer)
         ;; the process is dead, reuse its buffer
-        (kill-buffer it)
+        (kill-buffer buffer)
         (ansi-term (getenv "SHELL")))
     (ansi-term (getenv "SHELL"))))
 
@@ -47,9 +47,9 @@ With prefix argument, open the file in other window."
 
 With prefix argument, open the file in other window."
   (interactive "sFile name: ")
-  (--if-let (locate-dominating-file (buffer-file-name) file)
+  (if-let* ((root (locate-dominating-file (buffer-file-name) file)))
       (nameless/dispatch-by-prefix-arg #'find-file-other-window #'find-file
-                                       (f-join it file))
+                                       (concat root file))
     (error "Cannot find `%s'" file)))
 
 (provide 'navigation)
