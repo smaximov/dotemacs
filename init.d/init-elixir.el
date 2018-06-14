@@ -6,6 +6,10 @@
 
 (require 'req-package)
 
+(req-package erlang
+  :ensure t
+  :pin melpa-stable)
+
 (req-package elixir-mode
   :ensure t
   :pin melpa
