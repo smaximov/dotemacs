@@ -106,5 +106,12 @@
   :bind (:map ruby-mode-map
               ("C-c :" . rubocop-toggle-cops)))
 
+(req-package rubocop
+  :ensure t
+  :require ruby-mode diminish
+  :diminish rubocop-mode
+  :pin melpa-stable
+  :hook (ruby-mode . rubocop-mode))
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
