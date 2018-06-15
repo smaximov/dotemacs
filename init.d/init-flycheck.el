@@ -8,6 +8,8 @@
 
 (req-package flycheck
   :ensure t
+  :require diminish
+  :diminish flycheck-mode
   :pin melpa-stable
   :hook (after-init . global-flycheck-mode)
   :config
