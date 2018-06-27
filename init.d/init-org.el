@@ -64,5 +64,9 @@
                  op/personal-github-link "https://github.com/smaximov"
                  op/personal-google-analytics-id "UA-74709646-1"))
 
+(req-package zpresent
+  :require org
+  :ensure t)
+
 (provide 'init-org)
 ;;; init-org.el ends here
