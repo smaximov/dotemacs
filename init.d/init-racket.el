@@ -8,8 +8,10 @@
 
 (req-package racket-mode
   :ensure t
-  :hook ((racket-mode . racket-unicode-input-method-enable)
-         (racket-repl-mode . racket-unicode-input-method-enable)))
+  :require paredit
+  :hook ((racket-mode  . racket-unicode-input-method-enable)
+         (racket-repl-mode . racket-unicode-input-method-enable)
+         (racket-mode . enable-paredit-mode)))
 
 (provide 'init-racket)
 ;;; init-racket.el ends here
