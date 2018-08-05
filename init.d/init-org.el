@@ -65,6 +65,7 @@
                  op/personal-google-analytics-id "UA-74709646-1"))
 
 (req-package zpresent
+  :pin melpa
   :require org
   :ensure t)
 
