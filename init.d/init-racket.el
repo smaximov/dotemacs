@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package racket-mode
+  :pin melpa
   :ensure t
   :require paredit
   :hook ((racket-mode  . racket-unicode-input-method-enable)
