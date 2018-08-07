@@ -16,6 +16,10 @@
   (validate-setq inf-ruby-default-implementation "pry"
                  ruby-insert-encoding-magic-comment nil))
 
+(req-package mmm-erb
+  :mode  ("\\.ejs$" . html-erb-mode)
+  :mode ("\\.erb$" . html-erb-mode))
+
 (req-package ruby-mode ; built-in
   :ensure t
   :require smartparens autoinsert
