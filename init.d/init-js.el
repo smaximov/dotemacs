@@ -8,6 +8,7 @@
 
 (req-package json-mode
   :ensure t
+  :hook ((json-mode . electric-pair-local-mode))
   :pin melpa-stable
   :config
   (setf js-indent-level 2))
@@ -30,6 +31,7 @@
 
 (req-package rjsx-mode
   :ensure t
+  :hook ((rjsx-mode . electric-pair-local-mode))
   :pin melpa-stable
   :require validate
   :mode "\\.js$"
