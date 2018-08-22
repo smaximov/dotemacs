@@ -36,7 +36,8 @@
   :require validate
   :mode "\\.js$"
   :config
-  (validate-setq js2-strict-missing-semi-warning nil))
+  (validate-setq js2-strict-missing-semi-warning nil
+                 js-indent-level 2))
 
 (req-package vue-mode
   :ensure t
