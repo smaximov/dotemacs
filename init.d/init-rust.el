@@ -22,9 +22,14 @@
 (req-package racer
   :ensure t
   :pin melpa-stable
-  :require rust-mode exec-path-from-shell
+  :require rust-mode eldoc exec-path-from-shell validate
   :diminish racer-mode
-  :hook (rust-mode . racer-mode))
+  :hook ((rust-mode . racer-mode)
+         (racer-mode . eldoc-mode))
+  :config
+  (validate-setq racer-cmd (concat racer-cargo-home "/bin/racer")
+                 racer-rust-src-path (concat (string-trim-right (shell-command-to-string "rustc --print sysroot"))
+                                             "/lib/rustlib/src/rust/src")))
 
 (req-package flycheck-rust
   :ensure t
