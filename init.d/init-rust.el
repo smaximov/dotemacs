@@ -41,9 +41,9 @@
                        (let* ((path (buffer-file-name))
                               (file (and path
                                          (f-filename path)))
-                              (is-cargo.toml (and file
-                                                  (string-equal "Cargo.toml" file))))
-                         (when is-cargo.toml
+                              (cargo.toml? (and file
+                                                (string-equal "Cargo.toml" file))))
+                         (when cargo.toml?
                            (cargo-minor-mode))))))
 
 (provide 'init-rust)
