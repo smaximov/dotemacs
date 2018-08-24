@@ -22,9 +22,9 @@
 (req-package racer
   :ensure t
   :pin melpa-stable
-  :require rust-mode f eldoc exec-path-from-shell validate
+  :require rust-mode exec-path-from-shell
   :diminish racer-mode
-  :hook ((rust-mode racer-mode) . racer-mode))
+  :hook (rust-mode . racer-mode))
 
 (req-package flycheck-rust
   :ensure t
