@@ -44,7 +44,9 @@
          ("C-x C-g" . magit-dispatch-popup)
          ("C-x j" . nameless:magit-insert-current-jira-issue-number))
   :if (version<= "24.4" emacs-version)
-  :hook (after-init . global-magit-file-mode)
+  :hook ((after-init . global-magit-file-mode)
+         (git-commit-mode . (lambda ()
+                              (validate-setq fill-column 72))))
   :config
   (validate-setq git-commit-summary-max-length 100
                  magit-completing-read-function #'ivy-completing-read))
