@@ -171,9 +171,6 @@ in BODY."
 
 (put 'narrow-to-region 'disabled nil)
 
-;; It's not like we are 800x600 nowadays
-(setq-default fill-column 120)
-
 ;; Handle whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 (require 'hl-line)
