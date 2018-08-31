@@ -9,8 +9,10 @@
 (req-package rust-mode
   :ensure t
   :pin melpa-stable
+  :require validate
   :mode "\\.rs$"
-  :hook (rust-mode . electric-pair-mode))
+  :hook (rust-mode . electric-pair-mode)
+  :config (validate-setq rust-format-on-save t))
 
 (req-package cargo
   :ensure t
