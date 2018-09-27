@@ -11,6 +11,10 @@
   :pin melpa-stable
   :require validate
   :mode "\\.md$" "\\.markdown$"
+  :preface
+  (defun make-markdown-readable ()
+    (set-face-attribute 'markdown-code-face nil :background "#37474f"))
+  :hook ((after-init . make-markdown-readable))
   :config
   (validate-setq markdown-command (or (executable-find "pandoc")
                                       (executable-find "kramdown"))))
