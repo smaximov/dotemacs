@@ -7,7 +7,8 @@
 (require 'req-package)
 
 (req-package dockerfile-mode
-  :disabled)
+  :pin melpa
+  :ensure t)
 
 (provide 'init-docker)
 ;;; init-docker.el ends here
