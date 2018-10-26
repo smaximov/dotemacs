@@ -130,4 +130,4 @@ First font family available is used:
 
 * Licence
 
-  Copyright © 2016 Sergei Maximov. Released under WTFTPL 2.0. See [[COPYING]].
+  Released under WTFTPL 2.0. See [[COPYING]].
