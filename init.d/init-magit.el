@@ -16,16 +16,18 @@
   (defun nameless:magit-insert-current-jira-issue-number ()
     "Get current current JIRA issue number from branch name and insert it at point."
     (interactive)
-    (if current-prefix-arg
+
+    (if (or current-prefix-arg
+            (plusp (minibuffer-depth)))
         (nameless:magit-insert-current-jira-issue-prefix)
       (let ((branch (magit-get-current-branch)))
         (if branch
-            (save-match-data
-              (if (string-match "^\\([A-Z]+\\)[-_]\\([[:digit:]]+\\)" branch)
-                  (insert (format "%s-%s "
-                                  (match-string-no-properties 1 branch)
-                                  (match-string-no-properties 2 branch)))
-                (nameless:magit-insert-current-jira-issue-prefix)))
+          (save-match-data
+            (if (string-match "^\\([A-Z]+\\)[-_]\\([[:digit:]]+\\)" branch)
+                (insert (format "%s-%s "
+                                (match-string-no-properties 1 branch)
+                                (match-string-no-properties 2 branch)))
+              (nameless:magit-insert-current-jira-issue-prefix)))
           (user-error "This branch doesn't reference a JIRA issue")))))
 
   (defun nameless:magit-insert-current-jira-issue-prefix ()
@@ -39,7 +41,7 @@
                            (with-temp-buffer
                              (insert-file-contents dotjira)
                              (buffer-string)))))
-        (user-error "Unable to infer JIRA issue number"))))
+        (user-error "Unable to infer JIRA issue prefix"))))
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-dispatch-popup)
          ("C-x j" . nameless:magit-insert-current-jira-issue-number))
