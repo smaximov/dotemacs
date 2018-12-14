@@ -8,7 +8,7 @@
 
 (req-package flycheck
   :ensure t
-  :require diminish
+  :require diminish direnv
   :diminish flycheck-mode
   :pin melpa-stable
   :hook (after-init . global-flycheck-mode)
