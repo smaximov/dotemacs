@@ -12,8 +12,14 @@
   :diminish flycheck-mode
   :pin melpa-stable
   :hook (after-init . global-flycheck-mode)
-  :config
-  (setf flycheck-disabled-checkers '(javascript-jshint)))
+  :custom
+  (flycheck-command-wrapper-function
+   (lambda (command)
+     (let ((bundler (executable-find "bundle"))
+           (cmd (file-name-nondirectory (car command))))
+       (if (string-equal cmd "rubocop")
+           (append (list bundler "exec" "rubocop") (cdr command))
+         command)))))
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here
