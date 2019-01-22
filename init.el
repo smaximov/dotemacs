@@ -21,12 +21,6 @@
 (package-initialize)
 
 ;;; Various definitions
-(defconst nameless/backup-dir "~/.emacs.d/backup/"
-  "Directory to put backup files.")
-
-(defconst nameless/auto-save-dir "~/.emacs.d/autosave/"
-  "Directory to put auto-save files.")
-
 (defconst nameless/user-config-directory
   (expand-file-name "init.d" user-emacs-directory)
   "Directory where `load-dir' will search for elisp files.")
@@ -133,12 +127,14 @@ in BODY."
 ;; Don't show splash screen at startup
 (validate-setq inhibit-splash-screen t)
 
-(make-directory nameless/backup-dir t)
-(make-directory nameless/auto-save-dir t)
-
-;; Get rid of annoying backup & autosave files stored in-place
-(validate-setq backup-directory-alist `(("." . ,nameless/backup-dir))
-               auto-save-file-name-transforms `((".*" ,nameless/auto-save-dir t)))
+;; Backup and autosave files settings
+(validate-setq backup-directory-alist `(("." . "~/.emacs.d/backup/"))
+               ;; auto-save-file-name-transforms `(("\\`.*\\'" "~/.emacs.d/autosave/" t))
+               auto-save-file-name-transforms `((".*" "~/.emacs.d/autosave/" t))
+               delete-old-versions t
+               kept-new-versions 9
+               kept-old-versions 4
+               version-control t)
 
 ;; Display current column position of the cursor
 (add-hook 'after-init-hook #'column-number-mode)

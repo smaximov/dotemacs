@@ -3,12 +3,15 @@
 /*/
 
 # …excepts these:
-!custom.el
-!init.el
-!snippets/
-!lib/
-!init.d/
-!misc/
-!.gitignore
-!COPYING
-!README.org
+!/custom.el
+!/init.el
+!/snippets/
+!/lib/
+!/init.d/
+!/misc/
+!/.gitignore
+!/COPYING
+!/README.org
+!/autosave
+/autosave/*
+!/autosave/.keep
