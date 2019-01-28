@@ -55,6 +55,7 @@
 
 (req-package magithub
   :pin melpa-stable
+  :disabled
   :ensure t
   :require exec-path-from-shell validate
   :config
@@ -64,6 +65,10 @@
                                                                     (expand-file-name "~/.cache"))))
                                                 (make-directory cache-home t)
                                                 cache-home))))
+
+(req-package forge :force t
+  :pin melpa
+  :ensure t)
 
 (provide 'init-magit)
 ;;; init-magit.el ends here
