@@ -53,21 +53,9 @@
   (validate-setq git-commit-summary-max-length 100
                  magit-completing-read-function #'ivy-completing-read))
 
-(req-package magithub
-  :pin melpa-stable
-  :disabled
-  :ensure t
-  :require exec-path-from-shell validate
-  :config
-  (magithub-feature-autoinject t)
-  (validate-setq magithub-dir
-                 (expand-file-name "magithub" (let ((cache-home (or (getenv "XDG_CACHE_HOME")
-                                                                    (expand-file-name "~/.cache"))))
-                                                (make-directory cache-home t)
-                                                cache-home))))
-
-(req-package forge :force t
+(req-package forge
   :pin melpa
+  :disabled
   :ensure t)
 
 (provide 'init-magit)
