@@ -53,10 +53,5 @@
   (validate-setq git-commit-summary-max-length 100
                  magit-completing-read-function #'ivy-completing-read))
 
-(req-package forge
-  :pin melpa
-  :disabled
-  :ensure t)
-
 (provide 'init-magit)
 ;;; init-magit.el ends here
