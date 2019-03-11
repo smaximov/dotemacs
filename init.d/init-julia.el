@@ -7,10 +7,12 @@
 (require 'req-package)
 
 (req-package julia-mode
-  :disabled)
+  :disabled
+  :ensure t)
 
 (req-package julia-shell
   :disabled
+  :ensure t
   :require julia-mode
   :mode ("\\.jl$" . julia-mode)
   :bind (:map julia-mode-map
