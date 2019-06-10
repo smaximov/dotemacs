@@ -6,6 +6,12 @@
 
 (require 'req-package)
 
+;;; TODO(smaximov):
+;;;   remove this package when new magit version is released.
+(req-package transient
+  :pin melpa
+  :ensure t)
+
 (req-package magit
   :pin melpa-stable
   :ensure t
