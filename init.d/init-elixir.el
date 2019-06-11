@@ -39,7 +39,7 @@
 (req-package alchemist
   :ensure t
   :pin melpa-stable
-  :require elixir-mode direnv
+  :require elixir-mode direnv validate
   :preface
   (defun set-erlang/elixir-source (&rest args)
     (when (eq major-mode 'elixir-mode)
@@ -48,7 +48,9 @@
         (when-let* ((elixir-src (getenv "ELIXIR_SRC")))
           (setq-local alchemist-goto-elixir-source-dir elixir-src))))
   :init
-  (advice-add 'direnv-update-directory-environment :after #'set-erlang/elixir-source))
+  (advice-add 'direnv-update-directory-environment :after #'set-erlang/elixir-source)
+  :config
+  (validate-setq alchemist-test-truncate-lines nil))
 
 (req-package flycheck-credo
   :ensure t
