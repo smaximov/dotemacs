@@ -12,6 +12,7 @@
 
 (req-package tide
   :ensure t
+  :require typescript-mode
   :preface
   (defun nameless:setup-tide-mode ()
     (tide-setup)
