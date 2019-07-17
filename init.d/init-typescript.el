@@ -6,22 +6,15 @@
 
 (require 'req-package)
 
+(req-package add-node-modules-path
+  :ensure t)
+
 (req-package typescript-mode
   :mode "\\.tsx$"
-  :require flycheck
+  :require flycheck add-node-modules-path prettier-js
   :ensure t
-  :preface
-  (defun nameless::locate-node-executable (name)
-    (when-let* ((root (locate-dominating-file
-                       (or (buffer-file-name) default-directory)
-                       "node_modules"))
-                (executable (expand-file-name (concat "node_modules/.bin/" name) root)))
-      (and (file-executable-p executable) executable)))
-
-  (defun nameless::set-flycheck-eslint-executable ()
-    (when-let* ((eslint (nameless::locate-node-executable "eslint")))
-      (setq-local flycheck-javascript-eslint-executable eslint)))
-  :hook (typescript-mode . nameless::set-flycheck-eslint-executable))
+  :hook ((typescript-mode . add-node-modules-path)
+         (typescript-mode . prettier-js-mode)))
 
 (req-package tide
   :ensure t
@@ -29,11 +22,13 @@
   :preface
   (defun nameless::setup-tide-mode ()
     (tide-setup)
-    (tide-hl-identifier-mode)
-    (add-hook 'before-save-hook #'tide-format-before-save))
+    (tide-hl-identifier-mode))
   :hook (typescript-mode . nameless::setup-tide-mode)
   :config
   (flycheck-add-next-checker 'typescript-tide 'javascript-eslint :append))
+
+(req-package prettier-js
+  :ensure t)
 
 (provide 'init-typescript)
 ;;; init-typescript.el ends here
