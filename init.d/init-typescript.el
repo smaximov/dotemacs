@@ -8,26 +8,32 @@
 
 (req-package typescript-mode
   :mode "\\.tsx$"
-  :ensure t)
-
-(req-package tide
+  :require flycheck
   :ensure t
-  :require typescript-mode flycheck
   :preface
-  (defun nameless:setup-tide-mode ()
-    (tide-setup)
-    (tide-hl-identifier-mode)
-    (add-hook 'before-save-hook #'tide-format-before-save)
-    (when-let* ((tslint (nameless:locate-tslint)))
-      (setq-local flycheck-typescript-tslint-executable tslint)))
-
-  (defun nameless:locate-tslint ()
+  (defun nameless::locate-node-executable (name)
     (when-let* ((root (locate-dominating-file
                        (or (buffer-file-name) default-directory)
                        "node_modules"))
-                (tslint (expand-file-name "node_modules/.bin/tslint" root)))
-      (and (file-executable-p tslint) tslint)))
-  :hook (typescript-mode . nameless:setup-tide-mode))
+                (executable (expand-file-name (concat "node_modules/.bin/" name) root)))
+      (and (file-executable-p executable) executable)))
+
+  (defun nameless::set-flycheck-eslint-executable ()
+    (when-let* ((eslint (nameless::locate-node-executable "eslint")))
+      (setq-local flycheck-javascript-eslint-executable eslint)))
+  :hook (typescript-mode . nameless::set-flycheck-eslint-executable))
+
+(req-package tide
+  :ensure t
+  :require typescript-mode
+  :preface
+  (defun nameless::setup-tide-mode ()
+    (tide-setup)
+    (tide-hl-identifier-mode)
+    (add-hook 'before-save-hook #'tide-format-before-save))
+  :hook (typescript-mode . nameless::setup-tide-mode)
+  :config
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint :append))
 
 (provide 'init-typescript)
 ;;; init-typescript.el ends here

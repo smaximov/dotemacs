@@ -10,7 +10,6 @@
   :ensure t
   :require diminish direnv
   :diminish flycheck-mode
-  :pin melpa-stable
   :hook (after-init . global-flycheck-mode))
 
 (provide 'init-flycheck)
