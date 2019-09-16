@@ -45,5 +45,13 @@
   :config
   (validate-setq flycheck-elixir-credo-strict t))
 
+(req-package exunit
+  :ensure t
+  :bind (("C-c , a" . exunit-verify-all)
+         ("C-c , u" . exunit-verify-all-in-umbrella)
+         ("C-c , v" . exunit-verify)
+         ("C-c , s" . exunit-verify-single)
+         ("C-c , r" . exunit-rerun)))
+
 (provide 'init-elixir)
 ;;; init-elixir.el ends here
