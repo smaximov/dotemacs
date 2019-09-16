@@ -105,6 +105,7 @@ in BODY."
 ;; Diminish
 (require 'diminish)
 (diminish 'auto-revert-mode)
+(diminish 'flymake-mode)
 
 ;; Emacs package header skeleton
 (define-auto-insert '(emacs-lisp-mode . "Emacs Package Skeleton")
