@@ -129,9 +129,8 @@ in BODY."
 (validate-setq inhibit-splash-screen t)
 
 ;; Backup and autosave files settings
-(validate-setq backup-directory-alist `(("." . "~/.emacs.d/backup/"))
-               ;; auto-save-file-name-transforms `(("\\`.*\\'" "~/.emacs.d/autosave/" t))
-               auto-save-file-name-transforms `((".*" "~/.emacs.d/autosave/" t))
+(setf backup-directory-alist '(("." . "~/.emacs.d/backup/")))
+(validate-setq auto-save-file-name-transforms `((".*" "~/.emacs.d/autosave/" t))
                delete-old-versions t
                kept-new-versions 9
                kept-old-versions 4
