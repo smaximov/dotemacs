@@ -34,7 +34,6 @@
 
 (req-package rvm
   :ensure t
-  :disabled
   :pin melpa-stable
   :require exec-path-from-shell
   :hook (after-init . rvm-use-default))
