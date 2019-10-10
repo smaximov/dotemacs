@@ -98,7 +98,9 @@
 
 (req-package rspec-mode
   :ensure t
-  :pin melpa-stable)
+  :pin melpa-stable
+  :require inf-ruby
+  :hook (after-init . inf-ruby-switch-setup))
 
 (req-package slim-mode
   :ensure t
