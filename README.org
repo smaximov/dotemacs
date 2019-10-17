@@ -4,121 +4,19 @@
 #+email: s.b.maximov@gmail.com
 
 
-My Emacs configuration.
+Overview:
 
-* Things I use
-
-  + package.el + req-package.el for managing packages.
-  + company-mode for completion.
-  + magit for interfacing with Git.
-  + Org mode for notes and stuff.
-  + flycheck for syntax checking.
-  + projectile for project management.
-  + ivy + counsel as generic completion backend.
-  + swiper as an alternative to isearch.
-  + yasnippet (custom [[snippets/][snippets]]).
++ package.el + req-package.el for managing packages.
++ company-mode for completion.
++ magit for interfacing with Git.
++ Org mode for notes and stuff.
++ flycheck for syntax checking.
++ projectile for project management.
++ ivy + counsel as generic completion backend.
++ swiper as an alternative to isearch.
++ yasnippet (custom [[snippets/][snippets]]).
 
 * Prerequisites
-
-** Magithub
-
-Magithub (at the moment of writing) uses two backends to access github API.
-
-- [[https://github.com/tarsius/ghub][ghub]] :: Emacs Lisp package which wraps Github HTTP API.
-
-     =ghub= needs Github API token, which can be obtained [[https://github.com/settings/tokens][here]]. After generating the token,
-     save it in =/.authinfo.gpg= (don't forget to install GnuPG and generate a key pair):
-
-     #+begin_src text
-       # -*- epa-file-encrypt-to: ("s.b.maximov@gmail.com") -*-
-       machine api.github.com login smaximov password <token>
-     #+end_src
-
-- [[https://hub.github.com/][Hub]] :: command line Git wrapper, used for Magithub (=hub= RPM package in
-     Fedora).
-
-     Before starting to use Hub with Magithub, you need to authenticate
-     first. It can be done by running =hub browse= from shell inside some Github
-     project.
-
-** Lisp
-
-*** [[https://github.com/cask/cask][Cask]]
-
-Clone the repository:
-
-#+begin_src bash
-  $ git clone git@github.com:/cask/cask.git ~/.local/share/cask
-#+end_src
-
-Make a link to the executable appear somewhere on =PATH=:
-
-#+begin_src bash
-  $ cd ~/.local/bin
-  $ ln -s ../share/cask/bin/cask cask
-#+end_src
-
-** Ruby
-
-Install [[https://rvm.io][RVM]] to manage rubies.
-
-*** Required gems:
-
-- =rubocop= ::
-     a static code analyzer enforcing guidelines outlined
-     in the community Ruby Style Guide.
-- =ruby-lint= ::
-     another static code analyzer which focuses primarily
-     on technical problems in your code.
-- =pry= ::
-     a ruby interactive REPL on steroids. =pry-doc= should
-     be installed too. Required for the =robe= code assistant tool.
-- =bundler= ::
-     bundler manages an application's dependencies though its entire life.
-
-** Markdown
-
-Requires the =kramdown= gem to render markdown files.
-
-** SCSS
-
-Requires the =sass= gem to compile SASS/SCSS files.
-
-** Rust
-
-Install Rust via [[https://rustup.rs][Rustup]].
-
-Installation locations:
-
-- =CARGO_HOME= - =$XDG_CACHE_HOME/cargo=;
-- =RUSTUP_HOME= - =$XDG_CACHE_HOME/rustup=.
-
-You may also consider to add =rustup= command completions to
-your shell by running ~rustup completions SHELL > DEST~, where
-=SHELL= is the name of your shell (e.g., ZSH or Bash), and
-~DEST~ is the destination where completion function is to be stored.
-
-For my ZSH setup the following command will do:
-
-#+begin_src bash
-$ rustup completions zsh > $ZDOTDIR/completions/_rustup
-#+end_src
-
-Rust code completion achieved with [[https://github.com/phildawes/racer][Racer]]. Racer requires Rust
-source code in order to work; the following command installs
-Rust source code (and keeps it in sync):
-
-#+begin_src bash
-$ rustup component add rust-src
-#+end_src
-
-** ELM
-
-You need to install following NPM packages:
-
-- =elm= - ELM compiler and utilities;
-- =elm-oracle= - a tool to query information about an ELM project's source code;
-  used for completion.
 
 ** Fonts
 
