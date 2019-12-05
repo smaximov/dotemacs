@@ -23,6 +23,7 @@
 
 (req-package racer
   :ensure t
+  :disabled
   :pin melpa-stable
   :require rust-mode eldoc exec-path-from-shell validate
   :diminish racer-mode
