@@ -21,7 +21,10 @@
   :ensure t
   :require lsp-mode
   :init
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  :bind
+  (([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
+   ([remap xref-find-references] . #'lsp-ui-peek-find-references)))
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

@@ -13,7 +13,9 @@
 (req-package elixir-mode
   :ensure t
   :pin melpa
-  :require projectile
+  :require projectile lsp-mode
+  :hook
+  (elixir-mode . lsp)
   :preface
   (defun set-default-directory-to-mix-project-root (original-fun &rest args)
     (if-let ((mix-project-root (and (projectile-project-p)
