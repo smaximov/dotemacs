@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package emr
+  :disabled
   :ensure t
   :pin melpa-stable
   :hook (prog-mode . emr-initialize)
