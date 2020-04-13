@@ -8,7 +8,9 @@
 
 (req-package crystal-mode
   :ensure t
-  :pin melpa)
+  :pin melpa
+  :hook ((crystal-mode . (lambda ()
+                           (add-hook 'before-save-hook #'crystal-tool-format nil t)))))
 
 (req-package flycheck-crystal
   :ensure t
