@@ -49,13 +49,14 @@
 
 (req-package exunit
   :ensure t
-  :bind (("C-c , a" . exunit-verify-all)
-         ("C-c , u" . exunit-verify-all-in-umbrella)
-         ("C-c , v" . exunit-verify)
-         ("C-c , s" . exunit-verify-single)
-         ("C-c , r" . exunit-rerun)
-         ("C-c , t" . exunit-toggle-file-and-test)
-         ("C-c , o" . exunit-toggle-file-and-test-other-window)))
+  :bind (:map elixir-mode-map
+              ("C-c , a" . exunit-verify-all)
+              ("C-c , u" . exunit-verify-all-in-umbrella)
+              ("C-c , v" . exunit-verify)
+              ("C-c , s" . exunit-verify-single)
+              ("C-c , r" . exunit-rerun)
+              ("C-c , t" . exunit-toggle-file-and-test)
+              ("C-c , o" . exunit-toggle-file-and-test-other-window)))
 
 (provide 'init-elixir)
 ;;; init-elixir.el ends here
