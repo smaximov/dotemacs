@@ -14,8 +14,6 @@
   :ensure t
   :pin melpa
   :require projectile lsp-mode
-  :hook
-  (elixir-mode . lsp)
   :preface
   (defun set-default-directory-to-mix-project-root (original-fun &rest args)
     (if-let ((mix-project-root (and (projectile-project-p)
@@ -34,7 +32,9 @@
                   `("--dot-formatter" ,(concat formatter-dir ".formatter.exs")))))
   :hook ((elixir-mode . (lambda ()
                           (add-hook 'before-save-hook #'elixir-format nil t)))
-         (elixir-format . setup-elixir-format-arguments))
+         (elixir-format . setup-elixir-format-arguments)
+         (elixir-mode . lsp)
+         (elixir-mode . exunit-mode))
   :init
   (advice-add 'elixir-format :around #'set-default-directory-to-mix-project-root))
 
