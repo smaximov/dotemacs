@@ -34,7 +34,7 @@
   (setf org-agenda-custom-commands
         '(("h" "Agenda and home-related chores"
            ((agenda)
-            (tags-todo "home"
+            (tags-todo "chore"
                        ((org-agenda-sorting-strategy '(priority-down))))))))
 
   :bind (("C-c c" . org-capture)
