@@ -15,7 +15,6 @@
   :init
   (require 'org-agenda)
   :config
-  :force t
   (validate-setq org-directory "~/share/sync/notes"
                  org-default-notes-file (f-join org-directory "general.org")
                  org-agenda-files `(,org-default-notes-file)
@@ -40,7 +39,9 @@
   :bind (("C-c c" . org-capture)
          ("C-c a" . org-agenda)
          ("C-c f a" . org-cycle-agenda-files)
-         ("C-c l" . org-store-link)))
+         ("C-c l" . org-store-link)
+         :map org-mode-map
+         ("C-c !" . org-time-stamp-inactive)))
 
 (req-package org-page
   :disabled
