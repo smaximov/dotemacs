@@ -15,10 +15,10 @@
   :init
   (require 'org-agenda)
   :config
-  (validate-setq org-directory "~/share/owncloud/org"
-                 org-default-notes-file (f-join org-directory "notes.org")
-                 org-agenda-files `(,org-default-notes-file
-                                    ,(f-join org-directory "tasks.org"))
+  :force t
+  (validate-setq org-directory "~/share/sync/notes"
+                 org-default-notes-file (f-join org-directory "general.org")
+                 org-agenda-files `(,org-default-notes-file)
                  org-src-fontify-natively t
                  org-enforce-todo-checkbox-dependencies t
                  org-enforce-todo-dependencies t
