@@ -8,14 +8,10 @@
 
 (req-package lsp-mode
   :ensure t
-  :config
-  (setf lsp-prefer-flymake nil))
-
-(req-package company-lsp
-  :ensure t
   :require company
   :config
-  (push 'company-lsp company-backends))
+  (setf lsp-prefer-flymake nil)
+  (push 'company-capf company-backends))
 
 (req-package lsp-ui
   :ensure t
