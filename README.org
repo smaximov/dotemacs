@@ -1,4 +1,4 @@
-#+title: .emacs.d
+#+title: .config/emacs
 #+date: <2016-02-10 Wed>
 #+author: Sergei Maximov
 #+email: s.b.maximov@gmail.com

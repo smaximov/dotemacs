@@ -129,8 +129,8 @@ in BODY."
 (validate-setq inhibit-splash-screen t)
 
 ;; Backup and autosave files settings
-(setf backup-directory-alist '(("." . "~/.emacs.d/backup/")))
-(validate-setq auto-save-file-name-transforms `((".*" "~/.emacs.d/autosave/" t))
+(setf backup-directory-alist `(("." . ,(expand-file-name  "backup/" user-emacs-directory))))
+(validate-setq auto-save-file-name-transforms `((".*" ,(expand-file-name "autosave/" user-emacs-directory) t))
                delete-old-versions t
                kept-new-versions 9
                kept-old-versions 4
@@ -143,7 +143,7 @@ in BODY."
 (add-hook 'after-init-hook #'recentf-mode)
 
 ;; Detach the customization file
-(validate-setq custom-file "~/.emacs.d/custom.el")
+(validate-setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (f-exists? custom-file)
   (f-touch custom-file))
 (load custom-file t t)
