@@ -106,6 +106,9 @@
   :ensure t
   :pin melpa-stable)
 
+(req-package haml-mode
+  :ensure t)
+
 (req-package rubocop-toggle-cops
   :load-path "lib"
   :require flycheck ruby-mode
