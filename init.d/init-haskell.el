@@ -7,7 +7,7 @@
 (require 'req-package)
 
 (req-package haskell-mode
-  :disabled
+  :ensure t
   :require validate
   :init
   (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
