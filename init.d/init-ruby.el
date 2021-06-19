@@ -26,7 +26,7 @@
   :mode "^Gemfile$"
   :mode "^Rakefile$"
   :hook (ruby-mode . smartparens-mode)
-  :config
+  :init
   (define-auto-insert '(ruby-mode . "Ruby skeleton")
     '(nil
       "# frozen_string_literal: true" ?\n
