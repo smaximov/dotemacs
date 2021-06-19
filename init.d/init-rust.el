@@ -43,12 +43,12 @@
 (req-package toml-mode
   :ensure t
   :pin melpa
-  :require f cargo
+  :require cargo
   :mode "\\.cargo/config$"
   :hook (toml-mode . (lambda ()
                        (let* ((path (buffer-file-name))
                               (file (and path
-                                         (f-filename path)))
+                                         (file-name-nondirectory path)))
                               (cargo.toml? (and file
                                                 (string-equal "Cargo.toml" file))))
                          (when cargo.toml?

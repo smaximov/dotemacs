@@ -1,6 +1,0 @@
-# key: mod-
-# name: mod
-# --
-module ${1:Modname$(s-upper-camel-case yas-text)}
-  $0
-end

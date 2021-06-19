@@ -98,9 +98,10 @@ in BODY."
 ;; When emacs is built without X frontend some features like
 ;; toolbar or scrollbar are unavailable; that causes
 ;; initialization to fail. To avoid that, check if the feature is present first
-(--each '(tool-bar-mode scroll-bar-mode menu-bar-mode)
-  (when (fboundp it)
-    (funcall it 0)))
+(seq-each (lambda (mode)
+            (when (fboundp mode)
+              (funcall mode 0)))
+          '(tool-bar-mode scroll-bar-mode menu-bar-mode))
 
 ;; Diminish
 (require 'diminish)
@@ -134,8 +135,8 @@ in BODY."
 
 ;; Detach the customization file
 (validate-setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(unless (f-exists? custom-file)
-  (f-touch custom-file))
+(unless (file-exists-p custom-file)
+  (write-region "" nil custom-file))
 (load custom-file t t)
 
 ;; Follow links to VCS-controlled source files

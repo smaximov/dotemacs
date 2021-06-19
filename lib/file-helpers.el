@@ -4,7 +4,6 @@
 
 ;;; Code:
 
-(require 'f)
 (require 'rx)
 
 (defvar shebang-regexp
@@ -32,7 +31,7 @@
            (widen)
            (goto-char (point-min))
            (when (and (looking-at shebang-regexp)
-                      (not (f-executable? buffer-file-name)))
+                      (not (file-executable-p buffer-file-name)))
              (nameless/file-make-executable buffer-file-name))))))
 
 (defun nameless/set-auto-mode ()

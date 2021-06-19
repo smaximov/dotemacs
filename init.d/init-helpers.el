@@ -24,23 +24,7 @@
   :bind
   (([remap query-replace] . phi-replace)))
 
-(req-package f
-  :ensure t
-  :pin melpa-stable)
-
-(req-package s
-  :ensure t
-  :pin melpa-stable)
-
 (req-package diminish
-  :ensure t
-  :pin melpa-stable)
-
-(req-package async
-  :ensure t
-  :pin melpa-stable)
-
-(req-package dash
   :ensure t
   :pin melpa-stable)
 

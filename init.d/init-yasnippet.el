@@ -9,7 +9,7 @@
 (req-package yasnippet
   :ensure t
   :pin melpa-stable
-  :require validate s diminish
+  :require validate diminish
   :diminish yas-minor-mode
   :hook
   (after-init . yas-global-mode)

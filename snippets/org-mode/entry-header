@@ -2,7 +2,7 @@
 # name: entry header
 # key: header_
 # --
-#+title: ${1:`(s-titleized-words (f-base (buffer-file-name)))`}
+#+title: ${1:`(string-join (mapcar #'capitalize (split-string (file-name-base (buffer-file-name)) "[ \f\t\n\r\v_-]+")) " ")`}
 #+date: `(insert (format-time-string "<%Y-%m-%d %a>"))`
 #+author: Sergei Maximov
 #+email: s.b.maximov@gmail.com

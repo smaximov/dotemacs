@@ -32,23 +32,14 @@
       "# frozen_string_literal: true" ?\n
       _)))
 
-(req-package rvm
-  :ensure t
-  :pin melpa-stable
-  :require exec-path-from-shell
-  :hook (after-init . rvm-use-default))
-
 (req-package robe
   :ensure t
   :pin melpa-stable
-  :require company ruby-mode rvm inf-ruby diminish
+  :require company ruby-mode inf-ruby diminish
   :diminish robe-mode
   :hook (ruby-mode . robe-mode)
   :config
-  (push 'company-robe company-backends)
-
-  (advice-add 'inf-ruby-console-auto
-              :before #'rvm-activate-corresponding-ruby))
+  (push 'company-robe company-backends))
 
 (req-package yard-mode
   :ensure t
@@ -67,47 +58,11 @@
          ("C-c . r" . rake-rerun)
          ("C-c . c" . rake-regenerate-cache)))
 
-(req-package projectile-rails
-  :ensure t
-  :pin melpa-stable
-  :disabled
-  :require rvm validate
-  :bind (:map projectile-rails-command-map
-              ("#" . rvm-activate-corresponding-ruby))
-  :preface
-  ;; https://github.com/bbatsov/projectile/issues/991#issuecomment-248026667
-  (defvar projectile-rails-keymap-prefix (kbd "C-c C-r"))
-  :hook ((projectile-mode . projectile-rails-global-mode)
-         (projectile-rails-server-mode . (lambda ()
-                                           (setq-local compilation-scroll-output t))))
-  :config
-  (validate-setq projectile-rails-expand-snippet nil))
-
-(req-package projectile-hanami
-  :require rvm validate
-  :disabled
-  :preface
-  (defun projectile-rails-or-hanami-on ()
-    "Activate either `projectile-rails-mode` or `projectile-hanami-mode`."
-    (if (projectile-hanami-applicable-p)
-        (projectile-hanami-mode +1)
-      (projectile-rails-on)))
-  :hook (projectile-mode . projectile-rails-or-hanami-on)
-  :bind (:map projectile-hanami-mode-command-map
-              ("#" . rvm-activate-corresponding-ruby)))
-
 (req-package rspec-mode
   :ensure t
   :pin melpa-stable
   :require inf-ruby
   :hook (after-init . inf-ruby-switch-setup))
-
-(req-package slim-mode
-  :ensure t
-  :pin melpa-stable)
-
-(req-package haml-mode
-  :ensure t)
 
 (req-package rubocop-toggle-cops
   :load-path "lib"

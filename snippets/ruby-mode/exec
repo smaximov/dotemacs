@@ -3,6 +3,6 @@
 # key: exec-
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-execute <<-SQL.squish
+execute <<~SQL.squish
   $0
 SQL
