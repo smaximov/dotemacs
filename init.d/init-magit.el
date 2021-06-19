@@ -50,7 +50,7 @@
          (git-commit-mode . (lambda ()
                               (validate-setq fill-column 72))))
   :config
-  (validate-setq git-commit-summary-max-length 100
+  (validate-setq git-commit-summary-max-length 72
                  magit-completing-read-function #'ivy-completing-read))
 
 (provide 'init-magit)
