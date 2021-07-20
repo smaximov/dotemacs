@@ -34,6 +34,8 @@
          ([remap describe-bindings] . counsel-descbinds)         ; C-h b
          ([remap find-file] . counsel-find-file)                 ; C-x C-f
          ([remap yank-pop] . counsel-yank-pop)                   ; M-y
+         ([remap switch-to-buffer] . counsel-switch-buffer)     ; C-x b
+         ([remap switch-to-buffer-other-window] . counsel-switch-buffer-other-window) ; C-x 4 b
          ("C-c I" . counsel-info-lookup-symbol)
          ("C-c i" . counsel-imenu)
          ("C-c g" . counsel-rg)
@@ -51,11 +53,6 @@
   :ensure t
   :pin melpa-stable
   :hook (after-init . counsel-projectile-mode))
-
-(req-package ivy-pages
-  :ensure t
-  :pin melpa-stable
-  :bind (("C-c p" . ivy-pages)))
 
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
