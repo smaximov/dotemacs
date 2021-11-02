@@ -7,8 +7,7 @@
 (require 'req-package)
 
 (req-package iedit
-  :ensure t
-  :hook (prog-mode . iedit-mode))
+  :ensure t)
 
 (provide 'init-iedit)
 ;;; init-iedit.el ends here

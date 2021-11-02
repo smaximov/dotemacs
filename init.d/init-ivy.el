@@ -9,7 +9,7 @@
 (req-package ivy
   :ensure t
   :pin melpa-stable
-  :require diminish validate
+  :require diminish validate tramp
   :diminish ivy-mode
   :hook (after-init . ivy-mode)
   :bind (("C-c r" . ivy-resume)
@@ -34,6 +34,8 @@
          ([remap describe-bindings] . counsel-descbinds)         ; C-h b
          ([remap find-file] . counsel-find-file)                 ; C-x C-f
          ([remap yank-pop] . counsel-yank-pop)                   ; M-y
+         ([remap switch-to-buffer] . counsel-switch-buffer)      ; C-x b
+         ([remap switch-to-buffer-other-window] . counsel-switch-buffer-other-window) ; C-x 4 b
          ("C-c I" . counsel-info-lookup-symbol)
          ("C-c i" . counsel-imenu)
          ("C-c g" . counsel-rg)

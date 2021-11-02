@@ -12,8 +12,8 @@
   :require eldoc diminish
   :diminish paredit-mode
   :hook
-  ((emacs-lisp-mode eval-expression-minibuffer-setup ielm-mode
-    lisp-mode lisp-interaction-mode scheme-mode) . enable-paredit-mode)
+  ((emacs-lisp-mode eval-expression-minibuffer-setup ielm-mode lisp-mode lisp-interaction-mode scheme-mode)
+   . enable-paredit-mode)
   :config
   (eldoc-add-command
    'paredit-backward-delete
