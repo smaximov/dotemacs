@@ -54,10 +54,5 @@
   :pin melpa-stable
   :hook (after-init . counsel-projectile-mode))
 
-(req-package ivy-pages
-  :ensure t
-  :pin melpa-stable
-  :bind (("C-c p" . ivy-pages)))
-
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
